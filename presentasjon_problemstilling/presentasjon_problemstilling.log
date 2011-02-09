@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.1415926-1.40.11 (TeX Live 2010/Arch Linux) (format=pdflatex 2010.12.9)  9 FEB 2011 14:57
+This is pdfTeX, Version 3.1415926-1.40.11 (TeX Live 2010/Arch Linux) (format=pdflatex 2010.12.9)  9 FEB 2011 15:14
 entering extended mode
  restricted \write18 enabled.
  %&-line parsing enabled.
@@ -1171,7 +1171,7 @@ LaTeX Font Info:    Font shape `T1/phv/bx/it' in size <5> not available
 LaTeX Font Info:    Font shape `T1/phv/b/it' in size <5> not available
 (Font)              Font shape `T1/phv/b/sl' tried instead on input line 97.
 
-Overfull \vbox (5.25151pt too high) detected at line 97
+Overfull \vbox (5.13145pt too high) detected at line 97
  []
 
 [6
@@ -1292,7 +1292,7 @@ nts/cm/cmsy10.pfb></usr/share/texmf-dist/fonts/type1/public/amsfonts/cm/cmsy8.p
 fb></usr/share/texmf-dist/fonts/type1/urw/helvetic/uhvb8a.pfb></usr/share/texmf
 -dist/fonts/type1/urw/helvetic/uhvr8a.pfb></usr/share/texmf-dist/fonts/type1/ur
 w/helvetic/uhvro8a.pfb>
-Output written on presentasjon_problemstilling.pdf (10 pages, 666213 bytes).
+Output written on presentasjon_problemstilling.pdf (10 pages, 666240 bytes).
 PDF statistics:
  142 PDF objects out of 1000 (max. 8388607)
  106 compressed objects within 2 object streams
