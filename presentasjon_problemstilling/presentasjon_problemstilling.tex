@@ -119,11 +119,14 @@ det, eksempelvis ved bruk av senterpunkter. For å sikre stabilitet har vi valgt
   \frametitle{Løsningskriterier}
   \begin{center}
   \begin{itemize}  
-    \item[$\bullet$] Vi måtte finne ut hva som skulle få vår numeriske modell til å avslutte simuleringen. Flere alternativer ble diskutert, vi kom frem til to; massedifferanse og temperatur.
+    \item[$\bullet$] Hva får vår numeriske modell
+      til å avslutte simuleringen?
 
-\item[$\bullet$] Massedifferanse: Av baconpakning vet vi initielt fettinnholdet (gram), vha. massetransportligninger er det mulig å forutsi kritisk massetap (målt gjennom forsøk). Når den verdien er nådd har vi, ifølge hypotesen - oppnådd sprøtt og godt bacon.
+\item[$\bullet$] Massedifferanse: Baconpakning gir fettinnholdet ved start,
+  massetransportligninger gjør det mulig å finne kritisk massetap (målt gjennom forsøk).
 
-\item[$\bullet$] Temperatur: Baconstykket vil bli modellert med en fordeling av fett og kjøtt, og deles inn i noder. Ved hjelp av varmetransportligninger utregnes temperaturen i hvert punkt. I følge Maillards reaksjoner vil baconet starte å bli brunt når temparaturen når 154 grader Celsius. Simuleringen avsluttes.
+\item[$\bullet$] Temperatur: Maillards reaksjoner sier at bruning starter ved
+  154$^o$C. Kritisk temperatur.
   \end{itemize}
   \end{center}
 \end{frame}
