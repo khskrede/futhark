@@ -1,0 +1,19 @@
+
+
+7: Eksperimentell verifikasjon
+
+7.1 - Lese av innholdsfortegnelsen til baconet og egenskapene til mikrobølgeovnen
+og bruke disse som parametre.
+
+7.2 - Gjøre den matematiske berigningen av modellen med de gitte parametrene
+
+7.3 - Stek bacon i mikrobølgeovnen med resultatet (tiden) gitt fra beregningen.
+
+7.4 - Dokumenter forventet resultat og faktisk resultat.
+
+7.5 - Gjenta N ganger.
+
+8: Kalibrering, geometri.
+
+8.1 - Måle effekt i mikrobølgeovnen ved å sette inn vannbad og måle hvor mye
+som fordamper i løpet av en gitt tid.
