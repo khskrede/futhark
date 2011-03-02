@@ -19,6 +19,11 @@ class CG_SOLVER {
    float *m_A_values;
    int *m_A_offsets;
    int m_A_size;
+   
+   // values used for the matrix A
+   float *m_B_values;
+   int *m_B_offsets;
+   int m_B_size;
 
    float *m_d;
    float *m_r;
@@ -35,8 +40,10 @@ class CG_SOLVER {
    ~CG_SOLVER();
 
    void Solve();
-   void Diagonalize(float *values, int *offsets, int n);
+   void DiagonalizeA(float *values, int *offsets, int n);
+   void DiagonalizeB(float *values, int *offsets, int n);
    void MultiplyDiagAVector(float *product, float *vector, int n);
+   void MultiplyDiagBVector(float *product, float *vector, int n);
    void PrintA();
 };
 

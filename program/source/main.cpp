@@ -12,6 +12,7 @@ using namespace std;
 /* Functions */
 
 void CalculateWaveField(float *f, int nx, int ny, int nz, float dt);
+void CalculateBoundaryConditions(float *b, int nx, int ny, int nz, float hx, float hy, float hz, float dt);
 
 void DumpState(float *x, int nx, int ny, int nz, int i);
 
@@ -22,27 +23,29 @@ main(int argc, char *argv[]) {
    float Lx, Ly, Lz, Lt;
    int nx, ny, nz, nt;
    float dx, dy, dz, dt;
-   float r, diag, hx, hy, hz;
+   float r, diagA, diagB, hx, hy, hz;
    float initial_temp, outside_temp, alpha;
 
    // initialize problem
-   outside_temp = 10;
+   outside_temp = 0;
    initial_temp = 20;
-   Lx = 10; Ly = 10; Lz = 10; Lt = 10;
-   nx = 50; ny = 50; nz = 50; nt = 20;
+   Lx = 0.10; Ly = 0.10; Lz = 0.10; Lt = 1000000000;
+   nx = 20; ny = 20; nz = 20; nt = 100;
 
-   dx = Lx / (float)nx;
-   dy = Ly / (float)ny;
-   dz = Lz / (float)nz;
-   dt = Lt / (float)nt;
+   dx = Lx / (float) (nx+1);
+   dy = Ly / (float) (ny+1);
+   dz = Lz / (float) (nz+1);
+   dt = Lt / (float) (nt+1);
 
    // Calculate diagonals of the A matrix
    alpha = 1;
-   r = alpha * dt / 2 * ( 1/dx/dx + 1/dy/dy + 1/dz/dz );
-   diag = 1 + 2*r;
-   hx = -r;
-   hy = -r;
-   hz = -r;
+   
+   r = alpha * 2 * ( dt/dx/dx + dt/dy/dy + dt/dz/dz );
+   diagA = 1 + r;
+   diagB = 1 - r;
+   hx = alpha * dt/dx/dx;
+   hy = alpha * dt/dx/dx;
+   hz = alpha * dt/dx/dx;
 
    // Initialize vectors
    int big_n = nx*ny*nz;
@@ -60,39 +63,36 @@ main(int argc, char *argv[]) {
    CalculateWaveField( f, nx, ny, nz, dt );
 
    // Calculate boundary conditions
-   for ( int k = 0; k < nz; k++ ) {
-      for ( int j = 0; j < ny; j++ ) {
-         for ( int i = 0; i < nx; i++ ) {
-            b0[ k*nx*ny + j*nx + i ] = 0;
-            if ( i == 0 || i == nx-1 ) {
-               b0[ k*nx*ny + j*nx + i ] += hx;
-            }
-            if ( j == 0 || j == ny-1 ) {
-               b0[ k*nx*ny + j*nx + i ] += hy;
-            }
-            if ( k == 0 || k == nz-1 ) {
-               b0[ k*nx*ny + j*nx + i ] += hz;
-            }
-//            cout << b0[k*nx*ny + j*nx + i] << " ";
-         }
-//         cout << "\n";
-      }
-//      cout << "\n";
-   }
+   CalculateBoundaryConditions( b0, nx, ny, nz, hx, hy, hz, outside_temp );
 
    // Initialize conjugate gradient solver
    CG_SOLVER solver(b, x, nx, ny, nz);
-   int* offsets = new int[4];
-   offsets[0] = 0;
-   offsets[1] = 1;
-   offsets[2] = nx;
-   offsets[3] = nx*ny;
-   float* values = new float[4];
-   values[0] = diag;
-   values[1] = hx;
-   values[2] = hy;
-   values[3] = hz;
-   solver.Diagonalize(values, offsets, 4);
+   
+   // Initialize A matrix
+   int* offsetsA = new int[4];
+   offsetsA[0] = 0;
+   offsetsA[1] = 1;
+   offsetsA[2] = nx;
+   offsetsA[3] = nx*ny;
+   float* valuesA = new float[4];
+   valuesA[0] = diagA;
+   valuesA[1] = hx;
+   valuesA[2] = hy;
+   valuesA[3] = hz;
+   solver.DiagonalizeA(valuesA, offsetsA, 4);
+
+   // Initialize B matrix
+   int* offsetsB = new int[4];
+   offsetsB[0] = 0;
+   offsetsB[1] = 1;
+   offsetsB[2] = nx;
+   offsetsB[3] = nx*ny;
+   float* valuesB = new float[4];
+   valuesB[0] = diagB;
+   valuesB[1] = -hx;
+   valuesB[2] = -hy;
+   valuesB[3] = -hz;
+   solver.DiagonalizeB(valuesB, offsetsB, 4);
 
    //solver.PrintA();
 
@@ -100,14 +100,14 @@ main(int argc, char *argv[]) {
    DumpState(x, nx, ny, nz, 0);
 
    // print h values
-   std::cout << "diag: " << diag << " hx: " << hx << " hy: " << hy << " hz: " << hz << "\n";
+   std::cout << "diag: " << diagA << " hx: " << hx << " hy: " << hy << " hz: " << hz << "\n";
 
    for ( int i = 1; i < nt; i++ ) {
    
-      // b <= Ax + b0 + f
-      solver.MultiplyDiagAVector(b, x, big_n);
+      // b <= Bx + bi + b(i+1) + f
+      solver.MultiplyDiagBVector(b, x, big_n);
       for( int j = 0; j < big_n; j++ ) {
-         b[j] = -b[j] + b0[j] + f[j];
+         b[j] += 2*b0[j]; // + f[j];
       }
 
       // solve Ax = b for x
@@ -118,8 +118,10 @@ main(int argc, char *argv[]) {
          DumpState(x, nx, ny, nz, i);
    }
 
-   delete[] offsets;
-   delete[] values;
+   delete[] offsetsA;
+   delete[] valuesA;
+   delete[] offsetsB;
+   delete[] valuesB;
    
    delete[] b0;
    delete[] f;
@@ -194,6 +196,28 @@ CalculateWaveField(float *f, int nx, int ny, int nz, float dt) {
       for (int j = 0; j<ny; j++ ) {
          for (int i = 0; i<nx; i++ ) {
             f[k*nz*ny + j*nx + i] = f[k*nz*ny + j*nx + i] / sum * effect;
+         }
+      }
+   }
+
+}
+
+void
+CalculateBoundaryConditions(float *b, int nx, int ny, int nz, float hx, float hy, float hz, float temp) {
+
+   for ( int k = 0; k < nz; k++ ) {
+      for ( int j = 0; j < ny; j++ ) {
+         for ( int i = 0; i < nx; i++ ) {
+            b[ k*nx*ny + j*nx + i ] = 0;
+            if ( i == 0 || i == nx-1 ) {
+               b[ k*nx*ny + j*nx + i ] += hx * temp;
+            }
+            if ( j == 0 || j == ny-1 ) {
+               b[ k*nx*ny + j*nx + i ] += hy * temp;
+            }
+            if ( k == 0 || k == nz-1 ) {
+               b[ k*nx*ny + j*nx + i ] += hz * temp;
+            }
          }
       }
    }
