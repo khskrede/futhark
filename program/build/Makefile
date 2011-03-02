@@ -5,7 +5,7 @@ LINKER       = g++
 LINKER-FLAGS = -o
 RM           = rm -f
 MAKE         = make
-OBJS         = main.o cgsolver.o
+OBJS         = main.o cgsolver.o diagmatrix.o
 TARGET       = main
 
 $(TARGET): $(OBJS) 
@@ -16,6 +16,9 @@ main.o : ../source/main.cpp
 
 cgsolver.o : ../source/cgsolver.cpp
 	$(CC) $(CC-FLAGS) ../source/cgsolver.cpp
+
+diagmatrix.o : ../source/diagmatrix.cpp
+	$(CC) $(CC-FLAGS) ../source/diagmatrix.cpp
 
 
 clean : 

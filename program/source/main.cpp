@@ -6,6 +6,7 @@
 #include <math.h>
 
 #include "headers/cgsolver.h"
+#include "headers/diagmatrix.h"
 
 using namespace std;
 
@@ -13,7 +14,6 @@ using namespace std;
 
 void CalculateWaveField(float *f, int nx, int ny, int nz, float dt);
 void CalculateBoundaryConditions(float *b, int nx, int ny, int nz, float hx, float hy, float hz, float dt);
-
 void DumpState(float *x, int nx, int ny, int nz, int i);
 
 int
@@ -27,25 +27,24 @@ main(int argc, char *argv[]) {
    float initial_temp, outside_temp, alpha;
 
    // initialize problem
-   outside_temp = 0;
-   initial_temp = 20;
-   Lx = 0.10; Ly = 0.10; Lz = 0.10; Lt = 1000000000;
-   nx = 20; ny = 20; nz = 20; nt = 100;
+   outside_temp = 100;
+   initial_temp = 10;
+   Lx = 1.0; Ly = 1.0; Lz = 1.0; Lt = 1000;
+   nx = 3; ny = 3; nz = 3; nt = 100;
 
    dx = Lx / (float) (nx+1);
    dy = Ly / (float) (ny+1);
    dz = Lz / (float) (nz+1);
    dt = Lt / (float) (nt+1);
 
-   // Calculate diagonals of the A matrix
+   // Calculate diagonals of the A and B matrices
    alpha = 1;
-   
    r = alpha * 2 * ( dt/dx/dx + dt/dy/dy + dt/dz/dz );
    diagA = 1 + r;
    diagB = 1 - r;
    hx = alpha * dt/dx/dx;
-   hy = alpha * dt/dx/dx;
-   hz = alpha * dt/dx/dx;
+   hy = alpha * dt/dy/dy;
+   hz = alpha * dt/dz/dz;
 
    // Initialize vectors
    int big_n = nx*ny*nz;
@@ -64,48 +63,58 @@ main(int argc, char *argv[]) {
 
    // Calculate boundary conditions
    CalculateBoundaryConditions( b0, nx, ny, nz, hx, hy, hz, outside_temp );
-
-   // Initialize conjugate gradient solver
-   CG_SOLVER solver(b, x, nx, ny, nz);
    
    // Initialize A matrix
-   int* offsetsA = new int[4];
-   offsetsA[0] = 0;
-   offsetsA[1] = 1;
-   offsetsA[2] = nx;
-   offsetsA[3] = nx*ny;
-   float* valuesA = new float[4];
-   valuesA[0] = diagA;
-   valuesA[1] = hx;
-   valuesA[2] = hy;
-   valuesA[3] = hz;
-   solver.DiagonalizeA(valuesA, offsetsA, 4);
+   int* offsetsA = new int[7];
+   offsetsA[0] = -nx*ny;
+   offsetsA[1] = -nx;
+   offsetsA[2] = -1;
+   offsetsA[3] = 0;
+   offsetsA[4] = 1;
+   offsetsA[5] = nx;
+   offsetsA[6] = nx*ny;
+   float* valuesA = new float[7];
+   valuesA[0] = hz;
+   valuesA[1] = hy;
+   valuesA[2] = hx;
+   valuesA[3] = diagA;
+   valuesA[4] = hx;
+   valuesA[5] = hy;
+   valuesA[6] = hz;
+   DIAG_MATRIX *A = new DIAG_MATRIX(valuesA, offsetsA, 7, nx, ny, nz);
 
    // Initialize B matrix
-   int* offsetsB = new int[4];
-   offsetsB[0] = 0;
-   offsetsB[1] = 1;
-   offsetsB[2] = nx;
-   offsetsB[3] = nx*ny;
-   float* valuesB = new float[4];
-   valuesB[0] = diagB;
-   valuesB[1] = -hx;
-   valuesB[2] = -hy;
-   valuesB[3] = -hz;
-   solver.DiagonalizeB(valuesB, offsetsB, 4);
+   int* offsetsB = new int[7];
+   offsetsB[0] = -nx*ny;
+   offsetsB[1] = -nx;
+   offsetsB[2] = -1;
+   offsetsB[3] = 0;
+   offsetsB[4] = 1;
+   offsetsB[5] = nx;
+   offsetsB[6] = nx*ny;
+   float* valuesB = new float[7];
+   valuesB[0] = -hz;
+   valuesB[1] = -hy;
+   valuesB[2] = -hx;
+   valuesB[3] = diagB;
+   valuesB[4] = -hx;
+   valuesB[5] = -hy;
+   valuesB[6] = -hz;
+   DIAG_MATRIX *B = new DIAG_MATRIX(valuesB, offsetsB, 7, nx, ny, nz);
 
-   //solver.PrintA();
+   // Print A matrix
+   (*A).Print();
 
    // Print cross-section of initial state to file
    DumpState(x, nx, ny, nz, 0);
-
-   // print h values
-   std::cout << "diag: " << diagA << " hx: " << hx << " hy: " << hy << " hz: " << hz << "\n";
+   
+   // Initialize conjugate gradient solver
+   CG_SOLVER solver(b, x, nx, ny, nz, A);
 
    for ( int i = 1; i < nt; i++ ) {
    
       // b <= Bx + bi + b(i+1) + f
-      solver.MultiplyDiagBVector(b, x, big_n);
+      (*B).MultiplyVector(b, x, big_n);
       for( int j = 0; j < big_n; j++ ) {
          b[j] += 2*b0[j]; // + f[j];
       }
@@ -114,14 +123,15 @@ main(int argc, char *argv[]) {
       solver.Solve();
 
       // Print cross-section to file
-      if( i % 1 == 0)
-         DumpState(x, nx, ny, nz, i);
+      DumpState(x, nx, ny, nz, i);
    }
 
    delete[] offsetsA;
    delete[] valuesA;
+   delete A;
    delete[] offsetsB;
    delete[] valuesB;
+   delete B;
    
    delete[] b0;
    delete[] f;
@@ -132,6 +142,7 @@ main(int argc, char *argv[]) {
 }
 
 
+// Print cross-section
 void
 DumpState(float *x, int nx, int ny, int nz, int i) {
 
@@ -142,15 +153,12 @@ DumpState(float *x, int nx, int ny, int nz, int i) {
    ofstream outfile;
    outfile.open( (string("data/") + string(str) + string(".dat")).c_str() , ios::out);
 
-   // Print cross-section
    int k=nz/2;
-//   for (int k = 0; k<nz; k++ ) {
       for (int j = 0; j<ny; j++ ) {
          for (int i = 0; i<nx; i++ ) {
             outfile << j << " " << i << " " << x[k*nz*ny + j*nx + i] << "\n";
          }
          outfile << "\n";
-//      }
    }
 
    outfile.close();
@@ -173,8 +181,6 @@ CalculateWaveField(float *f, int nx, int ny, int nz, float dt) {
    for (int k = 0; k<nz; k++ ) {
       for (int j = 0; j<ny; j++ ) {
          for (int i = 0; i<nx; i++ ) {
-
-
 
             r = 16 * sqrt( (nx / 2 - i) * (nx / 2 - i)
                       + (ny / 2 - j) * (ny / 2 - j)
