@@ -4,6 +4,7 @@
 #include <stdio.h>
 #include <stdlib.h>
 #include <math.h>
+#include <omp.h>
 
 #include "headers/cgsolver.h"
 #include "headers/diagmatrix.h"
@@ -12,39 +13,58 @@ using namespace std;
 
 /* Functions */
 
-void CalculateWaveField(float *f, int nx, int ny, int nz, float dt);
+void CalculateWaveField(float *f, int nx, int ny, int nz, float dx, float dy, float dz, float dt, float effect);
 void CalculateBoundaryConditions(float *b, int nx, int ny, int nz, float hx, float hy, float hz, float dt);
 void DumpState(float *x, int nx, int ny, int nz, int i);
 
 int
 main(int argc, char *argv[]) {
 
+   // Set number of processors
+   omp_set_num_threads(4);
+
    // Initialize variables
    float Lx, Ly, Lz, Lt;
    int nx, ny, nz, nt;
    float dx, dy, dz, dt;
    float r, diagA, diagB, hx, hy, hz;
-   float initial_temp, outside_temp, alpha;
+   float initial_temp, outside_temp, alpha, microwave_effect, cfl;
 
    // initialize problem
-   outside_temp = 100;
-   initial_temp = 10;
-   Lx = 1.0; Ly = 1.0; Lz = 1.0; Lt = 1000;
-   nx = 3; ny = 3; nz = 3; nt = 100;
+   outside_temp = 20;
+   initial_temp = 20;
+   microwave_effect = 300;
+   
+   Lx = 100.0; Ly = 100.0; Lz = 100.0; Lt = 1000.0;
+   nx = 20; ny = 20; nz = 20; nt = 10000;
 
    dx = Lx / (float) (nx+1);
    dy = Ly / (float) (ny+1);
    dz = Lz / (float) (nz+1);
    dt = Lt / (float) (nt+1);
 
+   cfl = 1.0/12.0;
+
    // Calculate diagonals of the A and B matrices
-   alpha = 1;
-   r = alpha * 2 * ( dt/dx/dx + dt/dy/dy + dt/dz/dz );
+   alpha = 0.5;
+
+   hx = alpha * dt / 2 / dx / dx;
+   hy = alpha * dt / 2 / dy / dy;
+   hz = alpha * dt / 2 / dz / dz;
+
+   r = 2 * ( hx + hy + hz );
+
    diagA = 1 + r;
    diagB = 1 - r;
-   hx = alpha * dt/dx/dx;
-   hy = alpha * dt/dy/dy;
-   hz = alpha * dt/dz/dz;
+
+   // Check Courant-Friedrichs-Lewy (CFL) condition
+   if ( dt/dx/dx > cfl || dt/dy/dy > cfl || dt/dz/dz > cfl  ) {
+      std::cout << "Error: Courant-Friedrichs-Lewy (CFL) condition broken\n";
+      std::cout << "The calculation was stopped because accuracy can be inaccurate and oscillations can occur. \n\n";
+      return 1;
+   }
+
+   std::cout << "hx: " << hx << " hy: " << hy << " hz: " << hz << "\n";
 
    // Initialize vectors
    int big_n = nx*ny*nz;
@@ -59,51 +79,20 @@ main(int argc, char *argv[]) {
    }
 
    // calculate heat field
-   CalculateWaveField( f, nx, ny, nz, dt );
+   CalculateWaveField( f, nx, ny, nz, dx, dy, dz, dt, microwave_effect );
 
    // Calculate boundary conditions
    CalculateBoundaryConditions( b0, nx, ny, nz, hx, hy, hz, outside_temp );
    
    // Initialize A matrix
-   int* offsetsA = new int[7];
-   offsetsA[0] = -nx*ny;
-   offsetsA[1] = -nx;
-   offsetsA[2] = -1;
-   offsetsA[3] = 0;
-   offsetsA[4] = 1;
-   offsetsA[5] = nx;
-   offsetsA[6] = nx*ny;
-   float* valuesA = new float[7];
-   valuesA[0] = hz;
-   valuesA[1] = hy;
-   valuesA[2] = hx;
-   valuesA[3] = diagA;
-   valuesA[4] = hx;
-   valuesA[5] = hy;
-   valuesA[6] = hz;
+   int offsetsA[7] = { -nx*ny, -nx, -1, 0, 1, nx, nx*ny };
+   float valuesA[7] = { -hz, -hy, -hx, diagA, -hx, -hy, -hz };
    DIAG_MATRIX *A = new DIAG_MATRIX(valuesA, offsetsA, 7, nx, ny, nz);
 
    // Initialize B matrix
-   int* offsetsB = new int[7];
-   offsetsB[0] = -nx*ny;
-   offsetsB[1] = -nx;
-   offsetsB[2] = -1;
-   offsetsB[3] = 0;
-   offsetsB[4] = 1;
-   offsetsB[5] = nx;
-   offsetsB[6] = nx*ny;
-   float* valuesB = new float[7];
-   valuesB[0] = -hz;
-   valuesB[1] = -hy;
-   valuesB[2] = -hx;
-   valuesB[3] = diagB;
-   valuesB[4] = -hx;
-   valuesB[5] = -hy;
-   valuesB[6] = -hz;
+   int offsetsB[7] = { -nx*ny, -nx, -1, 0, 1, nx, nx*ny };
+   float valuesB[7] = { hz, hy, hx, diagB, hx, hy, hz };
    DIAG_MATRIX *B = new DIAG_MATRIX(valuesB, offsetsB, 7, nx, ny, nz);
-
-   // Print A matrix
-   (*A).Print();
 
    // Print cross-section of initial state to file
    DumpState(x, nx, ny, nz, 0);
@@ -111,28 +100,25 @@ main(int argc, char *argv[]) {
    // Initialize conjugate gradient solver
    CG_SOLVER solver(b, x, nx, ny, nz, A);
 
+   // Main loop
    for ( int i = 1; i < nt; i++ ) {
    
       // b <= Bx + bi + b(i+1) + f
       (*B).MultiplyVector(b, x, big_n);
       for( int j = 0; j < big_n; j++ ) {
-         b[j] += 2*b0[j]; // + f[j];
+         b[j] += 2*b0[j] + f[j];
       }
 
       // solve Ax = b for x
       solver.Solve();
 
       // Print cross-section to file
-      DumpState(x, nx, ny, nz, i);
+      if( i % 10 == 0)
+         DumpState(x, nx, ny, nz, i/10);
    }
 
-   delete[] offsetsA;
-   delete[] valuesA;
    delete A;
-   delete[] offsetsB;
-   delete[] valuesB;
    delete B;
-   
    delete[] b0;
    delete[] f;
    delete[] b;
@@ -166,9 +152,9 @@ DumpState(float *x, int nx, int ny, int nz, int i) {
 
 
 void
-CalculateWaveField(float *f, int nx, int ny, int nz, float dt) {
+CalculateWaveField(float *f, int nx, int ny, int nz, float dx, float dy, float dz, float dt, float effect) {
 
-   float effect = nx*ny*nz*dt*30.1;
+   float added_heat = 5 * effect * dt;
    float sum = 0;
    float r, r_max;
 
@@ -186,13 +172,13 @@ CalculateWaveField(float *f, int nx, int ny, int nz, float dt) {
                       + (ny / 2 - j) * (ny / 2 - j)
                       + (nz / 2 - k) * (nz / 2 - k) ) / r_max;
 
-            f[k*nz*ny + j*nx + i] = - 1.33789
+            f[k*nx*ny + j*nx + i] = - 1.33789
                                     + 4.54712 * r
                                     - 1.25814 * r * r
                                     + 0.127253 * r * r* r
                                     - 0.00469462 * r * r * r * r
                                     + 0.0000385689 * r * r * r * r * r;
-            sum += f[k*nz*ny + j*nx + i];
+            sum += f[k*nx*ny + j*nx + i];
          }
       }
    }
@@ -201,7 +187,7 @@ CalculateWaveField(float *f, int nx, int ny, int nz, float dt) {
    for (int k = 0; k<nz; k++ ) {
       for (int j = 0; j<ny; j++ ) {
          for (int i = 0; i<nx; i++ ) {
-            f[k*nz*ny + j*nx + i] = f[k*nz*ny + j*nx + i] / sum * effect;
+            f[k*nx*ny + j*nx + i] = f[k*nx*ny + j*nx + i] / sum * added_heat;
          }
       }
    }
@@ -216,13 +202,13 @@ CalculateBoundaryConditions(float *b, int nx, int ny, int nz, float hx, float hy
          for ( int i = 0; i < nx; i++ ) {
             b[ k*nx*ny + j*nx + i ] = 0;
             if ( i == 0 || i == nx-1 ) {
-               b[ k*nx*ny + j*nx + i ] += hx * temp;
+               b[ k*nx*ny + j*nx + i ] += hz * temp;
             }
             if ( j == 0 || j == ny-1 ) {
-               b[ k*nx*ny + j*nx + i ] += hy * temp;
+               b[ k*nx*ny + j*nx + i ] += hz * temp;
             }
             if ( k == 0 || k == nz-1 ) {
-               b[ k*nx*ny + j*nx + i ] += hz * temp;
+               b[ k*nx*ny + j*nx + i ] += hx * temp;
             }
          }
       }
