@@ -1,0 +1,48 @@
+\documentclass[11pt,norsk,a4paper]{book}
+\usepackage{../futhark} %I denne filen har vi alt av \usepackage, alle egendefinerte kommandoer osv.
+
+\begin{document}
+
+%Forside:
+	\thispagestyle{empty}   %Ingen sidetall
+	\forsideProsess		%Denne setter inn forsiden.
+	\clearpage		%Ny side
+	
+%Sammendrag og forord:
+	\pagestyle{plain}	%Stil på sammendrag og forord.
+	\pagenumbering{roman} 	%Sidetall på formen i, ii, osv. på sammendrag, forord og innholdsfortegnelse.
+
+	\sammendrag{Tekst som skal stå i sammendrag}
+
+	\forord{Tekst som skal stå i forord}
+
+	\clearpage		%Ny side
+
+%Innholdsfortegnelse (automagisk)
+	\tableofcontents
+	\clearpage		%Blank side
+	\thispagestyle{empty}	%Uten sidetall
+
+%Kapitler:
+	\kapittelstil %Fikser stilen i kapitlene
+
+	\include{innledning} %Kap. 1
+	\include{medlemmer}  %Kap. 2
+
+	%Disse er copy-pasta fra rapporten Joakim fikk tak i,
+	%Bør sikkert endre navn, rekkefølge osv slik at det passer oss.
+	%\include{utvikling}
+	%\include{kompetanse}
+	%\include{roller}
+	%\include{beslutninger}
+	%\include{fremdrift}
+	%\include{kommunikasjon}
+	%\include{konklusjon}
+	%\include{oppsummering}
+
+%Referanser:
+	\bibliographystyle{plain}
+	\bibliography{referanser.bib}
+
+\end{document}
+

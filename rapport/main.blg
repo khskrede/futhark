@@ -1,0 +1,55 @@
+This is BibTeX, Version 0.99d (TeX Live 2010/Arch Linux)
+Capacity: max_strings=35307, hash_size=35307, hash_prime=30011
+The top-level auxiliary file: main.aux
+A level-1 auxiliary file: innledning.aux
+A level-1 auxiliary file: teori.aux
+A level-1 auxiliary file: numerikk.aux
+A level-1 auxiliary file: eksperimenter.aux
+A level-1 auxiliary file: numerikk_resultater.aux
+A level-1 auxiliary file: konklusjon.aux
+The style file: plain.bst
+Database file #1: referanser.bib.bib
+Warning--string name "july" is undefined
+--line 6 of file referanser.bib.bib
+You've used 1 entry,
+            2118 wiz_defined-function locations,
+            510 strings with 4242 characters,
+and the built_in function-call counts, 582 in all, are:
+= -- 58
+> -- 13
+< -- 2
++ -- 5
+- -- 4
+* -- 38
+:= -- 81
+add.period$ -- 3
+call.type$ -- 1
+change.case$ -- 5
+chr.to.int$ -- 0
+cite$ -- 1
+duplicate$ -- 25
+empty$ -- 53
+format.name$ -- 4
+if$ -- 135
+int.to.chr$ -- 0
+int.to.str$ -- 1
+missing$ -- 1
+newline$ -- 8
+num.names$ -- 2
+pop$ -- 7
+preamble$ -- 1
+purify$ -- 4
+quote$ -- 0
+skip$ -- 25
+stack$ -- 0
+substring$ -- 65
+swap$ -- 14
+text.length$ -- 2
+text.prefix$ -- 0
+top$ -- 0
+type$ -- 4
+warning$ -- 0
+while$ -- 4
+width$ -- 2
+write$ -- 14
+(There was 1 warning)

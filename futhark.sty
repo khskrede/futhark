@@ -1,0 +1,178 @@
+%Denne .sty-filen brukes av latex-dokumentene i mappene ``prosess'' og
+%``rapport''. 
+\usepackage[utf8]{inputenc}
+\usepackage{babel}
+\usepackage{graphicx}
+\usepackage[T1]{fontenc}
+\usepackage{allrunes}	%runer for å skrive futhark
+\usepackage[Lenny]{fncychap}	%fancy kapittel-overskrifter
+\usepackage{hyperref}	%linker
+\usepackage{fancyhdr}	%header og footer
+\usepackage{lipsum}	%Lorem Ipsum
+\usepackage{amsmath}
+\usepackage{amsthm} 	%Teoremer
+\usepackage{amssymb}	%Matematiske symboler
+\usepackage{multicol}	%Flere kolonner
+\usepackage{cleveref}	%Bedre referanser med \label og \cref
+
+%Færre orddelinger ved linje-
+%skift:
+\hyphenpenalty=5000
+\tolerance=5000
+
+%Oppsett for hyperref-pakken
+\hypersetup{
+colorlinks=true,
+linkcolor=black, %interne lenker i dokumentet
+urlcolor=blue,   %hyperlenker
+citecolor=green  %siteringer
+}
+
+%Oppsett for cleveref-pakken - norske navn
+\crefname{equation}{likn.}{likn.}
+\crefname{section}{avs.}{avsnittene}
+  %figure har passende navn fra før av
+\crefname{theorem}{teorem}{teoremene}
+\crefname{chapter}{kapittel}{kapitlene}
+
+
+%Oppsett for fancyhdr-pakken
+\setlength{\headheight}{15.2pt}
+%Vi reformaterer \leftmark og \rightmark slik at de ikke er skrevet med bare store bokstaver:
+\renewcommand{\chaptermark}[1]{\markboth{#1}{}}
+\renewcommand{\sectionmark}[1]{\markright{#1}{}}
+
+%Ting som vi bruker i forsidene
+\newlength{\drop}
+\providecommand*{\wb}{{\textarl{ \withlines futhark}}}
+
+%Forside for prosess, settes inn med \forsideProsess
+\newcommand*{\forsideProsess}{\begingroup
+\drop = 2\baselineskip
+\centering
+\vspace*{\drop}
+{\Huge PROSESSRAPPORT}\\[\drop]
+\wb\\[\drop]
+{\Large\itshape Numeriske Simuleringer og Eksperimenter med}\\[\baselineskip]
+{\Large STEKING AV BACON I MIKROBØLGEOVN}\\[\baselineskip]
+\wb\\[\baselineskip]
+{\Large\itshape EiT - Matematikk Innen Anvendelser}\\[\baselineskip]
+{\Large gruppe 5 - FU\TH ARK - \textarn{futhark} - \wb}\par
+\vfill
+\wb\\[\drop]
+{\Large \textsc{Åsmund Ervik, Joakim Johnsen, Knut Halvor Skrede, Turid
+Schoonderbeek Solberg, Paul Vo}}\\
+\vspace*{\drop}
+{\scshape 2011}\par
+\vspace*{\drop}
+\endgroup}
+
+%Forside for rapport, settes inn med \forsideRapport
+\newcommand*{\forsideRapport}{\begingroup
+\drop = 2\baselineskip
+\centering
+\vspace*{\drop}
+{\Huge RESULTATER}\\[\drop]
+\wb\\[\drop]
+{\Large\itshape Numeriske Simuleringer og Eksperimenter med}\\[\baselineskip]
+{\Large STEKING AV BACON I MIKROBØLGEOVN}\\[\baselineskip]
+\wb\\[\baselineskip]
+{\Large\itshape EiT - Matematikk Innen Anvendelser}\\[\baselineskip]
+{\Large gruppe 5 - FU\TH ARK - \textarn{futhark} - \wb}\par
+\vfill
+\wb\\[\drop]
+{\Large \textsc{Åsmund Ervik, Joakim Johnsen, Knut Halvor Skrede, Turid
+Schoonderbeek Solberg, Paul Vo}}\\
+\vspace*{\drop}
+{\scshape 2011}\par
+\vspace*{\drop}
+\endgroup}
+
+
+%\abstract{} er ikke definert når vi bruker book-stilen.
+%vi lager vårt egen \sammendrag{} :
+\newcommand{\sammendrag}[1]{
+\section*{
+\centering \textbf{\Large{Sammendrag}}}
+  \begin{quotation}
+    \noindent 
+    #1
+  \end{quotation}
+\clearpage
+}
+
+%\forord{} lager forordet for oss.
+\newcommand{\forord}[1]{
+\begin{flushleft}
+\textbf{\Large{Forord}}
+\end{flushleft}
+#1
+\begin{flushright}
+Åsmund Ervik, Joakim Johnsen, Paul Vo,\\ Knut Halvor Skrede, Turid Schoonderbeek Solberg
+\\ \textit{ \today}
+\end{flushright}
+}
+
+%vi bruker f.eks. person{Åsmund} som overskrift i medlemmer-kapittelet istedet for \section{Åsmund}.
+\newcommand{\person}[1]{
+\phantomsection
+\addcontentsline{toc}{section}{#1}
+\section*{#1}
+}
+
+%Vi definerer \kapittelstil, som gjør oppsettet for kapitlene.
+\newcommand{\kapittelstil}{
+\pagenumbering{arabic}	%Vanlige sidetall
+\pagestyle{fancy}	%Så vi kan bruke fancyhdr
+%Mer oppsett for fancyhdr-pakken, for kapitlene.
+%head betyr header, foot er footer. (l|c|r) er venstre, midten, høyre
+%den første {} gir for partall-sider, den andre {} gir for oddetall-sider
+\lhead{}{\leftmark}
+\chead{}{}
+\rhead{\rightmark}{}
+\lfoot{Kap. \thechapter}
+\cfoot{\thepage}
+\rfoot{\wb} 		%Dette gir et Futhark-tegn med stavruner i høyre hjørne nederst.
+\renewcommand{\headrulewidth}{0.3pt}
+}
+
+%Diverse matematiske lurerier
+% \DeclareMathOperator{\Sample}{Sample}
+\let\vaccent=\v % rename builtin command \v{} to \vaccent{}
+\renewcommand{\v}[1]{\ensuremath{\mathbf{#1}}} % for vectors
+\newcommand{\gv}[1]{\ensuremath{\mbox{\boldmath$ #1 $}}} 
+% for vectors of Greek letters
+\newcommand{\uv}[1]{\ensuremath{\mathbf{\hat{#1}}}} % for unit vector
+\newcommand{\abs}[1]{\left| #1 \right|} % for absolute value
+\newcommand{\avg}[1]{\left< #1 \right>} % for average
+\let\underdot=\d % rename builtin command \d{} to \underdot{}
+\renewcommand{\d}[2]{\frac{d #1}{d #2}} % for derivatives
+\newcommand{\dd}[2]{\frac{d^2 #1}{d #2^2}} % for double derivatives
+\newcommand{\pd}[2]{\frac{\partial #1}{\partial #2}} 
+% for partial derivatives
+\newcommand{\pdd}[2]{\frac{\partial^2 #1}{\partial #2^2}} 
+% for double partial derivatives
+\newcommand{\pdc}[3]{\left( \frac{\partial #1}{\partial #2}
+ \right)_{#3}} % for thermodynamic partial derivatives
+\newcommand{\ket}[1]{\left| #1 \right>} % for Dirac bras
+\newcommand{\bra}[1]{\left< #1 \right|} % for Dirac kets
+\newcommand{\braket}[2]{\left< #1 \vphantom{#2} \right|
+ \left. #2 \vphantom{#1} \right>} % for Dirac brackets
+\newcommand{\matrixel}[3]{\left< #1 \vphantom{#2#3} \right|
+ #2 \left| #3 \vphantom{#1#2} \right>} % for Dirac matrix elements
+\newcommand{\grad}[1]{\gv{\nabla} #1} % for gradient
+\let\divsymb=\div % rename builtin command \div to \divsymb
+\renewcommand{\div}[1]{\gv{\nabla} \cdot #1} % for divergence
+\newcommand{\curl}[1]{\gv{\nabla} \times #1} % for curl
+\let\baraccent=\= % rename builtin command \= to \baraccent
+\renewcommand{\=}[1]{\stackrel{#1}{=}} % for putting numbers above =
+\newtheorem{prop}{Proposition}
+\newtheorem{thm}{Theorem}[section]
+\newtheorem{lem}[thm]{Lemma}
+\theoremstyle{definition}
+\newtheorem{dfn}{Definition}
+\theoremstyle{remark}
+\newtheorem*{rmk}{Remark}
+
+
+

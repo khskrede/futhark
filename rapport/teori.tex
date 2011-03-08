@@ -1,0 +1,27 @@
+\chapter{Teori}
+\section{Det fysiske systemet}
+Det fysiske systemet som skal beskrives er en tynn, rektangulær plate med
+spekket svinekjøtt som utsettes for mikrobølgestråling med en effekt på rundt
+750 W. Det som skal modelleres er temperatur, faseoverganger for fett, og
+transport av fett.
+
+\section{Differensiallikninger}
+De differensiallikningene som beskriver det fysiske systemet kan deles inn i to
+klasser: varmelikningen med kildeledd, og Navier-Stokes likning med kildeledd.
+Svinekjøttet deles inn i tre materialer: kjøtt, fast fett og flytende fett. Hver
+av disse materialene vil ha en egen varmelikning med ulike ledd, \cref{eq:temp}:
+\begin{align}
+  \label{eq:temp}
+  \pd{T}{t} + \grad{^2 T} &= J^{MW} \quad \rm{m,} \\
+  \pd{T}{t} + \grad{^2 T} &= J^{MW}  \quad \rm{s,} \\
+  \pd{T}{t} + \grad{^2 T} &= J^{MW}  \quad \rm{l.}
+\end{align}
+Her står m for kjøtt (meat), s for fast fett, og l for flytende fett. $J^{MW}$
+er mikrobølgeovnene, representert som et kildeledd. Dette modelleres i første
+omgang som et sylindersymmetrisk effektivt ledd, med en radiell form gitt ved
+\cref{eq:effektfordeling},
+\begin{equation}
+  J^{MW}(r) = -1.33789 + 4.54712x - 1.25814x^2 + 0.127253x^3 - 0.00469462x^4 + 0.0000385689x^5 \rm{,}
+  \label{eq:effektfordeling}
+\end{equation}
+altså et 5. gradspolynom. Dette er tilpasset numeriske resultater fra \cite{huang+zhu}
