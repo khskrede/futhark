@@ -1,5 +1,6 @@
 
 #include <iostream>
+#include <omp.h>
 #include "headers/diagmatrix.h"
 
 DIAG_MATRIX::DIAG_MATRIX(float *values, int *offsets, int n, int nx, int ny, int nz) {
@@ -11,9 +12,9 @@ DIAG_MATRIX::DIAG_MATRIX(float *values, int *offsets, int n, int nx, int ny, int
       m_offsets[i] = offsets[i];
    }
    m_n = nx*ny*nz;
-   m_nx=nx;
-   m_ny=ny;
-   m_nz=nz;
+   m_nx = nx;
+   m_ny = ny;
+   m_nz = nz;
 }
 
 DIAG_MATRIX::~DIAG_MATRIX() {
@@ -28,43 +29,41 @@ DIAG_MATRIX::~DIAG_MATRIX() {
 void
 DIAG_MATRIX::MultiplyVector(float *product, float *vector, int n) {
 
-   int disps[7][3] = { {0,0,0}, {1,0,0}, {0,1,0}, {0,0,1},
-                       {-1,0,0}, {0,-1,0}, {0,0,-1} };
+   int disps[7][3] = { {0,0,-1}, {0,-1,0}, {-1,0,0}, {0,0,0},
+                       {1,0,0}, {0,1,0}, {0,0,1} };
 
-   int i, k;
-   int x0, y0, z0, x, y, z;
-   bool test;
-
+   #pragma omp parallel for
    for ( int j = 0; j < m_n; j++ ) {
       product[j] = 0;
+
+      int i;
+      int x0, y0, z0, x, y, z;
+      bool test;
 
       x0 = j % m_nx;
       y0 = ( j / m_nx ) % m_ny;
       z0 = j / m_nx / m_ny;
 
       for ( int t = 0; t < m_size; t++ ) {
-         k = m_offsets[t];
-         i = j + k;
-         test = false;
+         i = j + m_offsets[t];
          
-         if ( i < m_n && i >= 0 ) {
-         
-            test = false;
-            for ( int p = 0; p < 7; p++ ) {
-               x = x0+disps[p][0]; 
-               y = y0+disps[p][1];
-               z = z0+disps[p][2];
-               if ( ( i == x + y*m_nx + z*m_nx*m_ny ) &&
-                   !( (x==-1 || x==m_nx) || 
-                      (y==-1 || y==m_ny) ||
-                      (z==-1 || z==m_nz) ) ) {
-                  test = true;
-                  break;
-               }
-            }         
+         if ( i < m_n && i>-1 ) {
 
-            if (test && i>=0 && i<m_n) 
-               product[j] += m_values[ t ] * vector[ i ];
+            test = false;
+
+            x = x0+disps[t][0]; 
+            y = y0+disps[t][1];
+            z = z0+disps[t][2];
+
+            if ( (x!=-1 && x!=m_nx) &&
+                 (y!=-1 && y!=m_ny) &&
+                 (z!=-1 && z!=m_nz) ) {
+               test = true;
+            }
+
+            if (test) {
+               product[j] += m_values[t] * vector[i];
+            }
 
          }
       }
@@ -75,8 +74,8 @@ DIAG_MATRIX::MultiplyVector(float *product, float *vector, int n) {
 void
 DIAG_MATRIX::Print() {
 
-   int disps[7][3] = { {0,0,0}, {1,0,0}, {0,1,0}, {0,0,1},
-                       {-1,0,0}, {0,-1,0}, {0,0,-1} };
+   int disps[7][3] = { {-1,0,0}, {0,-1,0}, {0,0,-1}, {0,0,0},
+                       {0,0,1}, {0,1,0}, {1,0,0} };
 
    int x0, y0, z0, x, y, z;
    bool test;
@@ -90,24 +89,24 @@ DIAG_MATRIX::Print() {
       for ( int i = 0; i < m_n; i++ ) {
          test = false;
          
-         if ( i < m_n && i >= 0 ) {
-         
+         if ( true ) {
+
             test = false;
             for ( int p = 0; p < 7; p++ ) {
                x = x0+disps[p][0]; 
                y = y0+disps[p][1];
                z = z0+disps[p][2];
-               if ( ( i == x + y*m_nx + z*m_nx*m_ny ) &&
-                   !( (x==-1 || x==m_nx) || 
+               if ( (i == x + y*m_nx + z*m_nx*m_ny) &&
+                    !((x==-1 || x==m_nx) || 
                       (y==-1 || y==m_ny) ||
-                      (z==-1 || z==m_nz) ) ) {
+                      (z==-1 || z==m_nz)) ) {
                   test = true;
                   break;
                }
-            }         
+            }
 
-            if (test && i>=0 && i<m_n) {
-               std::cout << "1 ";
+            if (test) {
+               std::cout << "1 " ;
             }
             else {
                std::cout << "0 ";

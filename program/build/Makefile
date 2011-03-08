@@ -1,7 +1,7 @@
 
 CC           = g++ 
-CC-FLAGS     = -c -Wall -g 
-LINKER       = g++
+CC-FLAGS     = -c -Wall -g -fopenmp
+LINKER       = g++ -fopenmp
 LINKER-FLAGS = -o
 RM           = rm -f
 MAKE         = make

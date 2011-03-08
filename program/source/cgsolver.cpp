@@ -9,7 +9,6 @@ CG_SOLVER::CG_SOLVER(float *b, float *x, int nx, int ny, int nz, DIAG_MATRIX *A)
    m_nz = nz;
 
    m_A = A;
-
    m_b = b;
    m_x = x;
 
@@ -37,7 +36,7 @@ void
 CG_SOLVER::Solve() {
 
    // Acceptable error
-   float error = 0.00001;
+   float error = 0.000000001;
 
    // variable declarations
    float theta_old = 0, theta_new = 0, theta_0 = 0, temp;
@@ -46,12 +45,14 @@ CG_SOLVER::Solve() {
    // r <= b - Ax
    // d <= r
    (*m_A).MultiplyVector(m_Ax, m_x, m_n);
+   #pragma omp parallel for
    for ( int i = 0; i < m_n; i++ ) {
       m_r[i] = m_b[i] - m_Ax[i];
       m_d[i] = m_r[i];
    }
 
    // theta_new <= r*r
+   #pragma omp parallel for reduction(+:theta_new)
    for ( int i = 0; i < m_n; i++ ) {
       theta_new += m_r[i] * m_r[i];
    }
@@ -64,35 +65,35 @@ CG_SOLVER::Solve() {
       // alpha <= theta_new / d*Ad
       (*m_A).MultiplyVector(m_Ad, m_d, m_n);
       temp = 0;
+      #pragma omp parallel for reduction(+:temp)
       for ( int i = 0; i < m_n; i++) {
          temp += m_d[i] * m_Ad[i];
       }
       m_alpha = theta_new / temp;
 
       // x <= x + alpha * d
+      #pragma omp parallel for
       for ( int i = 0; i < m_n; i++ ) {
          m_x[i] += m_alpha * m_d[i];
       }
 
       // if 50 iterations have passed
-      if ( iterations % 10 == 0 ) {
-
+      if ( iterations % 50 == 0 ) {
          // r <= b - Ax
          (*m_A).MultiplyVector(m_Ax, m_x, m_n);
+         #pragma omp parallel for
          for ( int i = 0; i < m_n; i++ ) {
             m_r[i] = m_b[i] - m_Ax[i];
          }
-
       }
 
       // else
       else {
-
          // r <= r - alpha * Ad
+         #pragma omp parallel for
          for ( int i = 0; i < m_n; i++ ) {
             m_r[i] -= m_alpha * m_Ad[i] ;
          }
-
       }
 
       // theta_old <= theta_new
@@ -100,6 +101,7 @@ CG_SOLVER::Solve() {
 
       // theta_new <= r*r
       theta_new = 0;
+      #pragma omp parallel for reduction(+:theta_new)
       for ( int i = 0; i < m_n; i++ ) {
          theta_new += m_r[i] * m_r[i];
       }
@@ -108,6 +110,7 @@ CG_SOLVER::Solve() {
       m_beta = theta_new / theta_old;
 
       // d <= r + beta * d
+      #pragma omp parallel for
       for ( int i = 0; i < m_n; i++ ) {
          m_d[i] = m_r[i] + m_beta * m_d[i];
       }
