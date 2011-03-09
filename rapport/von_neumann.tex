@@ -1,13 +1,30 @@
-\chapter{Numerikk}
+\documentclass[a4paper,norsk]{article}
+\usepackage[latin1]{inputenc}
+\usepackage[T1]{fontenc}
+\usepackage{babel, textcomp}
+\usepackage{graphicx}
+\usepackage{fancyvrb}
+\usepackage{amsmath}
+\usepackage{multirow}
+\usepackage[margin=1.5in]{geometry}
+\setlength{\parindent}{0in}
+
+\tolerance = 10000             
+\hbadness = \tolerance         
+\pretolerance = 2000
+\title{Øving 8 \\ TKT4192 Elementmetode i styrkeanalyse}
+\author{Joakim Johnsen - joakij@stud.ntnu.no}
+\date{\today}
+
+\begin{document}
 
 \section{Von Neumann-analyse av Crank-Nicolson-skjemaet}
 
 \begin{equation}
 \frac{\partial u}{\partial t} = \alpha\frac{\partial^2u}{\partial^2x}
-\label{varmelikn}
 \end{equation}
 
-\noindent Ved Ã¥ anvende Crank-Nicolson oppnÃ¥s fÃ¸lgende iterasjonsskjema
+\noindent Ved å anvende Crank-Nicolson oppnås følgende iterasjonsskjema
 
 \begin{equation}
 u_i^{n+1} = u_i^n\left(1-2D\right)+D\left(u_{i+1}^{n+1}-2u_i^{n+1}+u_{i-1}^{n+1}\right) + D\left(u_{i+1}^n + u_{i-1}^n\right)
@@ -16,14 +33,13 @@ u_i^{n+1} = u_i^n\left(1-2D\right)+D\left(u_{i+1}^{n+1}-2u_i^{n+1}+u_{i-1}^{n+1}
 D = \frac{1}{2}\frac{\alpha\Delta t}{(\Delta x)^2}
 \end{equation}
 
-\noindent InnfÃ¸rer tilnÃ¦rmelsen $u_j^n \approx E_j^n$ hvor $E_j^n = G^ne^{i\beta
-x_j}$, her er $n$ en potens. Innsatt i \cref{varmelikn}:
+\noindent Innfører tilnærmelsen $u_j^n \approx E_j^n$ hvor $E_j^n = G^ne^{i\beta x_j}$, her er $n$ en potens. Innsatt i $(1)$:
 
 \begin{equation*}
 G^{n+1}e^{i\beta x_j} = G^ne^{i\beta x_j}\left(1-2D\right) + G^{n+1}D\left(e^{i\beta x_{j+1}} - 2e^{i\beta x_j} + e^{i\beta x_{j-1}}\right) + G^nD\left(e^{i\beta x_{j+1}} + e^{i\beta x_{j-1}}\right)
 \end{equation*}
 
-\noindent Hvis vi deler $(3)$ pÃ¥ $G^ne^{i\beta x_j}$ og benytter at $x_{j+1} \approx x_j + h$ fÃ¥r vi
+\noindent Hvis vi deler $(3)$ på $G^ne^{i\beta x_j}$ og benytter at $x_{j+1} \approx x_j + h$ får vi
 \begin{eqnarray*}
 G\left[1-D\left(2\cos{\beta h} - 2\right)\right] &=& 1 - 2D\left(1-\cos{\beta h}\right) \\
 \cos{\beta h} &=& \frac{1}{2}\left(1-\sin^2{\frac{\beta h}{2}}\right) \\
@@ -37,5 +53,5 @@ G &=& \frac{1-4D\sin^2{\frac{\beta h}{2}}}{1+4D\sin^2{\frac{\beta h}{2}}}
 |G| = \left|\frac{1-4D}{1+4D}\right|
 \end{equation}
 
-\noindent Verdt Ã¥ observere at sÃ¥ lenge $D > 0 \ \Rightarrow \ |G| \le 1$, slik at Crank-Nicolson-skjemaet er \emph{ubetinget stabilt} 
-
+\noindent Verdt å observere at så lenge $D > 0 \ \Rightarrow \ |G| \le 1$, slik at Crank-Nicolson-skjemaet er \emph{ubetinget stabilt} 
+\end{document}

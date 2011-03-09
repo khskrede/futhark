@@ -12,16 +12,28 @@ Svinekjøttet deles inn i tre materialer: kjøtt, fast fett og flytende fett. Hv
 av disse materialene vil ha en egen varmelikning med ulike ledd, \cref{eq:temp}:
 \begin{align}
   \label{eq:temp}
-  \pd{T}{t} + \grad{^2 T} &= J^{MW} \quad \rm{m,} \\
-  \pd{T}{t} + \grad{^2 T} &= J^{MW}  \quad \rm{s,} \\
-  \pd{T}{t} + \grad{^2 T} &= J^{MW}  \quad \rm{l.}
+  (\rho c_p)_m \pd{T}{t} - \alpha_m \grad{^2 T} &= J^{MW} \quad \rm{m,} \\
+  \eta_s (\rho c_p)_s \pd{T}{t} - \eta_s\alpha_s \grad{^2 T} &= J^{MW} - J^{Smelting}  \quad \rm{s,} \\
+  \eta_l (\rho c_p)_l \pd{T}{t} - \eta_s\alpha_l \grad{^2 T} - \eta_l(\rho c_p)_l(\v{v}\cdot
+  \grad{})T &= J^{MW}  \quad \rm{l.}
 \end{align}
 Her står m for kjøtt (meat), s for fast fett, og l for flytende fett. $J^{MW}$
 er mikrobølgeovnene, representert som et kildeledd. Dette modelleres i første
 omgang som et sylindersymmetrisk effektivt ledd, med en radiell form gitt ved
 \cref{eq:effektfordeling},
 \begin{equation}
-  J^{MW}(r) = -1.33789 + 4.54712x - 1.25814x^2 + 0.127253x^3 - 0.00469462x^4 + 0.0000385689x^5 \rm{,}
+  J^{MW}(r) = 0.5 + 2.55008x - 0.588013x^2 + 0.032445x^3 + 0.00124411x^4 - 0.0000973516x^5 \rm{,}
   \label{eq:effektfordeling}
 \end{equation}
-altså et 5. gradspolynom. Dette er tilpasset numeriske resultater fra \cite{huang+zhu}
+altså et 5. gradspolynom. Dette er fra numeriske resultater fra \cite{huang+zhu}.
+
+Videre har vi leddene $J^{Smelting}$ som er varmetapet på grunn av smelting av
+fast fett. Dette kan skrives på formen \[ \frac{L \rho}{T_2-T_1} \pd{T}{t}
+\rm{,} \quad T \in (T1,T2) \rm{,}\] der fettet smelter mellom temperaturene T1
+og T2. For $T \notin (T1,T2)$ er dette leddet null. Vi ser da at dette leddet kun
+blir en modifikasjon av konstanten foran $\pd{T}{t}$-leddet, og dermed ikke en
+stor komplikasjon.
+
+I den siste likningen har man også en konvektiv derivert, på formen $(\v{v}\cdot
+\grad{})T$. Dette representerer varme som transporteres 
+
