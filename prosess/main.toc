@@ -3,7 +3,7 @@
 \contentsline {section}{\numberline {1.1}Innledning}{1}{section.1.1}
 \contentsline {chapter}{\numberline {2}Presentasjon av gruppens medlemmer}{3}{chapter.2}
 \contentsline {section}{\IeC {\r A}smund}{3}{section*.3}
-\contentsline {section}{Joakim}{3}{section*.5}
-\contentsline {section}{Turid}{4}{section*.7}
-\contentsline {section}{Paul}{4}{section*.9}
-\contentsline {section}{Knut Halvor}{5}{section*.11}
+\contentsline {section}{Joakim}{3}{section*.7}
+\contentsline {section}{Turid}{4}{section*.11}
+\contentsline {section}{Paul}{4}{section*.13}
+\contentsline {section}{Knut Halvor}{5}{section*.17}
