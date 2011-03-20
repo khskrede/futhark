@@ -1,15 +1,16 @@
-\select@language {norsk}
+\select@language {english}
 \contentsline {chapter}{\numberline {1}Innledning}{1}{chapter.1}
 \contentsline {section}{\numberline {1.1}Innledning}{1}{section.1.1}
 \contentsline {chapter}{\numberline {2}Theory}{3}{chapter.2}
 \contentsline {section}{\numberline {2.1}The physical system}{3}{section.2.1}
 \contentsline {section}{\numberline {2.2}Our approach}{3}{section.2.2}
-\contentsline {section}{\numberline {2.3}Differential equations}{3}{section.2.3}
-\contentsline {chapter}{\numberline {3}Numerikk}{7}{chapter.3}
-\contentsline {section}{\numberline {3.1}Von Neumann-analyse av Crank-Nicolson-skjemaet}{7}{section.3.1}
-\contentsline {chapter}{\numberline {4}Eksperimenter}{9}{chapter.4}
-\contentsline {section}{\numberline {4.1}Eksperimenter}{9}{section.4.1}
-\contentsline {chapter}{\numberline {5}Numerikkresultater}{11}{chapter.5}
-\contentsline {section}{\numberline {5.1}Numerikkresultater}{11}{section.5.1}
-\contentsline {chapter}{\numberline {6}Konklusjon}{13}{chapter.6}
-\contentsline {section}{\numberline {6.1}Konklusjon}{13}{section.6.1}
+\contentsline {section}{\numberline {2.3}The heat equations}{4}{section.2.3}
+\contentsline {section}{\numberline {2.4}The transport equations}{4}{section.2.4}
+\contentsline {chapter}{\numberline {3}Numerikk}{5}{chapter.3}
+\contentsline {section}{\numberline {3.1}Von Neumann-analyse av Crank-Nicolson-skjemaet}{5}{section.3.1}
+\contentsline {chapter}{\numberline {4}Eksperimenter}{7}{chapter.4}
+\contentsline {section}{\numberline {4.1}Eksperimenter}{7}{section.4.1}
+\contentsline {chapter}{\numberline {5}Numerikkresultater}{9}{chapter.5}
+\contentsline {section}{\numberline {5.1}Numerikkresultater}{9}{section.5.1}
+\contentsline {chapter}{\numberline {6}Konklusjon}{11}{chapter.6}
+\contentsline {section}{\numberline {6.1}Konklusjon}{11}{section.6.1}
