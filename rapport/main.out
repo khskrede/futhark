@@ -1,14 +1,15 @@
-\BOOKMARK [0][-]{chapter.1}{Innledning}{}% 1
-\BOOKMARK [1][-]{section.1.1}{Innledning}{chapter.1}% 2
-\BOOKMARK [0][-]{chapter.2}{Theory}{}% 3
-\BOOKMARK [1][-]{section.2.1}{The physical system}{chapter.2}% 4
-\BOOKMARK [1][-]{section.2.2}{Our approach}{chapter.2}% 5
-\BOOKMARK [1][-]{section.2.3}{Differential equations}{chapter.2}% 6
-\BOOKMARK [0][-]{chapter.3}{Numerikk}{}% 7
-\BOOKMARK [1][-]{section.3.1}{Von Neumann-analyse av Crank-Nicolson-skjemaet}{chapter.3}% 8
-\BOOKMARK [0][-]{chapter.4}{Eksperimenter}{}% 9
-\BOOKMARK [1][-]{section.4.1}{Eksperimenter}{chapter.4}% 10
-\BOOKMARK [0][-]{chapter.5}{Numerikkresultater}{}% 11
-\BOOKMARK [1][-]{section.5.1}{Numerikkresultater}{chapter.5}% 12
-\BOOKMARK [0][-]{chapter.6}{Konklusjon}{}% 13
-\BOOKMARK [1][-]{section.6.1}{Konklusjon}{chapter.6}% 14
+\BOOKMARK [0][-]{chapter.1}{Innledning}{}
+\BOOKMARK [1][-]{section.1.1}{Innledning}{chapter.1}
+\BOOKMARK [0][-]{chapter.2}{Theory}{}
+\BOOKMARK [1][-]{section.2.1}{The physical system}{chapter.2}
+\BOOKMARK [1][-]{section.2.2}{Our approach}{chapter.2}
+\BOOKMARK [1][-]{section.2.3}{Differential equations}{chapter.2}
+\BOOKMARK [0][-]{chapter.3}{Numerikk}{}
+\BOOKMARK [1][-]{section.3.1}{Von Neumann-analyse av Crank-Nicolson-skjemaet}{chapter.3}
+\BOOKMARK [2][-]{subsection.3.1.1}{Truncation error}{section.3.1}
+\BOOKMARK [0][-]{chapter.4}{Eksperimenter}{}
+\BOOKMARK [1][-]{section.4.1}{Eksperimenter}{chapter.4}
+\BOOKMARK [0][-]{chapter.5}{Numerikkresultater}{}
+\BOOKMARK [1][-]{section.5.1}{Numerikkresultater}{chapter.5}
+\BOOKMARK [0][-]{chapter.6}{Konklusjon}{}
+\BOOKMARK [1][-]{section.6.1}{Konklusjon}{chapter.6}
