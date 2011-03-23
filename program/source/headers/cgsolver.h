@@ -2,8 +2,6 @@
 #ifndef CONJUGATE_GRADIENT_H
 #define CONJUGATE_GRADIENT_H
 
-#include "diagmatrix.h"
-
 class cg_solver {
 
    private:
