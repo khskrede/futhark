@@ -14,6 +14,7 @@
 \usepackage{amssymb}	%Matematiske symboler
 \usepackage{multicol}	%Flere kolonner
 \usepackage{cleveref}	%Bedre referanser med \label og \cref
+\usepackage{../coffee2}
 
 %Færre orddelinger ved linje-
 %skift:
@@ -89,8 +90,8 @@ Schoonderbeek Solberg, Paul Vo}}\\
 
 
 %\abstract{} er ikke definert når vi bruker book-stilen.
-%vi lager vårt egen \sammendrag{} :
-\newcommand{\sammendrag}[1]{
+%vi lager vårt egen \sammendragNo{} og sammendragEn{} (norsk/engelsk):
+\newcommand{\sammendragNo}[1]{
 \section*{
 \centering \textbf{\Large{Sammendrag}}}
   \begin{quotation}
@@ -99,11 +100,30 @@ Schoonderbeek Solberg, Paul Vo}}\\
   \end{quotation}
 \clearpage
 }
+\newcommand{\sammendragEn}[1]{
+\section*{
+\centering \textbf{\Large{Abstract}}}
+  \begin{quotation}
+    \noindent 
+    #1
+  \end{quotation}
+\clearpage
+}
 
-%\forord{} lager forordet for oss.
-\newcommand{\forord}[1]{
+%\forord{} lager forordet for oss. engelsk og norsk versjon.
+\newcommand{\forordNo}[1]{
 \begin{flushleft}
 \textbf{\Large{Forord}}
+\end{flushleft}
+#1
+\begin{flushright}
+Åsmund Ervik, Joakim Johnsen, Paul Vo,\\ Knut Halvor Skrede, Turid Schoonderbeek Solberg
+\\ \textit{ \today}
+\end{flushright}
+}
+\newcommand{\forordEn}[1]{
+\begin{flushleft}
+\textbf{\Large{Preface}}
 \end{flushleft}
 #1
 \begin{flushright}
