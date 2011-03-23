@@ -1,20 +1,18 @@
-This is pdfTeX, Version 3.1415926-1.40.11 (TeX Live 2010/Arch Linux) (format=pdflatex 2010.12.9)  9 MAR 2011 10:22
+This is pdfTeX, Version 3.1415926-1.40.10 (TeX Live 2009/Debian) (format=pdflatex 2011.1.20)  20 MAR 2011 16:11
 entering extended mode
  restricted \write18 enabled.
  %&-line parsing enabled.
 **numerikk.tex
 (./numerikk.tex
 LaTeX2e <2009/09/24>
-Babel <v3.8l> and hyphenation patterns for english, dumylang, nohyphenation, ge
-rman-x-2009-06-19, ngerman-x-2009-06-19, afrikaans, ancientgreek, ibycus, arabi
-c, armenian, basque, bulgarian, catalan, pinyin, coptic, croatian, czech, danis
-h, dutch, ukenglish, usenglishmax, esperanto, estonian, farsi, finnish, french,
- galician, german, ngerman, swissgerman, monogreek, greek, hungarian, icelandic
-, assamese, bengali, gujarati, hindi, kannada, malayalam, marathi, oriya, panja
-bi, tamil, telugu, indonesian, interlingua, irish, italian, kurmanji, lao, lati
-n, latvian, lithuanian, mongolian, mongolianlmc, bokmal, nynorsk, polish, portu
-guese, romanian, russian, sanskrit, serbian, slovak, slovenian, spanish, swedis
-h, turkish, turkmen, ukrainian, uppersorbian, welsh, loaded.
+Babel <v3.8l> and hyphenation patterns for english, usenglishmax, dumylang, noh
+yphenation, farsi, arabic, croatian, bulgarian, ukrainian, russian, czech, slov
+ak, danish, dutch, finnish, french, basque, ngerman, german, german-x-2009-06-1
+9, ngerman-x-2009-06-19, ibycus, monogreek, greek, ancientgreek, hungarian, san
+skrit, italian, latin, latvian, lithuanian, mongolian2a, mongolian, bokmal, nyn
+orsk, romanian, irish, coptic, serbian, turkish, welsh, esperanto, uppersorbian
+, estonian, indonesian, interlingua, icelandic, kurmanji, slovenian, polish, po
+rtuguese, spanish, galician, catalan, swedish, ukenglish, pinyin, loaded.
 ! Undefined control sequence.
 l.1 \chapter
             {Numerikk}
@@ -747,10 +745,10 @@ Overfull \hbox (14.49295pt too wide) in paragraph at lines 40--41
 
  
 Here is how much of TeX's memory you used:
- 12 strings out of 493738
- 215 string characters out of 3148797
- 54081 words of memory out of 3000000
- 3404 multiletter control sequences out of 15000+200000
+ 12 strings out of 493848
+ 211 string characters out of 1152823
+ 52808 words of memory out of 3000000
+ 3387 multiletter control sequences out of 15000+50000
  3986 words of font info for 15 fonts, out of 3000000 for 9000
  714 hyphenation exceptions out of 8191
  18i,8n,12p,213b,79s stack positions out of 5000i,500n,10000p,200000b,50000s

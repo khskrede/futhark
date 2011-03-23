@@ -28,6 +28,13 @@ urlcolor=blue,   %hyperlenker
 citecolor=green  %siteringer
 }
 
+%marginpar lar oss skrive notater i margen, men vi gjør den litt penere:
+\setlength{\marginparwidth}{1.2in}
+\let\oldmarginpar\marginpar
+\renewcommand\marginpar[1]{\-\oldmarginpar[\raggedleft\footnotesize #1]%
+{\raggedright\footnotesize #1}}
+
+
 %Oppsett for fancyhdr-pakken
 \setlength{\headheight}{15.2pt}
 %Vi reformaterer \leftmark og \rightmark slik at de ikke er skrevet med bare store bokstaver:

@@ -7,7 +7,7 @@ GHz. To be modeled is the heat in the strip, phase transitions and transport.
 \section{Our approach}
 \begin{figure}[!h]
   \begin{center}
-    \includegraphics[width=0.8\linewidth]{physicists.png}
+    \includegraphics[width=0.4\linewidth]{physicists.png}
   \end{center}
   \caption{Our initial approach to the problem}
   \label{fig:xkcd_physics}
@@ -20,8 +20,8 @@ known, and we solve the transport equation for liquid fat out of the bacon. Then
 we know the distribution of liquid fat at step $n+2$, where we solve the heat
 equations again, and we repeat ad nauseam.
 
-\section{Differential equations}
-The differential equations governing the heat are all variations of the heat
+\section{The heat equations}
+The differential equations governing the heat transport are all variations of the heat
 equation, with various source terms, \cref{eq:temp}:
 \begin{align}
   \label{eq:temp}
@@ -52,6 +52,15 @@ complication.
 In the last of the heat equations, there also appears what is called a
 convective derivative, on the form $(\v{v}\cdot \grad{})T$. This is a somewhat
 more complicated term, and is essentially a modification due to transport of
-liquid fat implying an implicit transport of heat.
+liquid fat implying an implicit transport of heat. However, in the staggered
+approach used here, the velocity field is considered as known when it comes to
+the heat equations.
+
+\section{The transport equations}
+
+
+
+
+
 
 
