@@ -4,19 +4,19 @@
 
 #include "diagmatrix.h"
 
-class CG_SOLVER {
+class cg_solver {
 
    private:
 
-   DIAG_MATRIX* m_A;
+   void (*MVMultiply)(float* p, float* v);
 
    int m_n; // size of problem
    int m_nx;
    int m_ny;
    int m_nz;
 
-   float *m_b; // known vector of size n.
-   float *m_x; // unknown vector of size n.
+   float *m_b;
+   float *m_x;
 
    float *m_d;
    float *m_r;
@@ -29,8 +29,8 @@ class CG_SOLVER {
 
    public:
 
-   CG_SOLVER(float *b, float *x, int nx, int ny, int nz, DIAG_MATRIX *A);
-   ~CG_SOLVER();
+   cg_solver(float *b, float *x, int n, void (*MVMultiply)(float*, float*));
+   ~cg_solver();
 
    void Solve();
 };

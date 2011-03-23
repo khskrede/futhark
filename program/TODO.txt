@@ -1,0 +1,19 @@
+
+-----------------------------------
+- Find correct alpha values for:
+-----------------------------------
+
+   - Fat:
+      - Solid
+      - Melting
+      - Liquid
+      
+   - Meat
+      - Phase 1
+      - Phase 2 ?
+      
+   - Air
+      - Gass
+      
+
+Calculate boundary conditions using values for air

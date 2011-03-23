@@ -5,26 +5,36 @@ LINKER       = g++ -fopenmp
 LINKER-FLAGS = -o
 RM           = rm -f
 MAKE         = make
-OBJS         = main.o cgsolver.o diagmatrix.o
-TARGET       = main
+OBJS         = cgsolver.o phys_sys.o phys_consts.o
+TARGET1_OBJ  = main.o
+TARGET2_OBJ  = test.o
+TARGET1      = main
+TARGET2      = test
 
-$(TARGET): $(OBJS) 
-	$(LINKER) $(LINKER-FLAGS) $(TARGET) $(OBJS)
+all : $(TARGET1) $(TARGET2)
+
+$(TARGET1): $(TARGET1_OBJ) $(OBJS) 
+	$(LINKER) $(LINKER-FLAGS) $(TARGET1) $(TARGET1_OBJ) $(OBJS)
+
+$(TARGET2): $(TARGET2_OBJ) $(OBJS) 
+	$(LINKER) $(LINKER-FLAGS) $(TARGET2) $(TARGET2_OBJ) $(OBJS)
+
+test.o : ../source/test.cpp
+	$(CC) $(CC-FLAGS) ../source/test.cpp
 
 main.o : ../source/main.cpp
 	$(CC) $(CC-FLAGS) ../source/main.cpp
 
+phys_consts.o : ../source/phys_consts.cpp
+	$(CC) $(CC-FLAGS) ../source/phys_consts.cpp
+
 cgsolver.o : ../source/cgsolver.cpp
 	$(CC) $(CC-FLAGS) ../source/cgsolver.cpp
 
-diagmatrix.o : ../source/diagmatrix.cpp
-	$(CC) $(CC-FLAGS) ../source/diagmatrix.cpp
-
+phys_sys.o : ../source/phys_sys.cpp
+	$(CC) $(CC-FLAGS) ../source/phys_sys.cpp
 
 clean : 
-	rm -f ./*.o
+	rm -f ./*.o main test
 
-distclean :
-	rm -f ./*.o main
-
-rebuild: clean build
+rebuild: clean all
