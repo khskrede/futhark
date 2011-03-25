@@ -41,12 +41,14 @@ cg_solver::Solve() {
    // r <= b - Ax
    // d <= r
    MVMultiply(m_Ax, m_x);
+   #pragma omp parallel for
    for ( int i = 0; i < m_n; i++ ) {
       m_r[i] = m_b[i] - m_Ax[i];
       m_d[i] = m_r[i];
    }
 
    // theta_new <= r*r
+   #pragma omp parallel for reduction(+:theta_new)
    for ( int i = 0; i < m_n; i++ ) {
       theta_new += m_r[i] * m_r[i];
    }
@@ -59,12 +61,14 @@ cg_solver::Solve() {
       // alpha <= theta_new / d*Ad
       MVMultiply(m_Ad, m_d);
       temp = 0;
+      #pragma omp parallel for reduction(+:temp)
       for ( int i = 0; i < m_n; i++) {
          temp += m_d[i] * m_Ad[i];
       }
       m_alpha = theta_new / temp;
 
       // x <= x + alpha * d
+      #pragma omp parallel for
       for ( int i = 0; i < m_n; i++ ) {
          m_x[i] += m_alpha * m_d[i];
       }
@@ -73,6 +77,7 @@ cg_solver::Solve() {
       if ( iterations % 50 == 0 ) {
          // r <= b - Ax
          MVMultiply(m_Ax, m_x);
+         #pragma omp parallel for
          for ( int i = 0; i < m_n; i++ ) {
             m_r[i] = m_b[i] - m_Ax[i];
          }
@@ -81,6 +86,7 @@ cg_solver::Solve() {
       // else
       else {
          // r <= r - alpha * Ad
+         #pragma omp parallel for
          for ( int i = 0; i < m_n; i++ ) {
             m_r[i] -= m_alpha * m_Ad[i] ;
          }
@@ -91,6 +97,7 @@ cg_solver::Solve() {
 
       // theta_new <= r*r
       theta_new = 0;
+      #pragma omp parallel for reduction(+:theta_new)
       for ( int i = 0; i < m_n; i++ ) {
          theta_new += m_r[i] * m_r[i];
       }
@@ -99,6 +106,7 @@ cg_solver::Solve() {
       m_beta = theta_new / theta_old;
 
       // d <= r + beta * d
+      #pragma omp parallel for
       for ( int i = 0; i < m_n; i++ ) {
          m_d[i] = m_r[i] + m_beta * m_d[i];
       }
