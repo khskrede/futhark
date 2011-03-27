@@ -23,7 +23,7 @@ class phys_sys {
    static float* signs;
 
    // Helper function
-   static inline bool
+   static bool
    isOutside(int x, int y, int z);
 
    public:

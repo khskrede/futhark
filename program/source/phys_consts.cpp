@@ -43,7 +43,7 @@ phys_consts::CalculateValues( ) {
    // 1:0: solid
    alpha_values[1][0] = theta_meat / F_meat / Cp_meat;
    beta_values[1][0] = 1 / F_meat / Cp_meat;
-   substance_temps[1][0] = -200;
+   substance_temps[1][0] = -2000;
 
    // 1:1: solid-liquid (irrelevant)
    alpha_values[1][1] = 0;
@@ -72,7 +72,7 @@ phys_consts::CalculateValues( ) {
    // 2:0: solid
    alpha_values[2][0] = theta_fat / F_fat / Cp_fat;
    beta_values[2][0] = 1 / F_fat / Cp_fat;
-   substance_temps[1][0] = -2000;
+   substance_temps[2][0] = -2000;
 
    // 2:1: solid-liquid
    alpha_values[2][1] = theta_fat / F_fat / (Cp_fat + L_fat);

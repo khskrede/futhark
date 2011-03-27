@@ -27,7 +27,11 @@ class cg_solver {
 
    public:
 
-   cg_solver(float *b, float *x, int n, void (*MVMultiply)(float*, float*));
+   cg_solver(float *b,
+             float *x,
+             int n,
+             void (*MVMultiply)(float*, float*));
+
    ~cg_solver();
 
    void Solve();

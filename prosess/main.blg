@@ -3,11 +3,15 @@ Capacity: max_strings=35307, hash_size=35307, hash_prime=30011
 The top-level auxiliary file: main.aux
 A level-1 auxiliary file: innledning.aux
 A level-1 auxiliary file: medlemmer.aux
+A level-1 auxiliary file: teori.aux
+A level-1 auxiliary file: oppstart-utvikling.aux
+A level-1 auxiliary file: analyse.aux
+A level-1 auxiliary file: oppsummering.aux
 The style file: plain.bst
 Database file #1: referanser.bib.bib
 You've used 1 entry,
             2118 wiz_defined-function locations,
-            505 strings with 4118 characters,
+            509 strings with 4176 characters,
 and the built_in function-call counts, 260 in all, are:
 = -- 20
 > -- 7
