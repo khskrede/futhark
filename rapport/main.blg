@@ -1,19 +1,20 @@
 This is BibTeX, Version 0.99d (TeX Live 2010/Arch Linux)
 Capacity: max_strings=35307, hash_size=35307, hash_prime=30011
 The top-level auxiliary file: main.aux
-A level-1 auxiliary file: innledning.aux
-A level-1 auxiliary file: teori.aux
-A level-1 auxiliary file: numerikk.aux
-A level-1 auxiliary file: eksperimenter.aux
-A level-1 auxiliary file: numerikk_resultater.aux
-A level-1 auxiliary file: konklusjon.aux
+A level-1 auxiliary file: introduction.aux
+A level-1 auxiliary file: theory.aux
+A level-1 auxiliary file: numerics.aux
+A level-1 auxiliary file: implementation.aux
+A level-1 auxiliary file: experiments.aux
+A level-1 auxiliary file: resultats_numerics.aux
+A level-1 auxiliary file: conclusion.aux
 The style file: plain.bst
-Database file #1: referanser.bib.bib
+Database file #1: references.bib.bib
 Warning--string name "july" is undefined
---line 6 of file referanser.bib.bib
+--line 6 of file references.bib.bib
 You've used 1 entry,
             2118 wiz_defined-function locations,
-            510 strings with 4242 characters,
+            511 strings with 4260 characters,
 and the built_in function-call counts, 582 in all, are:
 = -- 58
 > -- 13
