@@ -6,12 +6,12 @@
 \contentsline {section}{\numberline {2.2}Our approach}{3}{section.2.2}
 \contentsline {section}{\numberline {2.3}The heat equations}{4}{section.2.3}
 \contentsline {section}{\numberline {2.4}The transport equations}{4}{section.2.4}
-\contentsline {chapter}{\numberline {3}Numerikk}{5}{chapter.3}
+\contentsline {chapter}{\numberline {3}Numerics}{5}{chapter.3}
 \contentsline {section}{\numberline {3.1}Von Neumann analysis of the Crank-Nicolson-scheme}{5}{section.3.1}
 \contentsline {section}{\numberline {3.2}Truncation error in the Crank-Nicolson scheme}{6}{section.3.2}
-\contentsline {chapter}{\numberline {4}Eksperimenter}{9}{chapter.4}
-\contentsline {section}{\numberline {4.1}Eksperimenter}{9}{section.4.1}
-\contentsline {chapter}{\numberline {5}Numerikkresultater}{11}{chapter.5}
-\contentsline {section}{\numberline {5.1}Numerikkresultater}{11}{section.5.1}
-\contentsline {chapter}{\numberline {6}Konklusjon}{13}{chapter.6}
-\contentsline {section}{\numberline {6.1}Konklusjon}{13}{section.6.1}
+\contentsline {chapter}{\numberline {4}Implementation}{9}{chapter.4}
+\contentsline {section}{\numberline {4.1}Implementing Crank-Nicolson}{9}{section.4.1}
+\contentsline {chapter}{\numberline {5}Experiments}{11}{chapter.5}
+\contentsline {section}{\numberline {5.1}Experiments}{11}{section.5.1}
+\contentsline {chapter}{\numberline {6}Conclusion}{13}{chapter.6}
+\contentsline {section}{\numberline {6.1}Conclusion}{13}{section.6.1}

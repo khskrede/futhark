@@ -13,9 +13,9 @@
 	\pagenumbering{roman} 	%Sidetall på formen i, ii, osv. på sammendrag, forord og innholdsfortegnelse.
 
 	\sammendragEn{Text in abstract}
-	\coffee{4}
+	%\coffee{4}
 	\forordEn{Text in foreword}
-	\coffee{1}
+	%\coffee{1}
 	\clearpage		%Ny side
 
 %Innholdsfortegnelse (automagisk)
@@ -26,16 +26,17 @@
 %Kapitler:
 	\kapittelstil %Fikser stilen i kapitlene
 
-	\include{innledning} 	%Kap. 1
-	\include{teori}		%Kap. 2
-	\include{numerikk}	%Kap. 3
-	\include{eksperimenter} %Kap. 4
-	\include{numerikk_resultater} %Kap. 5
-	\include{konklusjon}	%Kap. 6
+	\include{introduction} 	%Kap. 1
+	\include{theory}		%Kap. 2
+	\include{numerics}	%Kap. 3
+	\include{implementation} %Kap. 4
+	\include{experiments} %Kap. 5
+	\include{resultats_numerics} %Kap. 6
+	\include{conclusion}	%Kap. 7
 
 %Referanser:
 	\bibliographystyle{plain}
-	\bibliography{referanser.bib}
+	\bibliography{references.bib}
 
 \end{document}
 

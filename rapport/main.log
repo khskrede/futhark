@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.1415926-1.40.11 (TeX Live 2010/Arch Linux) (format=pdflatex 2010.12.9)  20 MAR 2011 16:56
+This is pdfTeX, Version 3.1415926-1.40.11 (TeX Live 2010/Arch Linux) (format=pdflatex 2011.3.24)  27 MAR 2011 17:33
 entering extended mode
  restricted \write18 enabled.
  %&-line parsing enabled.
@@ -284,7 +284,7 @@ File: graphics.cfg 2010/04/23 v1.9 graphics configuration of TeX Live
 Package graphics Info: Driver file: pdftex.def on input line 91.
 
 (/usr/share/texmf-dist/tex/latex/pdftex-def/pdftex.def
-File: pdftex.def 2010/09/14 v0.05b Graphics/color for pdfTeX
+File: pdftex.def 2010/11/26 v0.05c Graphics/color for pdfTeX
 \Gread@gobject=\count89
 ))
 \Gin@req@height=\dimen104
@@ -341,13 +341,29 @@ Package: fncychap 2007/07/30 v1.34 LaTeX package (Revised chapters)
 \pxx=\skip49
 )
 (/usr/share/texmf-dist/tex/latex/hyperref/hyperref.sty
-Package: hyperref 2010/10/30 v6.81t Hypertext links for LaTeX
+Package: hyperref 2010/12/16 v6.81z Hypertext links for LaTeX
 
 (/usr/share/texmf-dist/tex/generic/oberdiek/ltxcmds.sty
 Package: ltxcmds 2010/04/26 v1.7 LaTeX kernel commands for general use (HO)
 )
+(/usr/share/texmf-dist/tex/generic/oberdiek/ifpdf.sty
+Package: ifpdf 2010/01/28 v2.1 Provides the ifpdf switch (HO)
+Package ifpdf Info: pdfTeX in pdf mode detected.
+)
+(/usr/share/texmf-dist/tex/generic/oberdiek/pdftexcmds.sty
+Package: pdftexcmds 2010/04/01 v0.9 Utility functions of pdfTeX for LuaTeX (HO)
+
+
 (/usr/share/texmf-dist/tex/generic/oberdiek/infwarerr.sty
 Package: infwarerr 2010/04/08 v1.3 Providing info/warning/message (HO)
+)
+(/usr/share/texmf-dist/tex/generic/oberdiek/ifluatex.sty
+Package: ifluatex 2010/03/01 v1.3 Provides the ifluatex switch (HO)
+Package ifluatex Info: LuaTeX not detected.
+)
+Package pdftexcmds Info: LuaTeX not detected.
+Package pdftexcmds Info: \pdf@primitive is available.
+Package pdftexcmds Info: \pdf@ifprimitive is available.
 )
 (/usr/share/texmf-dist/tex/generic/oberdiek/kvsetkeys.sty
 Package: kvsetkeys 2010/03/01 v1.9 Key value parser (HO)
@@ -362,22 +378,6 @@ Package etexcmds Info: Could not find \expanded.
 (/usr/share/texmf-dist/tex/generic/oberdiek/pdfescape.sty
 Package: pdfescape 2010/03/01 v1.9 Provides hex, PDF name and string conversion
 s (HO)
-
-(/usr/share/texmf-dist/tex/generic/oberdiek/pdftexcmds.sty
-Package: pdftexcmds 2010/04/01 v0.9 Utility functions of pdfTeX for LuaTeX (HO)
-
-
-(/usr/share/texmf-dist/tex/generic/oberdiek/ifluatex.sty
-Package: ifluatex 2010/03/01 v1.3 Provides the ifluatex switch (HO)
-Package ifluatex Info: LuaTeX not detected.
-)
-Package pdftexcmds Info: LuaTeX not detected.
-Package pdftexcmds Info: \pdf@primitive is available.
-Package pdftexcmds Info: \pdf@ifprimitive is available.
-))
-(/usr/share/texmf-dist/tex/generic/oberdiek/ifpdf.sty
-Package: ifpdf 2010/01/28 v2.1 Provides the ifpdf switch (HO)
-Package ifpdf Info: pdfTeX in pdf mode detected.
 )
 (/usr/share/texmf-dist/tex/generic/oberdiek/ifvtex.sty
 Package: ifvtex 2010/03/01 v1.5 Switches for detecting VTeX and its modes (HO)
@@ -403,7 +403,7 @@ Package: kvoptions 2010/02/22 v3.7 Keyval support for LaTeX options (HO)
 \Hy@pagecounter=\count91
 
 (/usr/share/texmf-dist/tex/latex/hyperref/pd1enc.def
-File: pd1enc.def 2010/10/30 v6.81t Hyperref: PDFDocEncoding definition (HO)
+File: pd1enc.def 2010/12/16 v6.81z Hyperref: PDFDocEncoding definition (HO)
 Now handling font encoding PD1 ...
 ... no UTF-8 mapping file for font encoding PD1
 )
@@ -415,20 +415,20 @@ Package: intcalc 2007/09/27 v1.1 Expandable integer calculations (HO)
 (/usr/share/texmf-dist/tex/latex/latexconfig/hyperref.cfg
 File: hyperref.cfg 2002/06/06 v1.2 hyperref configuration of TeXLive
 )
-Package hyperref Info: Hyper figures OFF on input line 3976.
-Package hyperref Info: Link nesting OFF on input line 3981.
-Package hyperref Info: Hyper index ON on input line 3984.
-Package hyperref Info: Plain pages OFF on input line 3991.
-Package hyperref Info: Backreferencing OFF on input line 3996.
+Package hyperref Info: Hyper figures OFF on input line 3993.
+Package hyperref Info: Link nesting OFF on input line 3998.
+Package hyperref Info: Hyper index ON on input line 4001.
+Package hyperref Info: Plain pages OFF on input line 4008.
+Package hyperref Info: Backreferencing OFF on input line 4013.
 Package hyperref Info: Implicit mode ON; LaTeX internals redefined.
-Package hyperref Info: Bookmarks ON on input line 4211.
+Package hyperref Info: Bookmarks ON on input line 4231.
 \c@Hy@tempcnt=\count93
 
 (/usr/share/texmf-dist/tex/latex/url/url.sty
 \Urlmuskip=\muskip10
 Package: url 2006/04/12  ver 3.3  Verb mode for urls, etc.
 )
-LaTeX Info: Redefining \url on input line 4566.
+LaTeX Info: Redefining \url on input line 4584.
 
 (/usr/share/texmf-dist/tex/generic/oberdiek/bitset.sty
 Package: bitset 2007/09/28 v1.0 Data type bit set (HO)
@@ -439,15 +439,15 @@ Package: bigintcalc 2007/11/11 v1.1 Expandable big integer calculations (HO)
 \Fld@menulength=\count94
 \Field@Width=\dimen107
 \Fld@charsize=\dimen108
-Package hyperref Info: Hyper figures OFF on input line 5626.
-Package hyperref Info: Link nesting OFF on input line 5631.
-Package hyperref Info: Hyper index ON on input line 5634.
-Package hyperref Info: backreferencing OFF on input line 5641.
-Package hyperref Info: Link coloring OFF on input line 5646.
-Package hyperref Info: Link coloring with OCG OFF on input line 5651.
-Package hyperref Info: PDF/A mode OFF on input line 5656.
-LaTeX Info: Redefining \ref on input line 5696.
-LaTeX Info: Redefining \pageref on input line 5700.
+Package hyperref Info: Hyper figures OFF on input line 5668.
+Package hyperref Info: Link nesting OFF on input line 5673.
+Package hyperref Info: Hyper index ON on input line 5676.
+Package hyperref Info: backreferencing OFF on input line 5683.
+Package hyperref Info: Link coloring OFF on input line 5688.
+Package hyperref Info: Link coloring with OCG OFF on input line 5693.
+Package hyperref Info: PDF/A mode OFF on input line 5698.
+LaTeX Info: Redefining \ref on input line 5738.
+LaTeX Info: Redefining \pageref on input line 5742.
 
 (/usr/share/texmf-dist/tex/generic/oberdiek/atbegshi.sty
 Package: atbegshi 2010/03/25 v1.12 At begin shipout hook (HO)
@@ -460,7 +460,7 @@ Package: atbegshi 2010/03/25 v1.12 At begin shipout hook (HO)
 Package hyperref Message: Driver (autodetected): hpdftex.
 
 (/usr/share/texmf-dist/tex/latex/hyperref/hpdftex.def
-File: hpdftex.def 2010/10/30 v6.81t Hyperref driver for pdfTeX
+File: hpdftex.def 2010/12/16 v6.81z Hyperref driver for pdfTeX
 
 (/usr/share/texmf-dist/tex/latex/oberdiek/atveryend.sty
 Package: atveryend 2010/03/24 v1.5 Hooks at very end of document (HO)
@@ -641,15 +641,254 @@ Package cleveref Info: loaded `english' language definitions on input line 4988
 .
 Package cleveref Info: loaded `english' language definitions on input line 4989
 .
+) (../coffee2.sty
+(/usr/share/texmf-dist/tex/latex/pgf/frontendlayer/tikz.sty
+(/usr/share/texmf-dist/tex/latex/pgf/basiclayer/pgf.sty
+(/usr/share/texmf-dist/tex/latex/pgf/utilities/pgfrcs.sty
+(/usr/share/texmf-dist/tex/generic/pgf/utilities/pgfutil-common.tex
+\pgfutil@everybye=\toks28
 )
-Package hyperref Info: Option `colorlinks' set `true' on input line 29.
+(/usr/share/texmf-dist/tex/generic/pgf/utilities/pgfutil-latex.def
+\pgfutil@abb=\box54
+
+(/usr/share/texmf-dist/tex/latex/ms/everyshi.sty
+Package: everyshi 2001/05/15 v3.00 EveryShipout Package (MS)
+))
+(/usr/share/texmf-dist/tex/generic/pgf/utilities/pgfrcs.code.tex
+Package: pgfrcs 2010/10/25 v2.10 (rcs-revision 1.24)
+))
+Package: pgf 2008/01/15 v2.10 (rcs-revision 1.12)
+
+(/usr/share/texmf-dist/tex/latex/pgf/basiclayer/pgfcore.sty
+(/usr/share/texmf-dist/tex/latex/pgf/systemlayer/pgfsys.sty
+(/usr/share/texmf-dist/tex/generic/pgf/systemlayer/pgfsys.code.tex
+Package: pgfsys 2010/06/30 v2.10 (rcs-revision 1.37)
+
+(/usr/share/texmf-dist/tex/generic/pgf/utilities/pgfkeys.code.tex
+\pgfkeys@pathtoks=\toks29
+\pgfkeys@temptoks=\toks30
+
+(/usr/share/texmf-dist/tex/generic/pgf/utilities/pgfkeysfiltered.code.tex
+\pgfkeys@tmptoks=\toks31
+))
+\pgf@x=\dimen126
+\pgf@y=\dimen127
+\pgf@xa=\dimen128
+\pgf@ya=\dimen129
+\pgf@xb=\dimen130
+\pgf@yb=\dimen131
+\pgf@xc=\dimen132
+\pgf@yc=\dimen133
+\w@pgf@writea=\write3
+\r@pgf@reada=\read1
+\c@pgf@counta=\count121
+\c@pgf@countb=\count122
+\c@pgf@countc=\count123
+\c@pgf@countd=\count124
+
+(/usr/share/texmf-dist/tex/generic/pgf/systemlayer/pgf.cfg
+File: pgf.cfg 2008/05/14  (rcs-revision 1.7)
+)
+Package pgfsys Info: Driver file for pgf: pgfsys-pdftex.def on input line 900.
+
+(/usr/share/texmf-dist/tex/generic/pgf/systemlayer/pgfsys-pdftex.def
+File: pgfsys-pdftex.def 2009/05/22  (rcs-revision 1.26)
+
+(/usr/share/texmf-dist/tex/generic/pgf/systemlayer/pgfsys-common-pdf.def
+File: pgfsys-common-pdf.def 2008/05/19  (rcs-revision 1.10)
+)))
+(/usr/share/texmf-dist/tex/generic/pgf/systemlayer/pgfsyssoftpath.code.tex
+File: pgfsyssoftpath.code.tex 2008/07/18  (rcs-revision 1.7)
+\pgfsyssoftpath@smallbuffer@items=\count125
+\pgfsyssoftpath@bigbuffer@items=\count126
+)
+(/usr/share/texmf-dist/tex/generic/pgf/systemlayer/pgfsysprotocol.code.tex
+File: pgfsysprotocol.code.tex 2006/10/16  (rcs-revision 1.4)
+))
+(/usr/share/texmf-dist/tex/latex/xcolor/xcolor.sty
+Package: xcolor 2007/01/21 v2.11 LaTeX color extensions (UK)
+
+(/usr/share/texmf-dist/tex/latex/latexconfig/color.cfg
+File: color.cfg 2007/01/18 v1.5 color configuration of teTeX/TeXLive
+)
+Package xcolor Info: Driver file: pdftex.def on input line 225.
+Package xcolor Info: Model `cmy' substituted by `cmy0' on input line 1337.
+Package xcolor Info: Model `hsb' substituted by `rgb' on input line 1341.
+Package xcolor Info: Model `RGB' extended on input line 1353.
+Package xcolor Info: Model `HTML' substituted by `rgb' on input line 1355.
+Package xcolor Info: Model `Hsb' substituted by `hsb' on input line 1356.
+Package xcolor Info: Model `tHsb' substituted by `hsb' on input line 1357.
+Package xcolor Info: Model `HSB' substituted by `hsb' on input line 1358.
+Package xcolor Info: Model `Gray' substituted by `gray' on input line 1359.
+Package xcolor Info: Model `wave' substituted by `hsb' on input line 1360.
+)
+(/usr/share/texmf-dist/tex/generic/pgf/basiclayer/pgfcore.code.tex
+Package: pgfcore 2010/04/11 v2.10 (rcs-revision 1.7)
+
+(/usr/share/texmf-dist/tex/generic/pgf/math/pgfmath.code.tex
+(/usr/share/texmf-dist/tex/generic/pgf/math/pgfmathcalc.code.tex
+(/usr/share/texmf-dist/tex/generic/pgf/math/pgfmathutil.code.tex)
+(/usr/share/texmf-dist/tex/generic/pgf/math/pgfmathparser.code.tex
+\pgfmath@dimen=\dimen134
+\pgfmath@count=\count127
+\pgfmath@box=\box55
+\pgfmath@toks=\toks32
+\pgfmath@stack@operand=\toks33
+\pgfmath@stack@operation=\toks34
+)
+(/usr/share/texmf-dist/tex/generic/pgf/math/pgfmathfunctions.code.tex
+(/usr/share/texmf-dist/tex/generic/pgf/math/pgfmathfunctions.basic.code.tex)
+(/usr/share/texmf-dist/tex/generic/pgf/math/pgfmathfunctions.trigonometric.code
+.tex)
+(/usr/share/texmf-dist/tex/generic/pgf/math/pgfmathfunctions.random.code.tex)
+(/usr/share/texmf-dist/tex/generic/pgf/math/pgfmathfunctions.comparison.code.te
+x) (/usr/share/texmf-dist/tex/generic/pgf/math/pgfmathfunctions.base.code.tex)
+(/usr/share/texmf-dist/tex/generic/pgf/math/pgfmathfunctions.round.code.tex)
+(/usr/share/texmf-dist/tex/generic/pgf/math/pgfmathfunctions.misc.code.tex)))
+(/usr/share/texmf-dist/tex/generic/pgf/math/pgfmathfloat.code.tex
+\c@pgfmathroundto@lastzeros=\count128
+))
+(/usr/share/texmf-dist/tex/generic/pgf/basiclayer/pgfcorepoints.code.tex
+File: pgfcorepoints.code.tex 2010/04/09  (rcs-revision 1.20)
+\pgf@picminx=\dimen135
+\pgf@picmaxx=\dimen136
+\pgf@picminy=\dimen137
+\pgf@picmaxy=\dimen138
+\pgf@pathminx=\dimen139
+\pgf@pathmaxx=\dimen140
+\pgf@pathminy=\dimen141
+\pgf@pathmaxy=\dimen142
+\pgf@xx=\dimen143
+\pgf@xy=\dimen144
+\pgf@yx=\dimen145
+\pgf@yy=\dimen146
+\pgf@zx=\dimen147
+\pgf@zy=\dimen148
+)
+(/usr/share/texmf-dist/tex/generic/pgf/basiclayer/pgfcorepathconstruct.code.tex
+File: pgfcorepathconstruct.code.tex 2010/08/03  (rcs-revision 1.24)
+\pgf@path@lastx=\dimen149
+\pgf@path@lasty=\dimen150
+) (/usr/share/texmf-dist/tex/generic/pgf/basiclayer/pgfcorepathusage.code.tex
+File: pgfcorepathusage.code.tex 2008/04/22  (rcs-revision 1.12)
+\pgf@shorten@end@additional=\dimen151
+\pgf@shorten@start@additional=\dimen152
+)
+(/usr/share/texmf-dist/tex/generic/pgf/basiclayer/pgfcorescopes.code.tex
+File: pgfcorescopes.code.tex 2010/09/08  (rcs-revision 1.34)
+\pgfpic=\box56
+\pgf@hbox=\box57
+\pgf@layerbox@main=\box58
+\pgf@picture@serial@count=\count129
+)
+(/usr/share/texmf-dist/tex/generic/pgf/basiclayer/pgfcoregraphicstate.code.tex
+File: pgfcoregraphicstate.code.tex 2008/04/22  (rcs-revision 1.9)
+\pgflinewidth=\dimen153
+)
+(/usr/share/texmf-dist/tex/generic/pgf/basiclayer/pgfcoretransformations.code.t
+ex
+File: pgfcoretransformations.code.tex 2009/06/10  (rcs-revision 1.11)
+\pgf@pt@x=\dimen154
+\pgf@pt@y=\dimen155
+\pgf@pt@temp=\dimen156
+) (/usr/share/texmf-dist/tex/generic/pgf/basiclayer/pgfcorequick.code.tex
+File: pgfcorequick.code.tex 2008/10/09  (rcs-revision 1.3)
+)
+(/usr/share/texmf-dist/tex/generic/pgf/basiclayer/pgfcoreobjects.code.tex
+File: pgfcoreobjects.code.tex 2006/10/11  (rcs-revision 1.2)
+)
+(/usr/share/texmf-dist/tex/generic/pgf/basiclayer/pgfcorepathprocessing.code.te
+x
+File: pgfcorepathprocessing.code.tex 2008/10/09  (rcs-revision 1.8)
+) (/usr/share/texmf-dist/tex/generic/pgf/basiclayer/pgfcorearrows.code.tex
+File: pgfcorearrows.code.tex 2008/04/23  (rcs-revision 1.11)
+)
+(/usr/share/texmf-dist/tex/generic/pgf/basiclayer/pgfcoreshade.code.tex
+File: pgfcoreshade.code.tex 2008/11/23  (rcs-revision 1.13)
+\pgf@max=\dimen157
+\pgf@sys@shading@range@num=\count130
+)
+(/usr/share/texmf-dist/tex/generic/pgf/basiclayer/pgfcoreimage.code.tex
+File: pgfcoreimage.code.tex 2010/03/25  (rcs-revision 1.16)
+
+(/usr/share/texmf-dist/tex/generic/pgf/basiclayer/pgfcoreexternal.code.tex
+File: pgfcoreexternal.code.tex 2010/09/01  (rcs-revision 1.17)
+\pgfexternal@startupbox=\box59
+))
+(/usr/share/texmf-dist/tex/generic/pgf/basiclayer/pgfcorelayers.code.tex
+File: pgfcorelayers.code.tex 2010/08/27  (rcs-revision 1.2)
+)
+(/usr/share/texmf-dist/tex/generic/pgf/basiclayer/pgfcoretransparency.code.tex
+File: pgfcoretransparency.code.tex 2008/01/17  (rcs-revision 1.2)
+) (/usr/share/texmf-dist/tex/generic/pgf/basiclayer/pgfcorepatterns.code.tex
+File: pgfcorepatterns.code.tex 2009/07/02  (rcs-revision 1.3)
+)))
+(/usr/share/texmf-dist/tex/generic/pgf/modules/pgfmoduleshapes.code.tex
+File: pgfmoduleshapes.code.tex 2010/09/09  (rcs-revision 1.13)
+\pgfnodeparttextbox=\box60
+)
+(/usr/share/texmf-dist/tex/generic/pgf/modules/pgfmoduleplot.code.tex
+File: pgfmoduleplot.code.tex 2010/10/22  (rcs-revision 1.8)
+)
+(/usr/share/texmf-dist/tex/latex/pgf/compatibility/pgfcomp-version-0-65.sty
+Package: pgfcomp-version-0-65 2007/07/03 v2.10 (rcs-revision 1.7)
+\pgf@nodesepstart=\dimen158
+\pgf@nodesepend=\dimen159
+)
+(/usr/share/texmf-dist/tex/latex/pgf/compatibility/pgfcomp-version-1-18.sty
+Package: pgfcomp-version-1-18 2007/07/23 v2.10 (rcs-revision 1.1)
+))
+(/usr/share/texmf-dist/tex/latex/pgf/utilities/pgffor.sty
+(/usr/share/texmf-dist/tex/latex/pgf/utilities/pgfkeys.sty
+(/usr/share/texmf-dist/tex/generic/pgf/utilities/pgfkeys.code.tex))
+(/usr/share/texmf-dist/tex/generic/pgf/utilities/pgffor.code.tex
+Package: pgffor 2010/03/23 v2.10 (rcs-revision 1.18)
+\pgffor@iter=\dimen160
+\pgffor@skip=\dimen161
+\pgffor@stack=\toks35
+\pgffor@toks=\toks36
+))
+(/usr/share/texmf-dist/tex/generic/pgf/frontendlayer/tikz/tikz.code.tex
+Package: tikz 2010/10/13 v2.10 (rcs-revision 1.76)
+
+(/usr/share/texmf-dist/tex/generic/pgf/libraries/pgflibraryplothandlers.code.te
+x
+File: pgflibraryplothandlers.code.tex 2010/05/31 v2.10 (rcs-revision 1.15)
+\pgf@plot@mark@count=\count131
+\pgfplotmarksize=\dimen162
+)
+\tikz@lastx=\dimen163
+\tikz@lasty=\dimen164
+\tikz@lastxsaved=\dimen165
+\tikz@lastysaved=\dimen166
+\tikzleveldistance=\dimen167
+\tikzsiblingdistance=\dimen168
+\tikz@figbox=\box61
+\tikz@tempbox=\box62
+\tikztreelevel=\count132
+\tikznumberofchildren=\count133
+\tikznumberofcurrentchild=\count134
+\tikz@fig@count=\count135
+ (/usr/share/texmf-dist/tex/generic/pgf/modules/pgfmodulematrix.code.tex
+File: pgfmodulematrix.code.tex 2010/08/24  (rcs-revision 1.4)
+\pgfmatrixcurrentrow=\count136
+\pgfmatrixcurrentcolumn=\count137
+\pgf@matrix@numberofcolumns=\count138
+)
+\tikz@expandcount=\count139
+
+(/usr/share/texmf-dist/tex/generic/pgf/frontendlayer/tikz/libraries/tikzlibrary
+topaths.code.tex
+File: tikzlibrarytopaths.code.tex 2008/06/17 v2.10 (rcs-revision 1.2)
+))))
+Package hyperref Info: Option `colorlinks' set `true' on input line 30.
 \drop=\skip68
-\c@prop=\count121
-\c@thm=\count122
-\c@dfn=\count123
-) (./main.aux
-(./innledning.aux) (./teori.aux) (./numerikk.aux) (./eksperimenter.aux)
-(./numerikk_resultater.aux) (./konklusjon.aux))
+\c@prop=\count140
+\c@thm=\count141
+\c@dfn=\count142
+) (./main.aux (./introduction.aux) (./theory.aux)
+(./numerics.aux) (./implementation.aux) (./experiments.aux)
+(./resultats_numerics.aux) (./conclusion.aux))
 \openout1 = `main.aux'.
 
 LaTeX Font Info:    Checking defaults for OML/cmm/m/it on input line 4.
@@ -681,16 +920,16 @@ LaTeX Font Info:    ... okay on input line 4.
 
 (/usr/share/texmf-dist/tex/context/base/supp-pdf.mkii
 [Loading MPS to PDF converter (version 2006.09.02).]
-\scratchcounter=\count124
-\scratchdimen=\dimen126
-\scratchbox=\box54
-\nofMPsegments=\count125
-\nofMParguments=\count126
-\everyMPshowfont=\toks28
-\MPscratchCnt=\count127
-\MPscratchDim=\dimen127
-\MPnumerator=\count128
-\everyMPtoPDFconversion=\toks29
+\scratchcounter=\count143
+\scratchdimen=\dimen169
+\scratchbox=\box63
+\nofMPsegments=\count144
+\nofMParguments=\count145
+\everyMPshowfont=\toks37
+\MPscratchCnt=\count146
+\MPscratchDim=\dimen170
+\MPnumerator=\count147
+\everyMPtoPDFconversion=\toks38
 ) (/usr/share/texmf-dist/tex/latex/oberdiek/epstopdf-base.sty
 Package: epstopdf-base 2010/02/09 v2.5 Base part for package epstopdf
 
@@ -706,16 +945,7 @@ G,.JBIG2,.JB2,.eps]
 File: epstopdf-sys.cfg 2010/07/13 v1.3 Configuration of (r)epstopdf for TeX Liv
 e
 ))
-\AtBeginShipoutBox=\box55
-
-(/usr/share/texmf-dist/tex/latex/graphics/color.sty
-Package: color 2005/11/14 v1.0j Standard LaTeX Color (DPC)
-
-(/usr/share/texmf-dist/tex/latex/latexconfig/color.cfg
-File: color.cfg 2007/01/18 v1.5 color configuration of teTeX/TeXLive
-)
-Package color Info: Driver file: pdftex.def on input line 130.
-)
+\AtBeginShipoutBox=\box64
 Package hyperref Info: Link coloring ON on input line 4.
 
 (/usr/share/texmf-dist/tex/latex/hyperref/nameref.sty
@@ -727,17 +957,17 @@ Package: refcount 2008/08/11 v3.1 Data extraction from references (HO)
 (/usr/share/texmf-dist/tex/generic/oberdiek/gettitlestring.sty
 Package: gettitlestring 2009/12/18 v1.3 Cleanup title references (HO)
 )
-\c@section@level=\count129
+\c@section@level=\count148
 )
 LaTeX Info: Redefining \ref on input line 4.
 LaTeX Info: Redefining \pageref on input line 4.
 LaTeX Info: Redefining \nameref on input line 4.
  (./main.out)
 (./main.out)
-\@outlinefile=\write3
-\openout3 = `main.out'.
+\@outlinefile=\write4
+\openout4 = `main.out'.
 
- [1
+ ABD: EveryShipout initializing macros [1
 
 {/home/asmund/.texlive/texmf-var/fonts/map/pdftex/updmap/pdftex.map}] [1
 
@@ -745,7 +975,8 @@ LaTeX Info: Redefining \nameref on input line 4.
 
 ] (./main.toc
 LaTeX Font Info:    Try loading font information for U+msa on input line 3.
- (/usr/share/texmf-dist/tex/latex/amsfonts/umsa.fd
+
+(/usr/share/texmf-dist/tex/latex/amsfonts/umsa.fd
 File: umsa.fd 2009/06/22 v3.00 AMS symbols A
 )
 LaTeX Font Info:    Try loading font information for U+msb on input line 3.
@@ -753,16 +984,16 @@ LaTeX Font Info:    Try loading font information for U+msb on input line 3.
 (/usr/share/texmf-dist/tex/latex/amsfonts/umsb.fd
 File: umsb.fd 2009/06/22 v3.00 AMS symbols B
 ))
-\tf@toc=\write4
-\openout4 = `main.toc'.
+\tf@toc=\write5
+\openout5 = `main.toc'.
 
  [3
 
 
 ]
-\openout2 = `innledning.aux'.
+\openout2 = `introduction.aux'.
 
- (./innledning.tex
+ (./introduction.tex
 Chapter 1.
 LaTeX Font Info:    Try loading font information for OT1+phv on input line 1.
 (/usr/share/texmf-dist/tex/latex/psnfss/ot1phv.fd
@@ -782,11 +1013,11 @@ l.3 \lipsum[1-3]
 
 
 ]) [2]
-\openout2 = `teori.aux'.
+\openout2 = `theory.aux'.
 
- (./teori.tex
+ (./theory.tex
 Chapter 2.
-<physicists.png, id=123, 323.40825pt x 487.8225pt>
+<physicists.png, id=126, 323.40825pt x 487.8225pt>
 File: physicists.png Graphic file (type png)
  <use physicists.png>
 [3
@@ -806,9 +1037,9 @@ m/it/10.95 :\OT1/cmr/m/n/10.95 0000973516\OML/cmm/m/it/10.95 x[][]
  []
 
 ) [4]
-\openout2 = `numerikk.aux'.
+\openout2 = `numerics.aux'.
 
- (./numerikk.tex
+ (./numerics.tex
 Chapter 3.
 
 Overfull \hbox (82.7124pt too wide) detected at line 23
@@ -832,54 +1063,60 @@ Overfull \hbox (86.18924pt too wide) in alignment at lines 62--67
  []
 
 [6]) [7]
-\openout2 = `eksperimenter.aux'.
+\openout2 = `implementation.aux'.
 
- (./eksperimenter.tex [8
+ (./implementation.tex [8
 
 
 
 ]
 Chapter 4.
 [9]) [10]
-\openout2 = `numerikk_resultater.aux'.
+\openout2 = `experiments.aux'.
 
- (./numerikk_resultater.tex
+ (./experiments.tex
 Chapter 5.
 [11
 
 
 
 ]) [12]
-\openout2 = `konklusjon.aux'.
+\openout2 = `resultats_numerics.aux'.
 
- (./konklusjon.tex
+
+No file resultats_numerics.tex.
+\openout2 = `conclusion.aux'.
+
+(./conclusion.tex
 Chapter 6.
 [13
 
 
 
+
+
 ]) [14] (./main.bbl)
-Package atveryend Info: Empty hook `BeforeClearDocument' on input line 40.
+Package atveryend Info: Empty hook `BeforeClearDocument' on input line 41.
  [15
 
 
 ]
-Package atveryend Info: Empty hook `AfterLastShipout' on input line 40.
- (./main.aux (./innledning.aux) (./teori.aux)
-(./numerikk.aux) (./eksperimenter.aux) (./numerikk_resultater.aux)
-(./konklusjon.aux))
-Package atveryend Info: Executing hook `AtVeryEndDocument' on input line 40.
+Package atveryend Info: Empty hook `AfterLastShipout' on input line 41.
+ (./main.aux (./introduction.aux) (./theory.aux)
+(./numerics.aux) (./implementation.aux) (./experiments.aux)
+(./resultats_numerics.aux) (./conclusion.aux))
+Package atveryend Info: Executing hook `AtVeryEndDocument' on input line 41.
 Package rerunfilecheck Info: File `main.out' has not changed.
-(rerunfilecheck)             Checksum: AAE8937616010ECC72918248538FA0A4;963.
+(rerunfilecheck)             Checksum: EB1159A865CF872FA94FCE0A416A6079;964.
  ) 
 Here is how much of TeX's memory you used:
- 10104 strings out of 493738
- 159965 string characters out of 3148797
- 379247 words of memory out of 3000000
- 13076 multiletter control sequences out of 15000+200000
+ 18344 strings out of 493738
+ 324598 string characters out of 3148797
+ 988720 words of memory out of 3000000
+ 21119 multiletter control sequences out of 15000+200000
  29663 words of font info for 75 fonts, out of 3000000 for 9000
  714 hyphenation exceptions out of 8191
- 38i,12n,45p,311b,565s stack positions out of 5000i,500n,10000p,200000b,50000s
+ 70i,12n,59p,18238b,564s stack positions out of 5000i,500n,10000p,200000b,50000s
 {/usr/share/texmf-dist/fonts/enc/dvips/cm-super/cm-super-t1.enc}{/usr/share/t
 exmf-dist/fonts/enc/dvips/base/8r.enc}</usr/share/texmf-dist/fonts/type1/public
 /amsfonts/cm/cmbsy10.pfb></usr/share/texmf-dist/fonts/type1/public/amsfonts/cm/
@@ -905,10 +1142,10 @@ share/texmf-dist/fonts/type1/public/cm-super/sfrm2488.pfb></usr/share/texmf-dis
 t/fonts/type1/public/cm-super/sfti1095.pfb></usr/share/texmf-dist/fonts/type1/p
 ublic/cm-super/sfti1440.pfb></usr/share/texmf-dist/fonts/type1/urw/helvetic/uhv
 r8a.pfb></usr/share/texmf-dist/fonts/type1/urw/times/utmr8a.pfb>
-Output written on main.pdf (19 pages, 405663 bytes).
+Output written on main.pdf (19 pages, 405450 bytes).
 PDF statistics:
- 319 PDF objects out of 1000 (max. 8388607)
- 265 compressed objects within 3 object streams
+ 322 PDF objects out of 1000 (max. 8388607)
+ 268 compressed objects within 3 object streams
  48 named destinations out of 1000 (max. 500000)
- 134 words of extra memory for PDF output out of 10000 (max. 10000000)
+ 146 words of extra memory for PDF output out of 10000 (max. 10000000)
 
