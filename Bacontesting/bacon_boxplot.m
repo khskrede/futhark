@@ -1,13 +1,19 @@
 clc
 clear all
 
+<<<<<<< HEAD
 % CREATING TIME ARRAY
+=======
+% SKOGSBACON
+t = length(2*(70-25)/5);
+>>>>>>> bacadbc73f1d4ba6f10c10180f3a444937cdee03
 j=0;
 for i=25:5:70
     j = j+1;
     t(2*j) = i;
     t(2*j-1) = i;
 end
+<<<<<<< HEAD
 
 % DATA SHEET FOR 'SKOGSBACON', FROM TIME t = 25s -> 40s
 sb_vekt_for = [12.65 12.51 14.25 11.87 11.55 12.02 13.17 12.76];
@@ -102,3 +108,29 @@ boxplot(diff_fb_tpapir-fb_vekt_for-fb_vekt_etter,t(7:end))
 title('Water loss regular bacon')
 xlabel('Times (s)')
 ylabel('Weight (g)')
+=======
+sb_vekt_for = [12.65 12.51 14.25 11.87 11.55 12.02 13.17 12.76];
+sb_vekt_etter = [6.46 6.3 7.38 5.43 4.61 4.85 5.31 4.85 ];
+
+% Starter på 40s for FirstPrice-bacon
+fb_vekt_for = [17.23 15.7 20.23 17.64 17.8 31.73 18.6 18.6 17 16.06 15.81 15.73 16.21 16.5]; 
+fb_vekt_etter = [6.14 5.32 8.46 7.2 6.35 15.89 5.95 5.95 4.57 4.2 4.29 4.16 4.35 4.67];
+
+sprohet = [0.6 0.6 0.5 0.6 0.8 0.8 0.9 0.85];
+
+tpapir_for = [2.53 2.03 2.60 2.43 2.51 2.57 2.37 2.65];
+tpapir_etter = [5.05 4.80 5.05 5.07 5.2 5.6 4.8 5.45];
+diff_sbvekt = sb_vekt_for-sb_vekt_etter;
+
+diff_tpapir = tpapir_etter-tpapir_for;
+N = length(diff_tpapir);
+
+subplot(2,2,1)
+boxplot(diff_sbvekt,t(1:N))
+subplot(2,2,2)
+boxplot(diff_tpapir,t(1:N))
+subplot(2,2,3)
+boxplot(diff_sbvekt-diff_tpapir,t(1:N))
+subplot(2,2,4)
+boxplot(fb_vekt_for-fb_vekt_etter,t(7:end))
+>>>>>>> bacadbc73f1d4ba6f10c10180f3a444937cdee03
