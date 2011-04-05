@@ -1,3 +1,69 @@
 \chapter{Introduction}
-\section{Introduction}
-\lipsum[1-3]
+\section{Problem formulation}
+The problem considered in this project is the preparation of bacon in a microwave oven. Bacon is
+defined as cured meat from side and back cuts of a pig. A microwave oven in this context is a
+household appliance typically delivering 750W of microwave effect at a frequency of 2.1 GHz
+to a Faraday cage of volume 200 liters. 
+
+The motivation for the problem formulation was clear. As soon as modeling of food preparation was
+brought on the table, bacon seemed a prime choice. A microwave oven may seem an odd choice for
+bacon, but previous experiments have shown that optimal bacon can consistently be attained with this
+preparation method. Obvious advantages over traditional bacon preparation include less cleaning up
+to do afterwards and a shorter time-to-plate. The caveat is that microwave preparation is less
+suitable for feedback during the cooking process, as the bacon is obscured from view. To the
+traditional bacon chef, used to a touch-and-go approach, this is an obstacle to implementation, as
+overcooking bacon in a microwave oven yields inedible results. The
+purpose of this work, then, is to establish reliable numerical simulations that can serve as a basis
+for estimating cooking time for an arbitrary slice of bacon.
+
+As the project considers the optimal preparation of bacon in a microwave oven, two natural questions
+were formulated:
+
+\begin{itemize}
+  \item How is preparation of bacon in a microwave oven modelled numerically?
+  \item How does water and fat content affect the preparation, and what preparation time is optimal?
+\end{itemize}
+
+The first question is obvious, as any attempt at predicting the preparation time necessitates a
+numerical model of bacon in a microwave oven; a simple glance at the relevant equations 
+
+
+Det første spørsmålet var naturlig å stille, for om baconet skal være optimalt stekt, må vi kunne
+beskrive hvordan baconet utvikler seg i en mikrobølgeovn. Dette kan da hjelpe oss med å finne ut
+fort baconet blir stekt. Det andre spørsmålet er avgjørende for å få til et optimalt bacon. Siden
+det er mange typer bacon er det nødvendig å finne ut hvordan fett-, vann- og saltinnhold påvirker
+stekingen, fordi forskjellige typer bacon naturligvis utvikler seg annerledes under steking. Også
+hvilken effekt vi satte mikrobølgeovnen på vil nødvendigvis påvirke stekingen. En effekt som
+mikrobølgeovnen gir er ikke nødvendigvis lik den effekten som mottas av baconet. Egenskapene til
+mikrobølgeovnen er derfor en parameter i modellen. 
+
+Når vi forsøker å få svar på disse spørsmålene er det naturlig å sette opp hva som er input og hva
+som er output i modellen. Som input har vi allerede nevnt fett-, vann- og saltinnholdet i baconet.
+Dette er input som vi kan få direkte fra baconpakningen. I tillegg er tykkelsen og geometrien av
+baconet viktige størrelser. Om vi skal steke mange baconskiver på en gang, vil det sannsynligvis ha
+betydning for stekingen, så antallet baconskiver vil også være en input. Effekten vi setter på
+mikrobølgeovnen vil være en input i modellen fordi det vil ha stor betydning på resultatet. Til
+slutt kan vi nevne ”ønsket sprøhet” som en mulig inputparameter fordi forskjellige folk har
+forskjellige meninger om hva som er det optimale bacon. Noen ønsker å ha baconet mer saftig, mens
+andre vil ha det sprøest mulig. Når inputparametrene er satt inn i modellen, trenger den bare å
+finne ut hvor lang tid vi trenger å steke baconet. Eneste output i modellen er derfor steketiden.
+
+For å modellere steking av bacon i mikrobølgeovn, har vi tatt i betraktning hvordan baconet blir
+varmet opp, og hvordan fett- og vanninnholdet i baconet forandrer seg over tid. Åpenbare ligninger
+som kan brukes for å beskrive disse prosessene er varmeligningen og ligningen for massetransport.
+Med varmeligningen i tre dimensjonen vil vi kunne beskrive hvor fort baconet varmes opp.
+Temperaturen i baconet er nært knyttet til når det brunes opp. Med massetransportligningen vil vi
+finne ut hvor mye masse som trekkes ut av baconet. Den kan gjøre det mulig å finne kritisk massetap.
+Sammen vil ligningene ha betydning for hvor fort baconet blir stekt. Gitt varmeligningen og
+massetransportligningen er det også nødvendig å sette opp nøyaktige grensebetingelser for baconet i
+en mikrobølgeovn for at modellen skal være realistisk. Hvis modellen skulle beskrive prosessen i
+baconet godt nok, vil den kunne gi svar på hvor lang tid vi trenger å steke baconet gitt
+inputparametrene i modellen. For å verifisere at modellen er god, må det gjøres eksperimenter med
+samme inputparametre. De virkelige resultatene kan da brukes til å sammenligne med beregningene gitt
+av modellen. Dette er hovedmålet i oppgaven. 
+
+Videre er det mulig å få modellen mer realistisk ved å sette elektromagnetiske grensebetingelser i
+modellen. Hvis alle disse målene nås innen god tid, vil gruppa også forsøke å lage en app for den
+reduserte modellen som kan gi svar på hvor lang tid man trenger å steke bacon i mikrobølgeovn for
+gitte inputparametre.
+
