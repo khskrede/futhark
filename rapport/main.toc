@@ -10,7 +10,14 @@
 \contentsline {section}{\numberline {3.1}Von Neumann analysis of the Crank-Nicolson-scheme}{5}{section.3.1}
 \contentsline {section}{\numberline {3.2}Truncation error in the Crank-Nicolson scheme}{6}{section.3.2}
 \contentsline {chapter}{\numberline {4}Implementation}{9}{chapter.4}
-\contentsline {section}{\numberline {4.1}Implementing Crank-Nicolson}{9}{section.4.1}
+\contentsline {section}{\numberline {4.1}Tools}{9}{section.4.1}
+\contentsline {section}{\numberline {4.2}Program design}{9}{section.4.2}
+\contentsline {section}{\numberline {4.3}The physical system}{10}{section.4.3}
+\contentsline {subsection}{\numberline {4.3.1}Partitioning of the problem}{10}{subsection.4.3.1}
+\contentsline {subsection}{\numberline {4.3.2}Updating alpha and beta values}{10}{subsection.4.3.2}
+\contentsline {subsection}{\numberline {4.3.3}Calculating the distribution of the microwave effect}{10}{subsection.4.3.3}
+\contentsline {subsection}{\numberline {4.3.4}The matrix-vector multiplication procedure}{10}{subsection.4.3.4}
+\contentsline {section}{\numberline {4.4}The conjugate gradient method as an iterative algorithm}{10}{section.4.4}
 \contentsline {chapter}{\numberline {5}Experiments}{11}{chapter.5}
 \contentsline {section}{\numberline {5.1}Experiments}{11}{section.5.1}
 \contentsline {chapter}{\numberline {6}Conclusion}{13}{chapter.6}

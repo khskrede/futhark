@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.1415926-1.40.11 (TeX Live 2010/Arch Linux) (format=pdflatex 2011.3.24)  27 MAR 2011 17:33
+This is pdfTeX, Version 3.1415926-1.40.11 (TeX Live 2010/Arch Linux) (format=pdflatex 2011.3.24)  5 APR 2011 17:17
 entering extended mode
  restricted \write18 enabled.
  %&-line parsing enabled.
@@ -1017,7 +1017,7 @@ l.3 \lipsum[1-3]
 
  (./theory.tex
 Chapter 2.
-<physicists.png, id=126, 323.40825pt x 487.8225pt>
+<physicists.png, id=161, 323.40825pt x 487.8225pt>
 File: physicists.png Graphic file (type png)
  <use physicists.png>
 [3
@@ -1071,7 +1071,13 @@ Overfull \hbox (86.18924pt too wide) in alignment at lines 62--67
 
 ]
 Chapter 4.
-[9]) [10]
+LaTeX Font Info:    Try loading font information for OMS+cmr on input line 9.
+(/usr/share/texmf-dist/tex/latex/base/omscmr.fd
+File: omscmr.fd 1999/05/25 v2.5h Standard LaTeX font definitions
+)
+LaTeX Font Info:    Font shape `OMS/cmr/m/n' in size <10.95> not available
+(Font)              Font shape `OMS/cmsy/m/n' tried instead on input line 9.
+ [9]) [10]
 \openout2 = `experiments.aux'.
 
  (./experiments.tex
@@ -1107,14 +1113,14 @@ Package atveryend Info: Empty hook `AfterLastShipout' on input line 41.
 (./resultats_numerics.aux) (./conclusion.aux))
 Package atveryend Info: Executing hook `AtVeryEndDocument' on input line 41.
 Package rerunfilecheck Info: File `main.out' has not changed.
-(rerunfilecheck)             Checksum: EB1159A865CF872FA94FCE0A416A6079;964.
+(rerunfilecheck)             Checksum: 1F05D2B52D0E0EFDB3DDD46B8937A5D0;1538.
  ) 
 Here is how much of TeX's memory you used:
- 18344 strings out of 493738
- 324598 string characters out of 3148797
+ 18380 strings out of 493738
+ 325148 string characters out of 3148797
  988720 words of memory out of 3000000
- 21119 multiletter control sequences out of 15000+200000
- 29663 words of font info for 75 fonts, out of 3000000 for 9000
+ 21143 multiletter control sequences out of 15000+200000
+ 31203 words of font info for 77 fonts, out of 3000000 for 9000
  714 hyphenation exceptions out of 8191
  70i,12n,59p,18238b,564s stack positions out of 5000i,500n,10000p,200000b,50000s
 {/usr/share/texmf-dist/fonts/enc/dvips/cm-super/cm-super-t1.enc}{/usr/share/t
@@ -1132,20 +1138,21 @@ sfonts/cm/cmsy6.pfb></usr/share/texmf-dist/fonts/type1/public/amsfonts/cm/cmsy8
 .pfb></usr/share/texmf-dist/fonts/type1/public/allrunes/frulnn.pfb></usr/share/
 texmf-dist/fonts/type1/public/allrunes/frunmn.pfb></usr/share/texmf-dist/fonts/
 type1/public/cm-super/sfbx0900.pfb></usr/share/texmf-dist/fonts/type1/public/cm
--super/sfbx1095.pfb></usr/share/texmf-dist/fonts/type1/public/cm-super/sfbx1440
-.pfb></usr/share/texmf-dist/fonts/type1/public/cm-super/sfcc1095.pfb></usr/shar
-e/texmf-dist/fonts/type1/public/cm-super/sfcc1440.pfb></usr/share/texmf-dist/fo
-nts/type1/public/cm-super/sfrm0600.pfb></usr/share/texmf-dist/fonts/type1/publi
-c/cm-super/sfrm0900.pfb></usr/share/texmf-dist/fonts/type1/public/cm-super/sfrm
-1095.pfb></usr/share/texmf-dist/fonts/type1/public/cm-super/sfrm1440.pfb></usr/
-share/texmf-dist/fonts/type1/public/cm-super/sfrm2488.pfb></usr/share/texmf-dis
-t/fonts/type1/public/cm-super/sfti1095.pfb></usr/share/texmf-dist/fonts/type1/p
-ublic/cm-super/sfti1440.pfb></usr/share/texmf-dist/fonts/type1/urw/helvetic/uhv
-r8a.pfb></usr/share/texmf-dist/fonts/type1/urw/times/utmr8a.pfb>
-Output written on main.pdf (19 pages, 405450 bytes).
+-super/sfbx1095.pfb></usr/share/texmf-dist/fonts/type1/public/cm-super/sfbx1200
+.pfb></usr/share/texmf-dist/fonts/type1/public/cm-super/sfbx1440.pfb></usr/shar
+e/texmf-dist/fonts/type1/public/cm-super/sfcc1095.pfb></usr/share/texmf-dist/fo
+nts/type1/public/cm-super/sfcc1440.pfb></usr/share/texmf-dist/fonts/type1/publi
+c/cm-super/sfrm0600.pfb></usr/share/texmf-dist/fonts/type1/public/cm-super/sfrm
+0900.pfb></usr/share/texmf-dist/fonts/type1/public/cm-super/sfrm1095.pfb></usr/
+share/texmf-dist/fonts/type1/public/cm-super/sfrm1440.pfb></usr/share/texmf-dis
+t/fonts/type1/public/cm-super/sfrm2488.pfb></usr/share/texmf-dist/fonts/type1/p
+ublic/cm-super/sfti1095.pfb></usr/share/texmf-dist/fonts/type1/public/cm-super/
+sfti1440.pfb></usr/share/texmf-dist/fonts/type1/urw/helvetic/uhvr8a.pfb></usr/s
+hare/texmf-dist/fonts/type1/urw/times/utmr8a.pfb>
+Output written on main.pdf (19 pages, 423802 bytes).
 PDF statistics:
- 322 PDF objects out of 1000 (max. 8388607)
- 268 compressed objects within 3 object streams
- 48 named destinations out of 1000 (max. 500000)
- 146 words of extra memory for PDF output out of 10000 (max. 10000000)
+ 364 PDF objects out of 1000 (max. 8388607)
+ 308 compressed objects within 4 object streams
+ 55 named destinations out of 1000 (max. 500000)
+ 202 words of extra memory for PDF output out of 10000 (max. 10000000)
 

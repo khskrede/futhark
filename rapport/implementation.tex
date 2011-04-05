@@ -1,3 +1,51 @@
 \chapter{Implementation}
-\section{Implementing Crank-Nicolson}
-\lipsum[1-3]
+
+\section{Tools}
+
+The programming language chosen to implemented the system was c++.
+The arguments leading to this choice was:
+
+\begin{itemize}
+\item Most of the group members had some earlier experience with the language.
+\item It allows for a high level of abstraction without loosing control of the
+underlying hardware.
+\item The code can be easily parallelized for shared memory machines using OpenMP.
+\item Many libraries exist for c++ that implements highly optimized linear algebra
+functionality.
+\end{itemize}
+
+Other languages cosidered where Matlab and c.
+
+The tool chosen to visualize the resulting data was gnuplot and ffmpeg. Writing a
+program using OpenGL was considered, but dismissed on the grounds of beeing too time consuming.
+
+\section{Program design}
+
+The program mainly consist of three parts:
+
+\begin{itemize}
+\item C++ implementation of Linear algebra functionality of the discrete equations.
+\item C++ implementation of the conjugate gradient method for solving the
+equations described.
+\item Bash script for generating plots and and movie of the generated data.
+\end{itemize}
+
+The Bash script is not discussed in further detail as it can be considered simple.
+
+\section{The physical system}
+
+The main task of the physical system is to implement a matrix-vector multiplication
+procedure for the heat equation and a method of calculating the heating properties of
+a microwave.
+
+\subsection{Partitioning of the problem}
+
+\subsection{Updating alpha and beta values}
+
+\subsection{Calculating the distribution of the microwave effect}
+
+\subsection{The matrix-vector multiplication procedure}
+
+\section{The conjugate gradient method as an iterative algorithm}
+
+
