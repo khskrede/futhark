@@ -1,3 +1,11 @@
 *.dat.png
 *.o
+*.aux
+*.log
+*.out
+*.blg
+*.toc
+*.bbl
+*.dvi
+*.pdf
 program/
