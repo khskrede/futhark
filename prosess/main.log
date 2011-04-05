@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.1415926-1.40.11 (TeX Live 2010) (format=pdflatex 2011.3.28)  5 APR 2011 20:16
+This is pdfTeX, Version 3.1415926-1.40.11 (TeX Live 2010) (format=pdflatex 2011.3.28)  5 APR 2011 20:50
 entering extended mode
  restricted \write18 enabled.
  %&-line parsing enabled.
@@ -1113,50 +1113,72 @@ Underfull \hbox (badness 2452) in paragraph at lines 12--12
 er elit. Pro-in
  []
 
-[14] [15]
-Underfull \hbox (badness 1102) in paragraph at lines 48--48
-\T1/cmr/m/n/10.95 mag-na. Do-nec ve-hi-cu-la au-gue eu ne-que. Pel-len-tes-que 
-ha-bi-tant mor-bi
+[14]
+Underfull \hbox (badness 10000) in paragraph at lines 15--24
+
+ []
+
+[15]
+Underfull \hbox (badness 10000) in paragraph at lines 25--36
+
+ []
+
+
+Underfull \hbox (badness 2150) in paragraph at lines 48--56
+\T1/cmr/m/n/10.95 I gruppe-kon-trak-ten (se Ap-pen-diks XXXX) står det at be-sl
+ut-nin-ger
+ []
+
+
+Underfull \hbox (badness 10000) in paragraph at lines 48--56
+
  []
 
 [16]
-Underfull \hbox (badness 2452) in paragraph at lines 48--48
-\T1/cmr/m/n/10.95 no-num-my pel-len-tes-que ante. Pha-sel-lus adi-piscing sem-p
-er elit. Pro-in
+Underfull \hbox (badness 1237) in paragraph at lines 57--65
+[]\T1/cmr/m/n/10.95 Den førs-te av-gjø-rel-sen grup-pa tok var valg av opp-ga-v
+e. Ås-mund
  []
 
-[17]
-Underfull \hbox (badness 1102) in paragraph at lines 51--51
+
+Underfull \hbox (badness 2158) in paragraph at lines 57--65
+\T1/cmr/m/n/10.95 var i star-ten vel-dig gi-ret på ski-for-sø-ket. Som gikk ut 
+på å måle
+ []
+
+
+Underfull \hbox (badness 10000) in paragraph at lines 57--65
+
+ []
+
+
+Underfull \hbox (badness 1102) in paragraph at lines 75--75
 \T1/cmr/m/n/10.95 mag-na. Do-nec ve-hi-cu-la au-gue eu ne-que. Pel-len-tes-que 
 ha-bi-tant mor-bi
  []
 
 
-Underfull \hbox (badness 2452) in paragraph at lines 51--51
+Underfull \hbox (badness 2452) in paragraph at lines 75--75
 \T1/cmr/m/n/10.95 no-num-my pel-len-tes-que ante. Pha-sel-lus adi-piscing sem-p
 er elit. Pro-in
  []
 
-[18]
-Underfull \hbox (badness 1102) in paragraph at lines 54--54
+[17] [18]
+Underfull \hbox (badness 1102) in paragraph at lines 78--78
 \T1/cmr/m/n/10.95 mag-na. Do-nec ve-hi-cu-la au-gue eu ne-que. Pel-len-tes-que 
 ha-bi-tant mor-bi
  []
 
-[19]
-Underfull \hbox (badness 2452) in paragraph at lines 54--54
+
+Underfull \hbox (badness 2452) in paragraph at lines 78--78
 \T1/cmr/m/n/10.95 no-num-my pel-len-tes-que ante. Pha-sel-lus adi-piscing sem-p
 er elit. Pro-in
  []
 
-[20]) [21]
+[19]) [20]
 \openout2 = `analyse.aux'.
 
- (./analyse.tex [22
-
-
-
-]
+ (./analyse.tex
 Kapittel 5.
 
 Underfull \hbox (badness 1102) in paragraph at lines 6--6
@@ -1170,19 +1192,23 @@ Underfull \hbox (badness 2452) in paragraph at lines 6--6
 er elit. Pro-in
  []
 
-[23]
+[21
+
+
+
+]
 Underfull \hbox (badness 1102) in paragraph at lines 9--9
 \T1/cmr/m/n/10.95 mag-na. Do-nec ve-hi-cu-la au-gue eu ne-que. Pel-len-tes-que 
 ha-bi-tant mor-bi
  []
 
-[24]
+[22]
 Underfull \hbox (badness 2452) in paragraph at lines 9--9
 \T1/cmr/m/n/10.95 no-num-my pel-len-tes-que ante. Pha-sel-lus adi-piscing sem-p
 er elit. Pro-in
  []
 
-[25]
+[23]
 Underfull \hbox (badness 1102) in paragraph at lines 12--12
 \T1/cmr/m/n/10.95 mag-na. Do-nec ve-hi-cu-la au-gue eu ne-que. Pel-len-tes-que 
 ha-bi-tant mor-bi
@@ -1194,34 +1220,34 @@ Underfull \hbox (badness 2452) in paragraph at lines 12--12
 er elit. Pro-in
  []
 
-[26]
+[24]
 Underfull \hbox (badness 1102) in paragraph at lines 15--15
 \T1/cmr/m/n/10.95 mag-na. Do-nec ve-hi-cu-la au-gue eu ne-que. Pel-len-tes-que 
 ha-bi-tant mor-bi
  []
 
-[27]
+[25]
 Underfull \hbox (badness 2452) in paragraph at lines 15--15
 \T1/cmr/m/n/10.95 no-num-my pel-len-tes-que ante. Pha-sel-lus adi-piscing sem-p
 er elit. Pro-in
  []
 
-[28]
+[26]
 Underfull \hbox (badness 1102) in paragraph at lines 18--18
 \T1/cmr/m/n/10.95 mag-na. Do-nec ve-hi-cu-la au-gue eu ne-que. Pel-len-tes-que 
 ha-bi-tant mor-bi
  []
 
-[29]
+[27]
 Underfull \hbox (badness 2452) in paragraph at lines 18--18
 \T1/cmr/m/n/10.95 no-num-my pel-len-tes-que ante. Pha-sel-lus adi-piscing sem-p
 er elit. Pro-in
  []
 
-[30]) [31]
+[28]) [29]
 \openout2 = `oppsummering.aux'.
 
- (./oppsummering.tex [32
+ (./oppsummering.tex [30
 
 
 
@@ -1239,7 +1265,7 @@ Underfull \hbox (badness 2452) in paragraph at lines 2--2
 er elit. Pro-in
  []
 
-[33] [34]
+[31] [32]
 Kapittel 7.
 
 Underfull \hbox (badness 1102) in paragraph at lines 5--5
@@ -1253,11 +1279,11 @@ Underfull \hbox (badness 2452) in paragraph at lines 5--5
 er elit. Pro-in
  []
 
-[35
+[33
 
-]) [36] (./main.bbl)
+]) [34] (./main.bbl)
 Package atveryend Info: Empty hook `BeforeClearDocument' on input line 39.
- [37
+ [35
 
 
 ]
@@ -1273,8 +1299,8 @@ LaTeX Warning: There were undefined references.
 
  ) 
 Here is how much of TeX's memory you used:
- 16268 strings out of 493747
- 277474 string characters out of 3143546
+ 16266 strings out of 493747
+ 277460 string characters out of 3143546
  920271 words of memory out of 3000000
  19053 multiletter control sequences out of 15000+200000
  22555 words of font info for 53 fonts, out of 3000000 for 9000
@@ -1296,10 +1322,10 @@ ts/type1/public/cm-super/sfti1095.pfb></usr/local/texlive/2010/texmf-dist/fonts
 /type1/public/cm-super/sfti1440.pfb></usr/local/texlive/2010/texmf-dist/fonts/t
 ype1/urw/helvetic/uhvr8a.pfb></usr/local/texlive/2010/texmf-dist/fonts/type1/ur
 w/times/utmr8a.pfb>
-Output written on main.pdf (42 pages, 301956 bytes).
+Output written on main.pdf (40 pages, 299878 bytes).
 PDF statistics:
- 426 PDF objects out of 1000 (max. 8388607)
- 364 compressed objects within 4 object streams
- 90 named destinations out of 1000 (max. 500000)
+ 418 PDF objects out of 1000 (max. 8388607)
+ 358 compressed objects within 4 object streams
+ 88 named destinations out of 1000 (max. 500000)
  229 words of extra memory for PDF output out of 10000 (max. 10000000)
 

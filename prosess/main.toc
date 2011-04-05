@@ -16,13 +16,13 @@
 \contentsline {section}{\numberline {4.3}Opprinnelig plan}{14}{section.4.3}
 \contentsline {section}{\numberline {4.4}Regler, avtaler, kontrakt}{16}{section.4.4}
 \contentsline {section}{\numberline {4.5}Beslutningsm\IeC {\o }nstre}{16}{section.4.5}
-\contentsline {section}{\numberline {4.6}Roller vi tok}{18}{section.4.6}
+\contentsline {section}{\numberline {4.6}Roller vi tok}{17}{section.4.6}
 \contentsline {section}{\numberline {4.7}Tilbakeblikk}{19}{section.4.7}
-\contentsline {chapter}{\numberline {5}Analyse av gruppearbeidet}{23}{chapter.5}
-\contentsline {section}{\numberline {5.1}Kompetanse i praksis}{23}{section.5.1}
-\contentsline {section}{\numberline {5.2}Kommunikasjon og samspill}{24}{section.5.2}
-\contentsline {section}{\numberline {5.3}Bruk av regler/kontrakt}{26}{section.5.3}
-\contentsline {section}{\numberline {5.4}Teori vs. virkelighet}{28}{section.5.4}
-\contentsline {section}{\numberline {5.5}Situasjoner og eksempler}{29}{section.5.5}
-\contentsline {chapter}{\numberline {6}Oppsummering}{33}{chapter.6}
-\contentsline {chapter}{\numberline {7}Konklusjon}{35}{chapter.7}
+\contentsline {chapter}{\numberline {5}Analyse av gruppearbeidet}{21}{chapter.5}
+\contentsline {section}{\numberline {5.1}Kompetanse i praksis}{21}{section.5.1}
+\contentsline {section}{\numberline {5.2}Kommunikasjon og samspill}{22}{section.5.2}
+\contentsline {section}{\numberline {5.3}Bruk av regler/kontrakt}{24}{section.5.3}
+\contentsline {section}{\numberline {5.4}Teori vs. virkelighet}{26}{section.5.4}
+\contentsline {section}{\numberline {5.5}Situasjoner og eksempler}{27}{section.5.5}
+\contentsline {chapter}{\numberline {6}Oppsummering}{31}{chapter.6}
+\contentsline {chapter}{\numberline {7}Konklusjon}{33}{chapter.7}
