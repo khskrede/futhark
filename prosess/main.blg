@@ -1,4 +1,4 @@
-This is BibTeX, Version 0.99d (TeX Live 2010/Arch Linux)
+This is BibTeX, Version 0.99d (TeX Live 2010)
 Capacity: max_strings=35307, hash_size=35307, hash_prime=30011
 The top-level auxiliary file: main.aux
 A level-1 auxiliary file: innledning.aux
@@ -9,44 +9,46 @@ A level-1 auxiliary file: analyse.aux
 A level-1 auxiliary file: oppsummering.aux
 The style file: plain.bst
 Database file #1: referanser.bib.bib
-You've used 1 entry,
+Warning--I didn't find a database entry for "schwartz"
+You've used 2 entries,
             2118 wiz_defined-function locations,
-            509 strings with 4176 characters,
-and the built_in function-call counts, 260 in all, are:
-= -- 20
-> -- 7
-< -- 1
-+ -- 4
-- -- 2
-* -- 13
-:= -- 49
-add.period$ -- 3
-call.type$ -- 1
-change.case$ -- 3
+            516 strings with 4321 characters,
+and the built_in function-call counts, 498 in all, are:
+= -- 40
+> -- 14
+< -- 2
++ -- 7
+- -- 4
+* -- 24
+:= -- 89
+add.period$ -- 6
+call.type$ -- 2
+change.case$ -- 6
 chr.to.int$ -- 0
-cite$ -- 1
-duplicate$ -- 14
-empty$ -- 27
-format.name$ -- 2
-if$ -- 53
+cite$ -- 2
+duplicate$ -- 28
+empty$ -- 53
+format.name$ -- 4
+if$ -- 105
 int.to.chr$ -- 0
-int.to.str$ -- 1
-missing$ -- 2
-newline$ -- 8
-num.names$ -- 2
-pop$ -- 9
+int.to.str$ -- 2
+missing$ -- 4
+newline$ -- 13
+num.names$ -- 4
+pop$ -- 18
 preamble$ -- 1
-purify$ -- 3
+purify$ -- 6
 quote$ -- 0
-skip$ -- 6
+skip$ -- 12
 stack$ -- 0
-substring$ -- 6
-swap$ -- 2
-text.length$ -- 1
+substring$ -- 11
+swap$ -- 4
+text.length$ -- 2
 text.prefix$ -- 0
 top$ -- 0
-type$ -- 2
+type$ -- 4
 warning$ -- 0
-while$ -- 2
-width$ -- 2
-write$ -- 13
+while$ -- 4
+width$ -- 3
+write$ -- 24
+(There was 1 warning)

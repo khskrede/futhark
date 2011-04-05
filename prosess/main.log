@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.1415926-1.40.11 (TeX Live 2010) (format=pdflatex 2011.3.28)  5 APR 2011 19:54
+This is pdfTeX, Version 3.1415926-1.40.11 (TeX Live 2010) (format=pdflatex 2011.3.28)  5 APR 2011 20:16
 entering extended mode
  restricted \write18 enabled.
  %&-line parsing enabled.
@@ -1001,8 +1001,12 @@ LaTeX Font Info:    Try loading font information for OT1+ptm on input line 1.
 
 (/usr/local/texlive/2010/texmf-dist/tex/latex/psnfss/ot1ptm.fd
 File: ot1ptm.fd 2001/06/04 font definitions for OT1/ptm.
-))pdfTeX warning (ext4): destination with the same identifier (name{page.1}) ha
-s been already used, duplicate ignored
+)
+
+LaTeX Warning: Citation `schwartz' on page 1 undefined on input line 3.
+
+)pdfTeX warning (ext4): destination with the same identifier (name{page.1}) has
+ been already used, duplicate ignored
 <to be read again> 
                    \relax 
 l.28 	\include{innledning}
@@ -1109,42 +1113,38 @@ Underfull \hbox (badness 2452) in paragraph at lines 12--12
 er elit. Pro-in
  []
 
-[14]
-
-LaTeX Warning: Citation `jj' on page 15 undefined on input line 18.
-
-[15]
-Underfull \hbox (badness 1102) in paragraph at lines 46--46
+[14] [15]
+Underfull \hbox (badness 1102) in paragraph at lines 48--48
 \T1/cmr/m/n/10.95 mag-na. Do-nec ve-hi-cu-la au-gue eu ne-que. Pel-len-tes-que 
 ha-bi-tant mor-bi
  []
 
 [16]
-Underfull \hbox (badness 2452) in paragraph at lines 46--46
+Underfull \hbox (badness 2452) in paragraph at lines 48--48
 \T1/cmr/m/n/10.95 no-num-my pel-len-tes-que ante. Pha-sel-lus adi-piscing sem-p
 er elit. Pro-in
  []
 
 [17]
-Underfull \hbox (badness 1102) in paragraph at lines 49--49
+Underfull \hbox (badness 1102) in paragraph at lines 51--51
 \T1/cmr/m/n/10.95 mag-na. Do-nec ve-hi-cu-la au-gue eu ne-que. Pel-len-tes-que 
 ha-bi-tant mor-bi
  []
 
 
-Underfull \hbox (badness 2452) in paragraph at lines 49--49
+Underfull \hbox (badness 2452) in paragraph at lines 51--51
 \T1/cmr/m/n/10.95 no-num-my pel-len-tes-que ante. Pha-sel-lus adi-piscing sem-p
 er elit. Pro-in
  []
 
 [18]
-Underfull \hbox (badness 1102) in paragraph at lines 52--52
+Underfull \hbox (badness 1102) in paragraph at lines 54--54
 \T1/cmr/m/n/10.95 mag-na. Do-nec ve-hi-cu-la au-gue eu ne-que. Pel-len-tes-que 
 ha-bi-tant mor-bi
  []
 
 [19]
-Underfull \hbox (badness 2452) in paragraph at lines 52--52
+Underfull \hbox (badness 2452) in paragraph at lines 54--54
 \T1/cmr/m/n/10.95 no-num-my pel-len-tes-que ante. Pha-sel-lus adi-piscing sem-p
 er elit. Pro-in
  []
@@ -1273,10 +1273,10 @@ LaTeX Warning: There were undefined references.
 
  ) 
 Here is how much of TeX's memory you used:
- 16266 strings out of 493747
- 277459 string characters out of 3143546
+ 16268 strings out of 493747
+ 277474 string characters out of 3143546
  920271 words of memory out of 3000000
- 19052 multiletter control sequences out of 15000+200000
+ 19053 multiletter control sequences out of 15000+200000
  22555 words of font info for 53 fonts, out of 3000000 for 9000
  714 hyphenation exceptions out of 8191
  61i,12n,53p,18238b,820s stack positions out of 5000i,500n,10000p,200000b,50000s
@@ -1296,10 +1296,10 @@ ts/type1/public/cm-super/sfti1095.pfb></usr/local/texlive/2010/texmf-dist/fonts
 /type1/public/cm-super/sfti1440.pfb></usr/local/texlive/2010/texmf-dist/fonts/t
 ype1/urw/helvetic/uhvr8a.pfb></usr/local/texlive/2010/texmf-dist/fonts/type1/ur
 w/times/utmr8a.pfb>
-Output written on main.pdf (42 pages, 297245 bytes).
+Output written on main.pdf (42 pages, 301956 bytes).
 PDF statistics:
- 425 PDF objects out of 1000 (max. 8388607)
- 363 compressed objects within 4 object streams
- 89 named destinations out of 1000 (max. 500000)
+ 426 PDF objects out of 1000 (max. 8388607)
+ 364 compressed objects within 4 object streams
+ 90 named destinations out of 1000 (max. 500000)
  229 words of extra memory for PDF output out of 10000 (max. 10000000)
 
