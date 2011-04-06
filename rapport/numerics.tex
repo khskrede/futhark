@@ -1,47 +1,102 @@
 \chapter{Numerics}
 
-\section{Von Neumann analysis of the Crank-Nicolson-scheme}
+\section{Numerical schemes}
 
-Consider the heat equation,
+In this project we have use the Cranch-Nicholson method to discretize the heat
+equation \cref{eq:temp} in 3D over a finite grid. The Crank-Nicholson method is based on the equation \cref{integral}, where the trapezoidal rule \cref{trapezoidalrule} is used to approximate the integral on the right hand side. We insert the right hand side of the heat equation in the resulting expression \cref{res}, and use Taylor-expansion to obtain the discretizaion. We use the notation \cref{notations} in the rest of the document.
 \begin{equation}
-\frac{\partial u}{\partial t} = \alpha\frac{\partial^2u}{\partial^2x}
-\label{eq:heat}
+\partial_{x}^{k}u=\frac{\partial^{k}u}{\partial^{}x^{k}},\quad \quad \partial_{t}^{k}u=\frac{\partial^{k}u}{\partial^{}t^{k}} \quad \quad u_{m}^{n+\alpha k } = u(x_{m},t_{n}+\alpha k)
+\label{notations}
 \end{equation}
-By applying Crank-Nicolson the following iteration scheme is attained,
+
 \begin{equation}
-u_i^{n+1} = u_i^n\left(1-2D\right)+D\left(u_{i+1}^{n+1}-2u_i^{n+1}+u_{i-1}^{n+1}\right) + D\left(u_{i+1}^n + u_{i-1}^n\right)
-\label{eq:crank}
+u(x_m,t_{n+1}) - u(x_m,t_n) = \int_{t_n} ^{t_{n+1}} u_t(x_m,t) dt
+\label{integral}
 \end{equation}
+
 \begin{equation}
+\int_0^k f(t) dt = \frac{1}{2} k (f(0) - f(k)) -\frac{1}{12} k^3 f''(\frac{k}{2}) + ...
+\label{trapezoidalrule}
+\end{equation}
+We thus obtain
+\begin{eqnarray}
+\label{res}
+u_m^ {n+1} &=& u_m^ n + \frac{1}{2} k(\partial_t u_m^n + \partial_t u_m^{n+1}) - \frac{1}{12} k^3 \partial_t ^3 u_m^{n+\frac{1}{2}} \\
+&\stackrel{\text{\tiny heat eq.}}{=}& u_m^ n + \frac{1}{2} k(\partial_x^2 u_m^n + \partial_y^2 u_m^n + \partial_z^2 u_m^n + \partial_x^2 u_m^{n+1} + \partial_y^2 u_m^{n+1} + \partial_z^2 u_m^{n+1}) - \frac{1}{12} k^3 \partial_t ^3    u_m^{n+\frac{1}{2}} \nonumber
+\end{eqnarray}
+Using central differences \cref{centraldiff}, and denoting the step sizes in $x, y, z$ direction by $h, f, g$ respectively, gives
+\begin{eqnarray*}
+u_m^{n+1} &=& u_m^ n + \frac{1}{2} k(\frac{1}{h^2}\delta_x^2 u_m^n + \frac{1}{f^2}\delta_y^2 u_m^n + \frac{1}{g^2}\delta_z^2 u_m^n + \frac{1}{h^2}\delta_x^2 u_m^{n+1} + \frac{1}{f^2}\delta_y^2 u_m^{n+1} + \frac{1}{g^2}\delta_z^2 u_m^{n+1}) \\
+  &&- \frac{1}{2} k (\frac{1}{12}h^2\partial_x^4 u_m^n + \frac{1}{12}g^2\partial_y^4 u_m^n + \frac{1}{12}f^2\partial_z^4 u_m^n + \frac{1}{12}h^2\partial_x^4 u_m^{n+1} + \frac{1}{12}g^2\partial_y^4 u_m^{n+1} + \frac{1}{12}f^2\partial_z^4 u_m^{n+1} + ...) \\
+  &&- \frac{1}{12} k^3 \partial_t ^3 u_m^{n+\frac{1}{2}} \\ 
+  %&=& u_m^n + \frac{r}{2}(\delta_x^2 u_m^n + \delta_x^2 u_m^{n+1}) + \frac{p}{2}(\delta_y^2 u_m^n + \delta_y^2 u_m^{n+1}) + \frac{q}{2}(\delta_z^2 u_m^n + \delta_z^2 u_m^{n+1}) + \tau_m^n
+\end{eqnarray*}
+where
+\begin{equation}
+\delta_{r}^{2}U_m^{n}=\frac{U_{m+1}^{n}-2U_m^{n}+U_{m-1}^{n}}{{\Delta r}^{2}}
+\label{centraldiff}
+\end{equation}
+We thus obtain the implicit method for the heat equation
+\begin{equation}
+u_m^{n+1}-k(\frac{1}{h^2}\delta_x^2 u_m^{n+1}-\frac{1}{f^2}\delta_y^2 u_m^{n+1}-\frac{1}{g^2}\delta_z^2 u_m^{n+1})=u_m^n + k(\frac{1}{h^2}\delta_x^2 u_m^n + \frac{1}{f^2}\delta_y^2 u_m^n +\frac{1}{g^2}\delta_z^2 u_m^n)
+\label{crank}
+\end{equation}
+with truncation error error
+\begin{eqnarray}
+\frac{\tau_m^ n}{k} &=& -\frac{1}{12} k^2 \partial_t^2 u_m^{n+\frac{1}{2}} - \frac{1}{12} h^2 \partial_x^4 u_m^{n+\frac{1}{2}} - \frac{1}{12} g^2 \partial_y^4 u_m^{n+\frac{1}{2}} - \frac{1}{12} f^2 \partial_z^4 u_m^{n+\frac{1}{2}}\\
+&=& O(k^2 + h^2 + g^2 + f^2)
+\label{truncerror}
+\end{eqnarray}
+
+Here we have used that $\frac{1}{2}(\partial_x^4 u_m^n + \partial_x^4 u_m^{n+1}) = \partial_x^4 u_m^{n+\frac{1}{2}} + O(k^2)$. 
+The truncation error $\tau_m^n \Rightarrow 0$ as $h,f,g,k \Rightarrow 0$, and the Crank-Nicholson method is consistent for the heat equation. To see if the method converges we perform a von Neumann analysis of the numerical scheme.
+
+\section{Von Neumann analysis of the Crank-Nicholson-scheme}
+
+The von Neumann analysis is based on Fourier analysis. The method consist of substituting 
+\begin{equation*}
+	U_m^n=\xi^n e^{i \beta x_m} \quad \quad  i=\sqrt{-1}
+\end{equation*}
+in the difference equation and solve for $\xi$.
+For the method to be stable it has to meet the condition
+\begin{equation}
+	\mid{\xi}\mid \leq 1
+	\label{stabcond}
+\end{equation}
+
+Here we only perform the Neumann analysis for the one-dimensional heat equation problem. We thus obtain the expression
+\begin{equation*}
+\xi^{n+1} e^{i\beta x_{j}} = \xi^{n} e^{i\beta x_j}\left(1-2D\right) + \xi^{n+1}D\left(e^{i\beta x_{j+1}} - 2e^{i\beta  x} + e^{i\beta x_{j-1}}\right) + \xi^{nD}\left(e^{i\beta x_{j+1}} + e^{i\beta x_{j-1}}\right)
+\end{equation*}
+
+where
+\begin{equation*}
 D = \frac{1}{2}\frac{\alpha\Delta t}{(\Delta x)^2}
 \label{eq:crank-D}
-\end{equation}
-Using the approximation $u_j^n \approx E_j^n$ where $E_j^n = G^ne^{i\beta
-x_j}$, and $n$ is a power, inserted into \cref{eq:heat}, this gives
-\begin{equation*}
-G^{n+1}e^{i\beta x_j} = G^ne^{i\beta x_j}\left(1-2D\right) + G^{n+1}D\left(e^{i\beta x_{j+1}} - 2e^{i\beta x_j} + e^{i\beta x_{j-1}}\right) + G^nD\left(e^{i\beta x_{j+1}} + e^{i\beta x_{j-1}}\right)
 \end{equation*}
-Dividing \cref{eq:crank-D} by $G^ne^{i\beta x_j}$, and using $x_{j+1} \approx
-x_j + h$ one obtains
-\begin{eqnarray*}
-G\left[1-D\left(2\cos{\beta h} - 2\right)\right] &=& 1 - 2D\left(1-\cos{\beta h}\right) \\
-\cos{\beta h} &=& \frac{1}{2}\left(1-\sin^2{\frac{\beta h}{2}}\right) \\
-G\left(1+4D\sin^{2}{\frac{\beta h}{2}}\right) &=& 1 - 4D\sin^2{\frac{\beta h}{2}} \\
-G &=& \frac{1-4D\sin^2{\frac{\beta h}{2}}}{1+4D\sin^2{\frac{\beta h}{2}}}
-\end{eqnarray*}
-As the maximum value of $\sin^2{x}$ is 1, and since the iteration scheme is
-stable if $|G| \le 1$, this implies stability,
-\begin{equation}
-|G| = \left|\frac{1-4D}{1+4D}\right|
-\end{equation}
-%Marginpar makes a note in the margin, e.g. for explaining things.
 \marginpar{A typical
 \textbf{C}ourant-\textbf{F}riedrichs-\textbf{L}ewy condition is an inequality of the form
-$\frac{\Delta t}{\Delta x} < C$, with C a constant.}
-It is noteworthy that $D > 0 \ \Rightarrow \ |G| \le 1$ , so the Crank-Nicolson
-scheme is \emph{unconditionally stable}. There is, however, a caveat: if the
-time steps and space steps do not fulfill a CFL-condition, the scheme may
-present oscillations.
+$\frac{\Delta t}{\Delta x} < C$, with C a constant. }
+%Marginpar makes a note in the margin, e.g. for explaining things.
+
+Dividing  by $\xi^ne^{i\beta x_j}$, and using $x_{j+1} = x_j + h$ one obtains    %\href{eq:crank-D}
+\begin{eqnarray*}
+\xi\left[1-D\left(2\cos{\beta h} - 2\right)\right] &=& 1 - 2D\left(1-\cos{\beta h}\right) \\
+\cos{\beta h} &=& \frac{1}{2}\left(1-\sin^2{\frac{\beta h}{2}}\right) \\
+\xi\left(1+4D\sin^{2}{\frac{\beta h}{2}}\right) &=& 1 - 4D\sin^2{\frac{\beta h}{2}} \\
+\xi &=& \frac{1-4D\sin^2{\frac{\beta h}{2}}}{1+4D\sin^2{\frac{\beta h}{2}}}
+\end{eqnarray*}
+As the maximum value of $\sin^2{x}$ is 1, the methods meets the stability condition \ref{stabcond}.
+\begin{equation}
+|\xi | = \left|\frac{1-4D}{1+4D}\right|
+\end{equation}
+
+Since D always are positiv, we get that the Crank-Nicolson
+scheme for the heat equation is \emph{unconditionally stable}. In practice it may happen that the method oscillates if the time steps and space steps do not fulfill a CFL-condition.
+\\
+\\
+From Lax' equivalent theorem, which state that a consistent difference scheme will converges if and only if it is stable, the Crank-Nicholson scheme will converge.
+
 
 \section{Truncation error in the Crank-Nicolson scheme}
 

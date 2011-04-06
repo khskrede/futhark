@@ -12,10 +12,11 @@ The style file: plain.bst
 Database file #1: references.bib.bib
 Warning--string name "july" is undefined
 --line 6 of file references.bib.bib
+Warning--I didn't find a database entry for "brent"
 Warning--empty journal in maillard
 You've used 4 entries,
             2118 wiz_defined-function locations,
-            527 strings with 4672 characters,
+            528 strings with 4677 characters,
 and the built_in function-call counts, 1423 in all, are:
 = -- 136
 > -- 55
@@ -54,4 +55,4 @@ warning$ -- 1
 while$ -- 11
 width$ -- 5
 write$ -- 43
-(There were 2 warnings)
+(There were 3 warnings)
