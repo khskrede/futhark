@@ -2,3 +2,28 @@
 \contentsline {chapter}{\numberline {1}Introduction}{1}{chapter.1}
 \contentsline {section}{\numberline {1.1}Problem formulation}{1}{section.1.1}
 \contentsline {section}{\numberline {1.2}Reasoning behind the problem formulation}{2}{section.1.2}
+\contentsline {chapter}{\numberline {2}Theory}{3}{chapter.2}
+\contentsline {section}{\numberline {2.1}The physical system}{3}{section.2.1}
+\contentsline {section}{\numberline {2.2}Our approach}{3}{section.2.2}
+\contentsline {section}{\numberline {2.3}The heat equations}{4}{section.2.3}
+\contentsline {section}{\numberline {2.4}The transport equations}{5}{section.2.4}
+\contentsline {chapter}{\numberline {3}Numerics}{7}{chapter.3}
+\contentsline {section}{\numberline {3.1}Numerical schemes}{7}{section.3.1}
+\contentsline {section}{\numberline {3.2}Von Neumann analysis of the Crank-Nicholson-scheme}{8}{section.3.2}
+\contentsline {section}{\numberline {3.3}Truncation error in the Crank-Nicolson scheme}{9}{section.3.3}
+\contentsline {chapter}{\numberline {4}Implementation}{11}{chapter.4}
+\contentsline {section}{\numberline {4.1}Tools}{11}{section.4.1}
+\contentsline {section}{\numberline {4.2}Program design}{11}{section.4.2}
+\contentsline {section}{\numberline {4.3}The physical system}{12}{section.4.3}
+\contentsline {subsection}{\numberline {4.3.1}Partitioning of the problem}{12}{subsection.4.3.1}
+\contentsline {subsection}{\numberline {4.3.2}Updating alpha and beta values}{12}{subsection.4.3.2}
+\contentsline {subsection}{\numberline {4.3.3}Calculating the distribution of the microwave effect}{12}{subsection.4.3.3}
+\contentsline {subsection}{\numberline {4.3.4}The matrix-vector multiplication procedure}{12}{subsection.4.3.4}
+\contentsline {section}{\numberline {4.4}The conjugate gradient method as an iterative algorithm}{12}{section.4.4}
+\contentsline {chapter}{\numberline {5}Experiments}{13}{chapter.5}
+\contentsline {section}{\numberline {5.1}Equipment}{13}{section.5.1}
+\contentsline {section}{\numberline {5.2}Execution}{13}{section.5.2}
+\contentsline {section}{\numberline {5.3}Measurements}{14}{section.5.3}
+\contentsline {section}{\numberline {5.4}Results and discussion}{14}{section.5.4}
+\contentsline {chapter}{\numberline {6}Conclusion}{15}{chapter.6}
+\contentsline {section}{\numberline {6.1}Conclusion}{15}{section.6.1}

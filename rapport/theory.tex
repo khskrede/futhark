@@ -9,7 +9,7 @@ GHz. To be modeled is the heat in the strip, phase transitions and transport.
   \begin{center}
     \includegraphics[width=0.4\linewidth]{physicists.png}
   \end{center}
-  \caption{Our initial approach to the problem. \url{xkcd.com/793}
+  \caption{Our initial approach to the problem. \url{xkcd.com/793}}
   \label{fig:xkcd_physics}
 \end{figure}
 
@@ -67,10 +67,28 @@ any new physics''.
 \section{The transport equations}
 The transport equation used in our approach is the one-dimensional Navier Stokes
 equation, with the additional assumptions of an incompressible, Newtonian flow.
-This leads to the equation \cref{
-
-
-
-
+This is the same as ignoring phenomena where sound waves or shock waves are
+important, which makes sense here. This leads to the equation \cref{eq:navier-stokes}
+\begin{equation}
+  \rho \left(\pd{\vec{v}}{t} + \vec{v} \cdot \pd{\vec{v}}{x}\right) = -\pd{p}{x} + \mu \nabla^2 \vec{v} + \vec{f}
+ \label{eq:navier-stokes}
+\end{equation}
+where $\vec{f}$ includes any additional forces, such as gravity. This term is
+discussed in further detail below. An interesting term here is $\pd{p}{x}$, where
+$p$ is the pressure in the fluid. Following the work by \cite{brent}, we replace
+this with a term inspired by \cref{carman-kozeny}
+\begin{equation}
+  \pd{p}{x} = -C\frac{ {1-\eta}^2}{\eta^3} \vec{v_a}
+  \label{carman-kozeny}
+\end{equation}
+where $\eta$ is the melted fraction in the current volume element, and
+$\vec{v_a}$ is an apparent velocity. This is known as the Carman-Kozeny equation
+for flow in a pouros medium, and is applicable to materials where melting does
+not happen at one specific temperature, but instead over a range of
+temperatures. This is typical for a material with a combination of slightly different
+fats, e.g. chocolate or in this case bacon. When a volume element is partially
+melted, it is assumed to have a dendritic structure, and it is said to be in a
+``mushy'' phase. The dendritic structure itself, and whether the flow is parallell or
+orthogonal to the dendritic structure, will influence the constant C. 
 
 
