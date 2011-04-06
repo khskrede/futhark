@@ -1,9 +1,25 @@
 \begin{thebibliography}{1}
 
+\bibitem{intarwebz}
+Erik Christensen.
+\newblock How to make crispy bacon.
+\newblock
+  \url{http://www.timesoftheinternet.com/absolutely-scrumptious/how-to-make-crispy-bacon/}.
+
 \bibitem{huang+zhu}
 Yi~Huang and Xu~Zhu.
 \newblock Microwave oven field uniformity analysis.
 \newblock In {\em Antennas and Propagation Society International Symposium,
   2005 IEEE}, volume~3B, pages 217 -- 220 vol. 3B, 2005.
+
+\bibitem{maillard}
+Louis~Camille Maillard.
+\newblock Genèse des matières protéiques et des matières humiques.
+\newblock 1913.
+
+\bibitem{namba}
+I.~Namba, N.~Tashiro, M.~Kume, T.~Kawaguchi, and T.~Azuma.
+\newblock Low voltage magnetron for microwave ovens.
+\newblock {\em Journal of Microwave Power}, 16(3):257 -- 261, 1981.
 
 \end{thebibliography}
