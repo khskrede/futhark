@@ -1,0 +1,192 @@
+\DeclareOption{norsk}{%
+   \PackageInfo{cleveref}{loaded norsk language definitions} 
+   \AtBeginDocument{%
+     \def\crefrangeconjunction@preamble{ til\nobreakspace}%
+     \def\crefrangepreconjunction@preamble{}%
+     \def\crefrangepostconjunction@preamble{}%
+     \def\crefpairconjunction@preamble{ og\nobreakspace}%
+     \def\crefmiddleconjunction@preamble{, }%
+     \def\creflastconjunction@preamble{ og\nobreakspace}%
+     \def\crefpairgroupconjunction@preamble{ og\nobreakspace}%
+     \def\crefmiddlegroupconjunction@preamble{, }%
+     \def\creflastgroupconjunction@preamble{ og\nobreakspace}%
+     \Crefname@preamble{equation}{Likning}{Likningene}%
+     \Crefname@preamble{part}{Del}{Delene}%
+     \Crefname@preamble{chapter}{Kapittel}{Kapitlene}%
+     \Crefname@preamble{section}{Avsnitt}{Avsnittene}%
+     \Crefname@preamble{appendix}{Tillegg}{Tilleggene}%
+     \Crefname@preamble{enumi}{Punkt}{Punktene}%
+     \Crefname@preamble{footnote}{Fotnote}{Fotnotene}%
+     \Crefname@preamble{figure}{Figur}{Figurene}%
+     \Crefname@preamble{table}{Tabell}{Tabellene}%
+     \Crefname@preamble{theorem}{Teorem}{Teoremene}%
+     \Crefname@preamble{lemma}{Lemma}{Lemma}%
+     \Crefname@preamble{corollary}{Korollar}{Korollarene}%
+     \Crefname@preamble{proposition}{P\aa stand}{P\aa standene}%
+     \Crefname@preamble{definition}{Definisjon}{Definisjonene}%
+     \Crefname@preamble{result}{Resultat}{Resultatene}%
+     \Crefname@preamble{example}{Eksempel}{Eksemplene}%
+     \Crefname@preamble{remark}{Bemerkning}{Bemerkningene}%
+     \Crefname@preamble{note}{Note}{Notene}%
+     \Crefname@preamble{algorithm}{Algoritme}{Algoritmene}%
+     \Crefname@preamble{listing}{Opplisting}{Opplistingene}%
+     \Crefname@preamble{line}{Linje}{Linjene}%
+     \if@cref@capitalise%
+     \crefname@preamble{equation}{Likning}{Likningene}%
+     \crefname@preamble{part}{Del}{Delene}%
+     \crefname@preamble{chapter}{Kapittel}{Kapitlene}%
+    \crefname@preamble{section}{Avsnitt}{Avsnittene}%
+     \crefname@preamble{appendix}{Tillegg}{Tilleggene}%
+     \crefname@preamble{enumi}{Punkt}{Punktene}%
+     \crefname@preamble{footnote}{Fotnote}{Fotnotene}%
+     \crefname@preamble{figure}{Figur}{Figurene}%
+     \crefname@preamble{table}{Tabell}{Tabellene}%
+     \crefname@preamble{theorem}{Teorem}{Teoremene}%
+     \crefname@preamble{lemma}{Lemma}{Lemma}%
+     \crefname@preamble{corollary}{Korollar}{Korollarene}%
+     \crefname@preamble{proposition}{P\aa stand}{P\aa standene}%
+     \crefname@preamble{definition}{Definisjon}{Definisjonene}%
+     \crefname@preamble{result}{Resultat}{Resultatene}%
+     \crefname@preamble{example}{Eksempel}{Eksemplene}%
+     \crefname@preamble{remark}{Bemerkning}{Bemerkningene}%
+     \crefname@preamble{note}{Note}{Notene}%
+     \crefname@preamble{algorithm}{Algoritme}{Algoritmene}%
+     \crefname@preamble{listing}{Opplisting}{Opplistingene}%
+     \crefname@preamble{line}{Linje}{Linjene}%
+  \else%
+     \crefname@preamble{equation}{likning}{likningene}%
+     \crefname@preamble{part}{del}{delene}%
+     \crefname@preamble{chapter}{kapittel}{kapitlene}%
+     \crefname@preamble{section}{avsnitt}{avsnittene}%
+     \crefname@preamble{appendix}{tillegg}{tilleggene}%
+     \crefname@preamble{enumi}{punkt}{punktene}%
+     \crefname@preamble{footnote}{fotnote}{fotnotene}%
+     \crefname@preamble{figure}{figur}{figurene}%
+     \crefname@preamble{table}{tabell}{tabeller}%
+     \crefname@preamble{theorem}{teorem}{teoremene}%
+     \crefname@preamble{lemma}{lemma}{lemma}%
+     \crefname@preamble{corollary}{korollar}{korollarene}%
+     \crefname@preamble{proposition}{p\aa stand}{p\aa standene}%
+     \crefname@preamble{definition}{definisjon}{definisjonene}%
+     \crefname@preamble{result}{resultat}{resultatene}%
+     \crefname@preamble{example}{eksempel}{eksemplene}%
+     \crefname@preamble{remark}{bemerkning}{bemerkningene}%
+     \crefname@preamble{note}{note}{notene}%
+     \crefname@preamble{algorithm}{algoritme}{algoritmene}%
+     \crefname@preamble{listing}{opplisting}{opplistingene}%
+     \crefname@preamble{line}{linje}{linjene}%
+  \fi%
+  \def\cref@language{norsk}%
+
+  \cref@addto\extrasnorsk{%
+     \renewcommand{\crefrangeconjunction}{ til\nobreakspace}%
+     \renewcommand\crefrangepreconjunction{}%
+     \renewcommand\crefrangepostconjunction{}%
+     \renewcommand{\crefpairconjunction}{ og\nobreakspace}%
+\renewcommand{\crefmiddleconjunction}{, }%
+\renewcommand{\creflastconjunction}{ og\nobreakspace}%
+\renewcommand{\crefpairgroupconjunction}{ og\nobreakspace}%
+\renewcommand{\crefmiddlegroupconjunction}{, }%
+\renewcommand{\creflastgroupconjunction}{ og\nobreakspace}%
+\Crefname{equation}{Likning}{Likningene}%
+\Crefname{part}{Del}{Delene}%
+\Crefname{chapter}{Kapittel}{Kapitlene}%
+\Crefname{section}{Avsnitt}{Avsnittene}%
+\Crefname{subsection}{Avsnitt}{Avsnittene}%
+\Crefname{subsubsection}{Avsnitt}{Avsnittene}%
+\Crefname{appendix}{Tillegg}{Tilleggene}%
+\Crefname{subappendix}{Tillegg}{Tilleggene}%
+\Crefname{subsubappendix}{Tillegg}{Tilleggene}%
+\Crefname{subsubsubappendix}{Tillegg}{Tilleggene}%
+\Crefname{enumi}{Punkt}{Punktene}%
+\Crefname{enumii}{Punkt}{Punktene}%
+\Crefname{enumiii}{Punkt}{Punktene}%
+\Crefname{enumiv}{Punkt}{Punktene}%
+\Crefname{enumv}{Punkt}{Punktene}%
+\Crefname{footnote}{Fotnote}{Fotnotene}%
+\Crefname{figure}{Figur}{Figurene}%
+\Crefname{subfigure}{Figur}{Figurene}%
+\Crefname{table}{Tabell}{Tabellene}%
+\Crefname{subtable}{Tabell}{Tabellene}%
+\Crefname{theorem}{Teorem}{Teoremene}%
+\Crefname{lemma}{Lemma}{Lemma}%
+\Crefname{corollary}{Korollar}{Korollarene}%
+\Crefname{proposition}{P\aa stand}{P\aa standene}%
+\Crefname{definition}{Definisjon}{Definisjonene}%
+\Crefname{result}{Resultat}{Resultatene}%
+\Crefname{example}{Eksempel}{Eksemplene}%
+\Crefname{remark}{Bemerkning}{Bemerkningene}%
+\Crefname{note}{Note}{Notene}%
+\Crefname{algorithm}{Algoritme}{Algoritmene}%
+\Crefname{listing}{Opplisting}{Opplistingene}%
+\Crefname{line}{Linje}{Linjene}%
+\if@cref@capitalise%
+  \crefname{equation}{Likning}{Likningene}%
+  \crefname{part}{Del}{Delene}%
+  \crefname{chapter}{Kapittel}{Kapitlene}%
+  \crefname{section}{Avsnitt}{Avsnittene}%
+  \crefname{subsection}{Avsnitt}{Avsnittene}%
+  \crefname{subsubsection}{Avsnitt}{Avsnittene}%
+  \crefname{appendix}{Tillegg}{Tilleggene}%
+  \crefname{subappendix}{Tillegg}{Tilleggene}%
+  \crefname{subsubappendix}{Tillegg}{Tilleggene}%
+  \crefname{subsubsubappendix}{Tillegg}{Tilleggene}%
+  \crefname{enumi}{Punkt}{Punktene}%
+  \crefname{enumii}{Punkt}{Punktene}%
+  \crefname{enumiii}{Punkt}{Punktene}%
+  \crefname{enumiv}{Punkt}{Punktene}%
+  \crefname{enumv}{Punkt}{Punktene}%
+  \crefname{footnote}{Fotnote}{Fotnotene}%
+  \crefname{figure}{Figur}{Figurene}%
+  \crefname{subfigure}{Figur}{Figurene}%
+  \crefname{table}{Tabell}{Tabellene}%
+  \crefname{subtable}{Tabell}{Tabellene}%
+  \crefname{theorem}{Teorem}{Teoremene}%
+  \crefname{lemma}{Lemma}{Lemma}%
+  \crefname{corollary}{Korollar}{Korollarene}%
+  \crefname{proposition}{P\aa stand}{P\aa standene}%
+  \crefname{definition}{Definisjon}{Definisjonene}%
+  \crefname{result}{Resultat}{Resultatene}%
+  \crefname{example}{Eksempel}{Eksemplene}%
+  \crefname{remark}{Bemerkning}{Bemerkningene}%
+  \crefname{note}{Note}{Notene}%
+  \crefname{algorithm}{Algoritme}{Algoritmene}%
+  \crefname{listing}{Opplisting}{Opplistingene}%
+  \crefname{line}{Linje}{Linjene}%
+\else%
+  \crefname{equation}{likning}{likningene}%
+  \crefname{part}{del}{delene}%
+  \crefname{chapter}{kapittel}{kapitlene}%
+  \crefname{section}{avsnitt}{avsnittene}%
+  \crefname{subsection}{avsnitt}{avsnittene}%
+  \crefname{subsubsection}{avsnitt}{avsnittene}%
+  \crefname{appendix}{tillegg}{tilleggene}%
+  \crefname{subappendix}{tillegg}{tilleggene}%
+  \crefname{subsubappendix}{tillegg}{tilleggene}%
+  \crefname{subsubsubappendix}{tillegg}{tilleggene}%
+  \crefname{enumi}{punkt}{punktene}%
+  \crefname{enumii}{punkt}{punktene}%
+  \crefname{enumiii}{punkt}{punktene}%
+  \crefname{enumiv}{punkt}{punktene}%
+  \crefname{enumv}{punkt}{punktene}%
+  \crefname{footnote}{fotnote}{fotnotene}%
+  \crefname{figure}{figur}{figurene}%
+  \crefname{subfigure}{figur}{figurene}%
+  \crefname{table}{tabell}{tabellene}%
+  \crefname{subtable}{tabell}{tabellene}%
+  \crefname{theorem}{teorem}{teoremene}%
+  \crefname{lemma}{lemma}{lemma}%
+  \crefname{corollary}{korollar}{korollarene}%
+  \crefname{proposition}{p\aa stand}{p\aa standene}%
+  \crefname{definition}{definisjon}{definisjonene}%
+  \crefname{result}{resultat}{resultatene}%
+  \crefname{example}{eksempel}{eksemplene}%
+  \crefname{remark}{bemerkning}{bemerkningene}%
+  \crefname{note}{note}{notene}%
+    \crefname{algorithm}{algoritme}{algoritmene}%
+    \crefname{listing}{opplisting}{opplistingene}%
+    \crefname{line}{linje}{linjene}%
+  \fi%
+}}}
+
+
