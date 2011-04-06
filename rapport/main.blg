@@ -12,47 +12,46 @@ The style file: plain.bst
 Database file #1: references.bib.bib
 Warning--string name "july" is undefined
 --line 6 of file references.bib.bib
-Warning--I didn't find a database entry for "brent"
 Warning--empty journal in maillard
-You've used 4 entries,
+You've used 6 entries,
             2118 wiz_defined-function locations,
-            528 strings with 4677 characters,
-and the built_in function-call counts, 1423 in all, are:
-= -- 136
-> -- 55
+            541 strings with 4956 characters,
+and the built_in function-call counts, 2056 in all, are:
+= -- 199
+> -- 80
 < -- 2
-+ -- 22
-- -- 18
-* -- 91
-:= -- 227
-add.period$ -- 12
-call.type$ -- 4
-change.case$ -- 21
++ -- 33
+- -- 26
+* -- 136
+:= -- 335
+add.period$ -- 18
+call.type$ -- 6
+change.case$ -- 31
 chr.to.int$ -- 0
-cite$ -- 5
-duplicate$ -- 53
-empty$ -- 121
-format.name$ -- 18
-if$ -- 307
+cite$ -- 7
+duplicate$ -- 75
+empty$ -- 173
+format.name$ -- 26
+if$ -- 439
 int.to.chr$ -- 0
-int.to.str$ -- 4
-missing$ -- 3
-newline$ -- 23
-num.names$ -- 8
-pop$ -- 27
+int.to.str$ -- 6
+missing$ -- 5
+newline$ -- 33
+num.names$ -- 12
+pop$ -- 33
 preamble$ -- 1
-purify$ -- 17
+purify$ -- 25
 quote$ -- 0
-skip$ -- 47
+skip$ -- 61
 stack$ -- 0
-substring$ -- 107
-swap$ -- 16
+substring$ -- 160
+swap$ -- 18
 text.length$ -- 2
 text.prefix$ -- 0
 top$ -- 0
-type$ -- 16
+type$ -- 24
 warning$ -- 1
-while$ -- 11
-width$ -- 5
-write$ -- 43
-(There were 3 warnings)
+while$ -- 17
+width$ -- 7
+write$ -- 65
+(There were 2 warnings)

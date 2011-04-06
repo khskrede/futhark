@@ -1,0 +1,53 @@
+%Forside for prosess, settes inn med \forsideProsess
+\newcommand*{\forsideProsess}{\begingroup
+\drop = 2\baselineskip
+\centering
+\vspace*{\drop}
+{\Huge PROSESSRAPPORT}\\[\drop]
+\wb\\[\drop]
+{\Large\itshape Numeriske Simuleringer og Eksperimenter med}\\[\baselineskip]
+{\Large STEKING AV BACON I MIKROBØLGEOVN}\\[\baselineskip]
+\wb\\[\baselineskip]
+{\Large\itshape EiT - Matematikk Innen Anvendelser}\\[\baselineskip]
+{\Large gruppe 5 - FU\TH ARK - \textarn{futhark} - \wb}\par
+\vfill
+\wb\\[\drop]
+{\Large \textsc{Åsmund Ervik, Joakim Johnsen, Knut Halvor Skrede, Turid
+Schoonderbeek Solberg, Paul Vo}}\\
+\vspace*{\drop}
+{\scshape 2011}\par
+\vspace*{\drop}
+\endgroup}
+
+%\abstract{} er ikke definert når vi bruker book-stilen.
+%vi lager vårt egen \sammendrag
+\newcommand{\sammendrag}[1]{
+\section*{
+\centering \textbf{\Large{Sammendrag}}}
+  \begin{quotation}
+    \noindent 
+    #1
+  \end{quotation}
+\clearpage
+}
+
+%\forord{} lager forordet for oss.
+\newcommand{\forord}[1]{
+\begin{flushleft}
+\textbf{\Large{Forord}}
+\end{flushleft}
+#1
+\begin{flushright}
+Åsmund Ervik, Joakim Johnsen, Paul Vo,\\ Knut Halvor Skrede, Turid Schoonderbeek Solberg
+\\ \textit{ \today}
+\end{flushright}
+}
+
+%vi bruker f.eks. person{Åsmund} som overskrift i medlemmer-kapittelet istedet for \section{Åsmund}.
+\newcommand{\person}[1]{
+\phantomsection
+\addcontentsline{toc}{section}{#1}
+\section*{#1}
+}
+
+

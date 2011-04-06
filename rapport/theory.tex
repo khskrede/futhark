@@ -68,27 +68,52 @@ any new physics''.
 The transport equation used in our approach is the one-dimensional Navier Stokes
 equation, with the additional assumptions of an incompressible, Newtonian flow.
 This is the same as ignoring phenomena where sound waves or shock waves are
-important, which makes sense here. This leads to the equation \cref{eq:navier-stokes}
+important, which makes sense here. This leads to \cref{eq:navier-stokes}
 \begin{equation}
-  \rho \left(\pd{\vec{v}}{t} + \vec{v} \cdot \pd{\vec{v}}{x}\right) = -\pd{p}{x} + \mu \nabla^2 \vec{v} + \vec{f}
+  \rho \left(\pd{v}{t} + v \cdot \pd{v}{x}\right) = -\pd{p}{x} + \mu \nabla^2 v + f
  \label{eq:navier-stokes}
 \end{equation}
-where $\vec{f}$ includes any additional forces, such as gravity. This term is
+where $f$ includes any additional forces, such as gravity. This term is
 discussed in further detail below. An interesting term here is $\pd{p}{x}$, where
 $p$ is the pressure in the fluid. Following the work by \cite{brent}, we replace
 this with a term inspired by \cref{carman-kozeny}
 \begin{equation}
-  \pd{p}{x} = -C\frac{ {1-\eta}^2}{\eta^3} \vec{v_a}
+  \pd{p}{x} = -C\frac{ (1-\eta)^2}{\eta^3} v_a
   \label{carman-kozeny}
 \end{equation}
 where $\eta$ is the melted fraction in the current volume element, and
-$\vec{v_a}$ is an apparent velocity. This is known as the Carman-Kozeny equation
-for flow in a pouros medium, and is applicable to materials where melting does
-not happen at one specific temperature, but instead over a range of
-temperatures. This is typical for a material with a combination of slightly different
+$v_a$ is an apparent velocity. As the volume element melts, $\eta$ goes from
+zero to one, and $\pd{p}{x}$ goes from a very large value to zero. This is known 
+as the Carman-Kozeny equation for flow in a pouros medium, and is applicable to 
+materials where melting does not happen at one specific temperature, but instead 
+over a range of temperatures (non-isothermal phase change). \cite{poirier} 
+
+This is typical for a material with a combination of slightly different
 fats, e.g. chocolate or in this case bacon. When a volume element is partially
 melted, it is assumed to have a dendritic structure, and it is said to be in a
 ``mushy'' phase. The dendritic structure itself, and whether the flow is parallell or
 orthogonal to the dendritic structure, will influence the constant C. 
+
+Using the procedure outlined in \cite{poirier}, the constant $C$ was estimated to be
+$8 \times 10^8$, where flow is assumed to be parallell to the dendritic
+structure, and the primary dendritic arm distance in bacon was estimated to be
+2.5 mm. The assumption of parallell flow dictates the value of the Kozeny
+constant yielding the final value for $C$.
+
+Influenced by these considerations, the term $\pd{p}{x}$ in
+\cref{eq:navier-stokes} was replaced by \cref{eq:pressure}
+\begin{equation}
+  \pd{p}{x} =  -C\frac{ (1-\eta)^2}{(\eta+d)^3} v
+  \label{eq:pressure}
+\end{equation}
+where $d$ is a tiny constant introduced simply to avoid dividing by zero in the
+numerical procedure.
+
+Introducing this term has two effects. First of all, for a solid element,
+$\pd{p}{x}$ becomes very large, and forces the velocity to be zero. When the
+element starts melting, the flow will mimic the Carman-Kozeny flow, which is
+realistic for a porous medium, and finally in the molten stage, the ordinary
+Navier Stokes equations are recovered.
+
 
 
