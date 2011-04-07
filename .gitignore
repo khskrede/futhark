@@ -1,4 +1,5 @@
 *.dat.png
+*.dat
 *.o
 *.aux
 *.log
@@ -8,4 +9,3 @@
 *.bbl
 *.dvi
 *.pdf
-program/
