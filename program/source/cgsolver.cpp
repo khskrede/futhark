@@ -1,7 +1,8 @@
 
 #include "headers/cgsolver.h"
 
-cg_solver::cg_solver(float *b, float *x, int n, void (*p_MVMultiply)(float*, float*)) {
+cg_solver::cg_solver(float *b, float *x, int n, 
+                     void (*p_MVMultiply)(float*, float*)) {
 
    m_n = n;
 
@@ -32,7 +33,7 @@ void
 cg_solver::Solve() {
 
    // Acceptable error
-   float error = 0.000000001;
+   float error = 0.00000001;
 
    // variable declarations
    float theta_old = 0, theta_new = 0, theta_0 = 0, temp;

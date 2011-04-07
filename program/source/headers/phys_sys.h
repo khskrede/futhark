@@ -32,7 +32,7 @@ class phys_sys {
    Init( int nx, int ny, int nz, int nt, int dny,
          float dx, float dy, float dz, float dt,
          float* temperatures, float* alphas, float* betas,
-         float* boundarys, float* diagonals, float* microfield );
+         float* boundarys, float* diagonals, float* microfield);
 
    static void
    CalculateWaveField( float effect );

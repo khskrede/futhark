@@ -15,7 +15,7 @@ void
 phys_sys::Init(int t_nx, int t_ny, int t_nz, int t_nt, int t_dny,
                float t_dx, float t_dy, float t_dz, float t_dt,
                float* t_temperatures, float* t_alphas, float* t_betas,
-               float* t_boundarys, float* t_diagonals, float* t_microfield ) {
+               float* t_boundarys, float* t_diagonals, float* t_microfield) {
 
    nx = t_nx;
    ny = t_ny;
@@ -59,7 +59,7 @@ phys_sys::Init(int t_nx, int t_ny, int t_nz, int t_nt, int t_dny,
 void
 phys_sys::InitializeTemperature( float initial_temp ) {
 
-   #pragma omp parallel for
+   #pragma omp parallel for 
    for ( int i = 0; i < n; i++ ) {
       temperatures[i] = initial_temp;
    }
@@ -88,23 +88,20 @@ phys_sys::CalculateWaveField( float effect ) {
                       + (nz / 2 - z) * (nz / 2 - z) ) / r_max;
 
             microfield[i] = 0.5
-                                       + 2.5508 * r
-                                       - 0.588013 * r * r
-                                       + 0.032445 * r * r* r
-                                       + 0.00124411 * r * r * r * r
-                                       - 0.0000973516 * r * r * r * r * r;
+                          + 2.5508 * r
+                          - 0.588013 * r * r
+                          + 0.032445 * r * r* r
+                          + 0.00124411 * r * r * r * r
+                          - 0.0000973516 * r * r * r * r * r;
             sum += microfield[i];
          }
       }
    }
 
    // Normalize values in f for effect * dt
-   for (int z = 0; z<nz; z++ ) {
-      for (int y = 0; y<ny; y++ ) {
-         for (int x = 0; x<nx; x++ ) {
-            microfield[z*nx*ny + y*nx + x] /= sum;
-         }
-      }
+   #pragma omp parallel for
+   for (int i = 0; i<n; i++ ) {
+      microfield[i] /= sum;
    }
 }
 
@@ -196,7 +193,7 @@ phys_sys::MultiplyMatrixVector( float* product, float* vector ) {
          if ( !isOutside(x,y,z) ) {
 
             // If we are not on the diagonal
-            if (t != 3 ) {
+            if ( t != 3 ) {
                product[i] += signs[t]
                            * deltas[t]
                            * alphas[j]
@@ -259,16 +256,16 @@ phys_sys::CalculateDiagonal( ) {
    }
 }
 
-bool
+inline bool
 phys_sys::isOutside(int x, int y, int z) {
 
-   if ( z>=0 && z<nz &&
-        y>=0 && y<ny &&
-        x>=0 && x<nx ) {
-      return false;
+   if ( z<0 || z>nz-1 ||
+        y<0 || y>ny-1 ||
+        x<0 || x>nx-1 ) {
+      return true;
    }
    else {
-      return true;
+      return false;
    }
 }
 
@@ -308,3 +305,4 @@ float* phys_sys::signs=0;
 
 int phys_sys::stencil[7][3] = { {0,0,-1}, {0,-1,0}, {-1,0,0}, {0,0,0},
                               {1,0,0}, {0,1,0}, {0,0,1} };
+

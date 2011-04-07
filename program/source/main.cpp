@@ -6,6 +6,7 @@
 #include <stdlib.h>
 #include <math.h>
 #include <omp.h>
+#include <time.h>
 
 #include "headers/phys_sys.h"
 #include "headers/phys_consts.h"
@@ -14,23 +15,25 @@
 using namespace std;
 
 /* Functions */
-void DumpState(float *x, int nx, int ny, int nz, int i);
+void DumpHeat(float *x, int nx, int ny, int nz, float dx, float dy, float dz, int i);
 
 int
 main(int argc, char *argv[]) {
+
+   time_t start_time = time(0);
 
    // -------------------------------------------
    // Set number of threads
    // -------------------------------------------
 
-   omp_set_num_threads(4);
+//   omp_set_num_threads(4);
 
    // -------------------------------------------
    // initialize problem
    // -------------------------------------------
 
    // Initial temperatures
-   float outside_temp = 200;
+   float outside_temp = 20;
    float initial_temp = 20;
 
    // Microwave effect (W)
@@ -38,11 +41,11 @@ main(int argc, char *argv[]) {
 
    // dimensions of bacon (m)
    float Lx = 0.15;
-   float Ly = 0.15;
-   float Lz = 0.15;
+   float Ly = 0.05;
+   float Lz = 0.01;
 
    // Fat / Meat partition, Fat at y > DLy
-   float DLy = 0.5;
+   float DLy = 0.03;
 
    // Set length of cooking (s)
    float Lt = 120.0;
@@ -51,46 +54,48 @@ main(int argc, char *argv[]) {
    float snapshots_ps = 1;
 
    // Set size of mesh
-   int nx = 7;
-   int ny = 7;
-   int nz = 7;
-   int nt = 1200000;
+   int nx = 15;
+   int ny = 15;
+   int nz = 15;
+   int nt = 100000;
 
    // -------------------------------------------
    // Calculate delta values
    // -------------------------------------------
 
-   float dx = Lx / (float) (nx+2);
-   float dy = Ly / (float) (ny+2);
-   float dz = Lz / (float) (nz+2);
-   float dt = Lt / (float) (nt+2);
+   float dx = Lx / (float) (nx);
+   float dy = Ly / (float) (ny);
+   float dz = Lz / (float) (nz);
+   float dt = Lt / (float) (nt);
+
+   // Print delta values
+   cout << "dt " << dt << " dx " << dx << " dy " << dy << " dz " << dz << "\n";
 
    // Fat starts at Dny =
    int dny = DLy / Ly * ny;
 
    // Iterations between snapshots
-   int snapshots_pi = snapshots_ps / dt;
+   int snapshots_pi = 1 / snapshots_ps / dt;
 
    // -------------------------------------------
    // Check courant-Friedrichs-Lewy conditions
    // -------------------------------------------
-
-   float cfl = 1.0/6.0;
-
+/*
+   float cfl = 0.5;
    // Check Courant-Friedrichs-Lewy (CFL) condition
 
-   if ( dt/dx/dx > cfl || dt/dy/dy > cfl || dt/dz/dz > cfl ) {
-      std::cout << "Error: Courant-Friedrichs-Lewy (CFL) condition broken\n";
-      std::cout << "The calculation was stopped because inaccurate and oscillating solutions may occur. \n\n";
+   float greatest_alpha = 0.04;
+   float s = greatest_alpha * ( dt/dx/dx + dt/dy/dy + dt/dz/dz );
 
-      std::cout << "dt/dx^2: " 
-      << dt/dx/dx << " and dt/dy^2: " 
-      << dt/dy/dy << " and dt/dz^2: " 
-      << dt/dz/dz << " should be less than: " 
-      << cfl << "\n";
+   if ( dt/dx/dx > cfl || dt/dy/dy > cfl || dt/dz/dz > cfl ) {
+      std::cout << "Error: Courant-Friedrichs-Lewy (CFL) condition broken\n"
+                << "The calculation was stopped because" 
+                << "inaccurate and oscillating solutions may occur. \n\n"
+                << "a * ( dt/dx^2 + dt/dy^2 + dt/dz^2 ) " << s
+                << " should be less than: " << cfl << "\n";
 
       return 1;
-   }
+   }*/
 
    // -------------------------------------------
    // Initialize system
@@ -98,6 +103,7 @@ main(int argc, char *argv[]) {
 
    int n = nx*ny*nz;
 
+   // Allocate space
    float* temperatures = new float[n];
    float* alphas = new float[n];
    float* betas = new float[n];
@@ -106,6 +112,7 @@ main(int argc, char *argv[]) {
    float* microfield = new float[n];
    float* b = new float[n];
 
+   // Initialize physical system
    phys_sys::Init(nx, ny, nz, nt, dny,
                   dx, dy, dz, dt,
                   temperatures, alphas, betas,
@@ -114,7 +121,7 @@ main(int argc, char *argv[]) {
    // Set initial temperature
    phys_sys::InitializeTemperature( initial_temp );
 
-   // Calculate boundary conditions
+   // Calculate heat boundary conditions
    phys_sys::CalculateBoundaryConditions( outside_temp );
 
    // calculate microwave field
@@ -123,34 +130,46 @@ main(int argc, char *argv[]) {
    // Initialize conjugate gradient solver
    cg_solver solver(b, temperatures, n, phys_sys::MultiplyMatrixVector);
 
-   // Print cross-section of initial state to file
-   DumpState(temperatures, nx, ny, nz, 0);
+   // Print cross-sections of heat and flow state to file
+   DumpHeat(temperatures, nx, ny, nz, dx, dy, dz, 0);
 
    // Main loop
    for ( int i = 1; i < nt; i++ ) {
-      // Update alpha values
+
+      // Update values depending on the current temperature
       phys_sys::UpdateAlphaBetaValues( );
 
-      // Calculate diagonal
+      // Calculate diagonal of the matrix for the heat equation
       phys_sys::CalculateDiagonal( );
 
-      // b <= Bx
+      // solve Bx for right-hand side of heat equation
       phys_sys::SetRightSigns();
       phys_sys::MultiplyMatrixVector(b, temperatures);
 
-      // b += 2*boundarys
+      // add boundary conditions and microwave heat to right-
+      // hand side of heat equation
+
       for ( int j = 0; j < n; j++ ) {
-         b[j] += 2*boundarys[j]; // + 1000 * microfield[j] * betas[j] * microwave_effect * dt ;
+         b[j] += 2 * boundarys[j]
+                  + microfield[j] * betas[j] 
+                  * microwave_effect * dt / dx / dy / dz;
       }
 
-      // solve Ax = b for x
+      // solve heat equation using the conjugate gradient method
       phys_sys::SetLeftSigns();
       solver.Solve();
 
-      // Print cross-section to file
-      if( i%snapshots_pi == 0)
-         DumpState(temperatures, nx, ny, nz, i/snapshots_pi);
+      // Print cross-sections of temperature and flow to files
+      if( i%snapshots_pi == 0) {
+         DumpHeat(temperatures, nx, ny, nz, dx, dy, dz, i/snapshots_pi);
+      }
    }
+
+   time_t end_time = time(0);
+
+   time_t timed = end_time - start_time;
+
+   cout << timed << "\n";
 
    // Delete allocated space
    delete[] boundarys;
@@ -159,13 +178,12 @@ main(int argc, char *argv[]) {
    delete[] betas;
    delete[] microfield;
    delete[] b;
-
    return 0;
 }
 
-// Print cross-section
+// Print cross-section of heat
 void
-DumpState(float *t, int nx, int ny, int nz, int i) {
+DumpHeat(float *t, int nx, int ny, int nz, float dx, float dy, float dz, int i) {
 
    std::cout << "snapshot at iteration " << i << "\n";
 
@@ -177,10 +195,11 @@ DumpState(float *t, int nx, int ny, int nz, int i) {
    int z=nz/2;
       for (int y = 0; y<ny; y++ ) {
          for (int x = 0; x<nx; x++ ) {
-            outfile << x << " " << y << " " << t[z*nz*ny + y*nx + x] << "\n";
+            outfile << x*dx << " " << y*dy << " " << t[z*nz*ny + y*nx + x] << "\n";
          }
          outfile << "\n";
    }
 
    outfile.close();
 }
+
