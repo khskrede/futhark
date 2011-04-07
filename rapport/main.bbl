@@ -1,5 +1,11 @@
 \begin{thebibliography}{1}
 
+\bibitem{brent}
+A.~D. Brent, V.~R. Voller, and K.~J. Reid.
+\newblock The enthalpy porosity approach for modeling convection-diffusion
+  phase change.
+\newblock {\em Numerical Heat Transfer}, 13:297--318, 1988.
+
 \bibitem{intarwebz}
 Erik Christensen.
 \newblock How to make crispy bacon.
@@ -21,5 +27,11 @@ Louis~Camille Maillard.
 I.~Namba, N.~Tashiro, M.~Kume, T.~Kawaguchi, and T.~Azuma.
 \newblock Low voltage magnetron for microwave ovens.
 \newblock {\em Journal of Microwave Power}, 16(3):257 -- 261, 1981.
+
+\bibitem{poirier}
+D.~R. Poirier.
+\newblock Permeability for flow of interdendritic liquid in columnar-dendritic
+  alloys.
+\newblock {\em Met. Trans. B.}, 18B:245--256, 1987.
 
 \end{thebibliography}

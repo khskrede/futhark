@@ -1,19 +1,19 @@
 \documentclass[11pt,norsk,a4paper]{book}
-\usepackage{../futhark} %I denne filen har vi alt av \usepackage, alle egendefinerte kommandoer osv.
-
+\usepackage{../futhark} %I denne filen har vi alt av \usepackage osv
+\usepackage{../prosess}
 \begin{document}
 
 %Forside:
 	\thispagestyle{empty}   %Ingen sidetall
-	\forsideProsess		%Denne setter inn forsiden.
+	\forside		%Denne setter inn forsiden.
 	\clearpage		%Ny side
 	
 %Sammendrag og forord:
 	\pagestyle{plain}	%Stil på sammendrag og forord.
 	\pagenumbering{roman} 	%Sidetall på formen i, ii, osv. på sammendrag, forord og innholdsfortegnelse.
 
-	\sammendragNo{Tekst som skal stå i sammendrag}
-	\forordNo{Tekst som skal stå i forord}
+	\sammendrag{Tekst som skal stå i sammendrag}
+	\forord{Tekst som skal stå i forord}
 	
 	\clearpage		%Ny side
 
