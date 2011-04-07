@@ -27,7 +27,7 @@ program using OpenGL was considered, but dismissed on the grounds of beeing too 
     \includegraphics[width=0.5\linewidth]{classdiagram.png}
   \end{center}
   \caption{Class diagram of c++ implementation}
-  \label{fig:class_diagram}
+  \label{fig:classdiagram}
 \end{figure}
 
 The program mainly consist of three parts:
@@ -39,7 +39,7 @@ equations described.
 \item Bash script for generating plots and and movie of the generated data.
 \end{itemize}
 
-See \cref{fig:class\_diagram} for a class diagram of c++ implementation.
+See \cref{classdiagram} for a class diagram of c++ implementation.
 
 The Bash script is not discussed in further detail as it can be considered to be
 very simple.
@@ -56,7 +56,7 @@ for calculating the velocity of mass transfer.
 The problem is to perform the multiplication of a sparse, symmetrix, matrix with a
 vector. To describe this procedure we have vectors $a$, $b$ and $t$ containing alpha,
 beta, and temperature values respectively. The alpha values represent the heat 
-conduction properties, the beta values describe the substance's ability to heated
+conduction properties, the beta values describe the substance's ability to be heated
 by microwaves and the temperature values naturally contains the temperatures.
 
 \begin{figure}[!h]
@@ -73,16 +73,16 @@ j = z*n_x*n_y + y*n_x + x
 \end{equation}
 
 where $n_x$, $n_y$, $n_z$ is the number of points in the $x$, $y$ and $z$ directions
-respectively. See \cref{fig:grid}
+respectively. See \cref{grid}
 
 The center of the stencil, given by $j$ can be described by the equations:
-\begin{equation}
-x = j \% n_x \\
-y = ( j // nx ) \% ny
-z = ( j // nx // ny )
-\end{equation}
+\begin{eqnarray}
+  x & \cong & j\%n_x \\
+  y & \cong & (j/n_x)\%n_y \\
+  z & \cong & j/n_x/n_y 
+\end{eqnarray}
 
-where $//$ and $\%$ is the integer division and modulo operators respectively.
+where $/$ and $ \% $ is the integer division and modulo operators respectively.
 
 In addition to this, we define two more vectors and one more matrix:
 
@@ -91,10 +91,10 @@ In addition to this, we define two more vectors and one more matrix:
     \includegraphics[width=0.5\linewidth]{stencil.png}
   \end{center}
   \caption{Stencil}
-  \label{fig:stencil}
+  \label{stencil}
 \end{figure}
 
-The offset matrix represents the neighbours in the stencil (see \cref{fig:stencil}:
+The offset matrix represents the neighbours in the stencil (see \cref{stencil}):
 \begin{equation}
 \[
 O =
@@ -118,7 +118,7 @@ equation:
 D = \{ \frac{dt}{dz^2}, \frac{dt}{dy^2}, \frac{dt}{dx^2}, 0, \frac{dt}{dx^2}, \frac{dt}{dy^2}, \frac{dt}{dz^2} \}
 \end{equation}
 
-The matrix containing the offsets relative to the diagonal in the matrix we are multiplying
+The vector containing the offsets relative to the diagonal in the matrix we are multiplying
 with:
 \begin{equation}
 R = \{ -n_x*n_y, -n_x, -1, 0, 1, n_x, n_x*ny \}
@@ -185,3 +185,29 @@ result in the need of more than $n$ iterations for the algorithm to complete.
 \item Deallocate memory
 \end{itemize}
 
+\section{Parallel speedup}
+
+The program was tested with $n_x=n_y=n_z=15$ giving $n=3375$ and $n_t=100000$.
+
+The sequantial version of the program ran in 342 seconds. 
+The parallel version ran in 194 seconds (2 cores) and 181 seconds (4 cores).
+
+This gives us a speedup of:
+\begin{equation}
+S_p(2) = \frac{T_s}{T_{p,2}} = \frac{342}{194} = 1.76
+\end{equation}
+
+and
+
+\begin{equation}
+S_p(4) = \frac{T_s}{T_{p,4}} = \frac{342}{181} = 1.89
+\end{equation}
+
+The reason the speedup between 2 and 4 cores was so small may be due to a lack of
+parallelizable work. The code can only be parallelized on the spacial work ($n$) of the
+heat equation, and not across the time domain ($n_t$). Thus, most of the work involved in
+this program is sequential.
+
+The conjugate gradient method is not parallelizable either (except for the linear algebra functions it
+uses). Thus, the total of the sequential work required in this test is $n_t * n = 337500000$, this is a far greater amount of
+work than the work that can be parallelized.
