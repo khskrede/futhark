@@ -1,3 +1,4 @@
+
 \chapter{Implementation}
 
 \section{Tools}
@@ -29,7 +30,6 @@ program using OpenGL was considered, but dismissed on the grounds of beeing too 
   \label{fig:class_diagram}
 \end{figure}
 
-
 The program mainly consist of three parts:
 
 \begin{itemize}
@@ -38,6 +38,8 @@ The program mainly consist of three parts:
 equations described.
 \item Bash script for generating plots and and movie of the generated data.
 \end{itemize}
+
+See \cref{fig:class\_diagram} for a class diagram of c++ implementation.
 
 The Bash script is not discussed in further detail as it can be considered to be
 very simple.
@@ -51,11 +53,84 @@ for calculating the velocity of mass transfer.
 
 \subsection{Partitioning of the problem}
 
+The problem is to perform the multiplication of a sparse, symmetrix, matrix with a
+vector. To describe this procedure we have vectors $a$, $b$ and $t$ containing alpha,
+beta, and temperature values respectively. The alpha values represent the heat 
+conduction properties, the beta values describe the substance's ability to heated
+by microwaves and the temperature values naturally contains the temperatures.
+
+\begin{figure}[!h]
+  \begin{center}
+    \includegraphics[width=0.5\linewidth]{grid.png}
+  \end{center}
+  \caption{Grid}
+  \label{fig:grid}
+\end{figure}
+
+We say that position $j$ of the vectors is given by:
+\begin{equation}
+j = z*n_x*n_y + y*n_x + x
+\end{equation}
+
+where $n_x$, $n_y$, $n_z$ is the number of points in the $x$, $y$ and $z$ directions
+respectively. See \cref{fig:grid}
+
+The center of the stencil, given by $j$ can be described by the equations:
+\begin{equation}
+x = j \% n_x \\
+y = ( j // nx ) \% ny
+z = ( j // nx // ny )
+\end{equation}
+
+where $//$ and $\%$ is the integer division and modulo operators respectively.
+
+In addition to this, we define two more vectors and one more matrix:
+
+\begin{figure}[!h]
+  \begin{center}
+    \includegraphics[width=0.5\linewidth]{stencil.png}
+  \end{center}
+  \caption{Stencil}
+  \label{fig:stencil}
+\end{figure}
+
+The offset matrix represents the neighbours in the stencil (see \cref{fig:stencil}:
+\begin{equation}
+\[
+O =
+\left[
+\begin{array}{ccc}
+0 & 0 & -1 \\
+0 & -1 & 0 \\
+-1 & 0 & 0 \\
+0 & 0 & 0 \\
+1 & 0 & 0 \\
+0 & 1 & 0 \\
+0 & 0 & 1 \\
+\end{array}
+\right]
+\]
+\end{equation}
+
+The delta vector representing the difference in time and distance used in the heat
+equation:
+\begin{equation}
+D = \{ \frac{dt}{dz^2}, \frac{dt}{dy^2}, \frac{dt}{dx^2}, 0, \frac{dt}{dx^2}, \frac{dt}{dy^2}, \frac{dt}{dz^2} \}
+\end{equation}
+
+The matrix containing the offsets relative to the diagonal in the matrix we are multiplying
+with:
+\begin{equation}
+R = \{ -n_x*n_y, -n_x, -1, 0, 1, n_x, n_x*ny \}
+\end{equation}
+
+This is all the information we need to perform the necessary operations.
+
 \subsection{Updating alpha and beta values}
 
-Given the temperature, the function UpdateAlphaBeta updates the alpha and beta
-values to their correct values by using the temperature to get the current
-phase of the substance at each point in the grid.
+When updating the alpha and beta values, we simply loop through the temperature
+vector, and update the alpha and beta vectors to their correct values using the
+physical contants describing the substance at that point.
 
 \subsection{Calculating the distribution of the microwave effect}
 
@@ -65,7 +140,23 @@ in the grid.
 
 \subsection{The matrix-vector multiplication procedure}
 
+The matrix-vector multiplication procedure takes advantage of the fact that our 
+matrix is sparse and that our problem is well defined. Thus, the algorithm used
+will complete in $m$ iterations where $m$ is the number of non-zero entries in 
+the matrix. $m$ is approximately equal to $7m$.
+
 \section{The conjugate gradient method as an iterative algorithm}
+
+The method (conjugate gradient) used to solve the system of equations is based on 
+the steepest descent algorithm, however, it results in the exact solution within
+$n$ iterations. This is, however, assuming we have infinite floating point accuracy.
+
+The iterative conjugate gradient method lets us define an acceptable error, and stops
+once our solution has an error below what is acceptable.
+
+In our implementation, we recompute the correct residual to avoid accumulation of
+floating point precision errors, however, this is not done at each iteration, and may
+result in the need of more than $n$ iterations for the algorithm to complete.
 
 \section{The main procedure}
 
@@ -93,5 +184,4 @@ in the grid.
 
 \item Deallocate memory
 \end{itemize}
-
 
