@@ -134,7 +134,7 @@ We have all the information we need to perform the necessary operations.
 
 When updating the alpha and beta values, we simply loop through the temperature
 vector, and update the alpha and beta vectors to their correct values using the
-physical contants describing the substance at that point.
+physical constants describing the substance at that point.
 
 \subsection{Calculating the distribution of the microwave effect}
 
@@ -170,7 +170,6 @@ result in the need of more than $n$ iterations for the algorithm to complete.
   \item Allocate necessary memory
   \item Initialize physical system
   \item Initialize internal temperature
-  \item Initialize internal flow
   \item Calculate boundary conditions
   \item Calculate micro-wave field
   \item Initialize conjugate gradient solver
@@ -234,4 +233,6 @@ After looking closely at the differential equations and their discrete equivelen
 of practical issues surfaced. And the continued development of the equations was dismissed
 as the project was close to its end.
 
-
+Since the mass transfer equations was not properly implemented, the stop criteria was not 
+implemented either, as it turned out to be more practical to just run the simulation for as 
+many seconds as needed, and inspect the resulting plots.
