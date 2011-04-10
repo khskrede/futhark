@@ -59,7 +59,9 @@ The problem is to perform the multiplication of a sparse, symmetrix, matrix with
 vector. To describe this procedure we have vectors $a$, $b$ and $t$ containing alpha,
 beta, and temperature values respectively. The alpha values represent the heat 
 conduction properties, the beta values describe the substance's ability to be heated
-by microwaves and the temperature values naturally contains the temperatures.
+by microwaves and the temperature values naturally contains the temperatures. We need
+these vectors because each point in the grid contains a particular substance in
+a particular phase.
 
 \begin{figure}[!h]
   \begin{center}
@@ -210,3 +212,26 @@ this program is sequential.
 
 The conjugate gradient method is not parallelizable either (except for the linear algebra functions it
 uses). Thus, the total of parallelizable work is just $n$, which for this example may be too small.
+
+\section{Unimplemented functionality}
+
+Due to timeconstraints and unforeseen complications, the flow equations was not implemented, 
+however a significant amount of effort was put into the implementation before it was 
+abandoned.
+
+The numerical schemes implemented in an attemt at solving the equations was:
+
+\begin{itemize}
+  \item Forward euler
+  \item Runge-Kutta
+\end{itemize} 
+
+Forward euler was dismissed as the difference in time had to be too small to be practical.
+
+The runge kutta method also gave us some strange and unforeseen results.
+
+After looking closely at the differential equations and their discrete equivelents, a number
+of practical issues surfaced. And the continued development of the equations was dismissed
+as the project was close to its end.
+
+
