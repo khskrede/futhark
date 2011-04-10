@@ -26,7 +26,7 @@ main(int argc, char *argv[]) {
    // Set number of threads
    // -------------------------------------------
 
-//   omp_set_num_threads(4);
+   omp_set_num_threads(4);
 
    // -------------------------------------------
    // initialize problem
@@ -54,10 +54,10 @@ main(int argc, char *argv[]) {
    float snapshots_ps = 1;
 
    // Set size of mesh
-   int nx = 15;
-   int ny = 15;
-   int nz = 15;
-   int nt = 100000;
+   int nx = 10;
+   int ny = 10;
+   int nz = 10;
+   int nt = 12000000;
 
    // -------------------------------------------
    // Calculate delta values
@@ -80,14 +80,14 @@ main(int argc, char *argv[]) {
    // -------------------------------------------
    // Check courant-Friedrichs-Lewy conditions
    // -------------------------------------------
-/*
+
    float cfl = 0.5;
    // Check Courant-Friedrichs-Lewy (CFL) condition
 
    float greatest_alpha = 0.04;
    float s = greatest_alpha * ( dt/dx/dx + dt/dy/dy + dt/dz/dz );
 
-   if ( dt/dx/dx > cfl || dt/dy/dy > cfl || dt/dz/dz > cfl ) {
+   if ( s > cfl ) {
       std::cout << "Error: Courant-Friedrichs-Lewy (CFL) condition broken\n"
                 << "The calculation was stopped because" 
                 << "inaccurate and oscillating solutions may occur. \n\n"
@@ -95,7 +95,7 @@ main(int argc, char *argv[]) {
                 << " should be less than: " << cfl << "\n";
 
       return 1;
-   }*/
+   }
 
    // -------------------------------------------
    // Initialize system
