@@ -3,7 +3,11 @@
 \section{Numerical schemes}
 
 In this project we have use the Cranch-Nicholson method to discretize the heat
-equation \cref{eq:temp} in 3D over a finite grid. The Crank-Nicholson method is based on the equation \cref{integral}, where the trapezoidal rule \cref{trapezoidalrule} is used to approximate the integral on the right hand side. We insert the right hand side of the heat equation in the resulting expression \cref{res}, and use Taylor-expansion to obtain the discretizaion. We use the notation \cref{notations} in the rest of the document.
+equation \cref{eq:temp} in 3D over a finite grid. This method was chosen because
+it is unconditionally stable, and it converges in second order in time and space, as is shown below.
+
+
+The Crank-Nicholson method is based on the equation \cref{integral}, where the trapezoidal rule \cref{trapezoidalrule} is used to approximate the integral on the right hand side. We insert the right hand side of the heat equation in the resulting expression \cref{res}, and use Taylor-expansion to obtain the discretizaion. We use the notation \cref{notations} in the rest of the document.
 \begin{equation}
 \partial_{x}^{k}u=\frac{\partial^{k}u}{\partial^{}x^{k}},\quad \quad \partial_{t}^{k}u=\frac{\partial^{k}u}{\partial^{}t^{k}} \quad \quad u_{m}^{n+\alpha k } = u(x_{m},t_{n}+\alpha k)
 \label{notations}
