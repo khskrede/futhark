@@ -1,0 +1,34 @@
+   // Initialize physical system
+   phys_sys::Init(nx, ny, nz, nt, dny,
+                  dx, dy, dz, dt,
+                  temperatures, alphas, betas,
+                  boundarys, diagonals, microfield);
+   // Set initial temperature
+   phys_sys::InitializeTemperature( initial_temp );
+   // Calculate heat boundary conditions
+   phys_sys::CalculateBoundaryConditions( outside_temp );
+   // calculate microwave field
+   phys_sys::CalculateWaveField( microwave_effect );
+   // Initialize conjugate gradient solver
+   cg_solver solver(b, temperatures, n, phys_sys::MultiplyMatrixVector);
+   // Print cross-sections of heat and flow state to file
+   DumpHeat(temperatures, nx, ny, nz, dx, dy, dz, 0);
+   // Main loop
+   for ( int i = 1; i < nt; i++ ) {
+      // Update values depending on the current temperature
+      phys_sys::UpdateAlphaBetaValues( );
+      // Calculate diagonal of the matrix for the heat equation
+      phys_sys::CalculateDiagonal( );
+      // solve Bx for right-hand side of heat equation
+      phys_sys::SetRightSigns();
+      phys_sys::MultiplyMatrixVector(b, temperatures);
+      // add boundary conditions and microwave heat to right-
+      // hand side of heat equation
+      for ( int j = 0; j < n; j++ ) {
+         b[j] += 2 * boundarys[j]
+                  + microfield[j] * betas[j] 
+                  * microwave_effect * dt / dx / dy / dz;
+      }
+      phys_sys::SetLeftSigns();
+      solver.Solve();
+   }
