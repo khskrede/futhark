@@ -143,7 +143,7 @@ in the grid.
 The matrix-vector multiplication procedure takes advantage of the fact that our 
 matrix is sparse and that our problem is well defined. Thus, the algorithm used
 will complete in $m$ iterations where $m$ is the number of non-zero entries in 
-the matrix. $m$ is approximately equal to $7m$.
+the matrix. $m$ is approximately equal to $7*n$.
 
 \section{The conjugate gradient method as an iterative algorithm}
 
@@ -161,7 +161,6 @@ result in the need of more than $n$ iterations for the algorithm to complete.
 \section{The main procedure}
 
 \begin{itemize}
-
   \item Initialize problem; define grid-size, dimensions of bacon, partitioning of fat vs meat
   and internal and external temperature.
   \item Allocate necessary memory
@@ -181,13 +180,12 @@ result in the need of more than $n$ iterations for the algorithm to complete.
     \item Set signs for left side of equation (t=n+1)
     \item Solve using conjugate gradient method
   \end{itemize}
-
 \item Deallocate memory
 \end{itemize}
 
 \section{Parallel speedup}
 
-The program was tested with $n_x=n_y=n_z=15$ giving $n=3375$ and $n_t=100000$.
+The program was tested with $n_x=n_y=n_z=15$ giving $n=n_x*n_y*n_z=3375$ and $n_t=100000$.
 
 The sequantial version of the program ran in 342 seconds. 
 The parallel version ran in 194 seconds (2 cores) and 181 seconds (4 cores).
@@ -209,5 +207,4 @@ heat equation, and not across the time domain ($n_t$). Thus, most of the work in
 this program is sequential.
 
 The conjugate gradient method is not parallelizable either (except for the linear algebra functions it
-uses). Thus, the total of the sequential work required in this test is $n_t * n = 337500000$, this is a far greater amount of
-work than the work that can be parallelized.
+uses). Thus, the total of parallelizable work is just $n$, which for this example may be too small.
