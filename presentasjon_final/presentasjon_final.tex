@@ -109,20 +109,20 @@
 \begin{itemize}
   \item Varmelikninger
 \end{itemize}
-\begin{align}
+\begin{align*}
   \label{eq:temp}
-  (\rho c_p)_m \pd{T}{t} - \alpha_m \grad{^2 T} &= J^{MW} \quad \rm{m,} \\
-  \eta_s (\rho c_p)_s \pd{T}{t} - \eta_s\alpha_s \grad{^2 T} &= J^{MW} - J^{Melt}  \quad \rm{s,} \\
-  \eta_l (\rho c_p)_l \pd{T}{t} - \eta_s\alpha_l \grad{^2 T} - \eta_l(\rho c_p)_l(\v{v}\cdot
-  \grad{})T &= J^{MW}  \quad \rm{l.}
-\end{align}
+  (\rho c_p)_m \pd{T}{t} &- \alpha_m \grad{^2 T} = J^{MW} \quad \rm{,} \\
+  \eta_s (\rho c_p)_s \pd{T}{t} &- \eta_s\alpha_s \grad{^2 T} = J^{MW} - J^{Melt}  \quad \rm{,} \\
+  \eta_l (\rho c_p)_l \pd{T}{t} &- \eta_s\alpha_l \grad{^2 T} - \eta_l(\rho c_p)_l(\v{v}\cdot
+  \grad{})T = J^{MW}  \quad \rm{.}
+\end{align*}
 \begin{itemize}
   \item Massetransportlikning
 \end{itemize}
-\begin{equation}
+\begin{equation*}
   \rho \left(\pd{v}{t} + v \cdot \pd{v}{x}\right) = -\pd{p}{x} + \mu \nabla^2 v + f
  \label{eq:navier-stokes}
-\end{equation}
+\end{equation*}
 \end{frame}
 
 \begin{frame}
@@ -134,7 +134,15 @@ ligningene presentert i forrige slide.
 \item[$\bullet$] Vi bruker et vanlig grid. For å sikre stabilitet har vi valgt
 å bruke Crank-Nicolson:
 
-\item[$\bullet$] 
+\begin{eqnarray*}
+u_m^{n+1}-\mu k(\frac{1}{h^2}\delta_x^2 u_m^{n+1}-\frac{1}{f^2}\delta_y^2 u_m^{n+1}-\frac{1}{g^2}\delta_z^2 u_m^{n+1})= &  \\
+u_m^n + \mu k(\frac{1}{h^2}\delta_x^2 u_m^n + \frac{1}{f^2}\delta_y^2 u_m^n +\frac{1}{g^2}\delta_z^2 u_m^n)&
+\end{eqnarray*}
+der
+\begin{equation*}
+\delta_{r}^{2}U_m^{n}=\frac{U_{m+1}^{n}-2U_m^{n}+U_{m-1}^{n}}{{\Delta r}^{2}} \rm{,} \quad \quad \mu =\frac{\eta\alpha}{(\rho c_p)}
+\end{equation*}
+
 
   \end{itemize}
 \end{frame}
