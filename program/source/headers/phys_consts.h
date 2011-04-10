@@ -10,7 +10,6 @@ class phys_consts {
    // Air
    // ---------------
 
-   // Heat
    static const float F_air = 1.1839; // kg/m^3
    static const float Cp_air = 1.012*1000; // J/kg*C
    static const float theta_air = 0.025; // W/m*C
@@ -19,7 +18,6 @@ class phys_consts {
    // Meat
    // ---------------
 
-   // Heat
    static const float F_meat = 1.042 * 1000; // kg/m^3
    static const float Cp_meat = 1.51*1000; // J/kg*C
    static const float theta_meat = 0.6; // W/m*C
@@ -28,16 +26,10 @@ class phys_consts {
    // Fat
    // ---------------
 
-   // Heat
    static const float F_fat = 1.000 * 1000; // kg/m^3
    static const float Cp_fat = 1.00*1000; // J/kg*C
    static const float theta_fat = 0.9; // W/m*C
    static const float L_fat = 11.9*1000; // J/kg*C
-
-   // Flow
-   static const float a = 0.0002414;
-   static const float b = 247.8; // K
-   static const float c = 140; // K
 
    public:
 
