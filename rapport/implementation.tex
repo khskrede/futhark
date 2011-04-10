@@ -39,7 +39,7 @@ equations described.
 \item Bash script for generating plots and and movie of the generated data.
 \end{itemize}
 
-See \cref{classdiagram} for a class diagram of c++ implementation.
+See \cref{fig:classdiagram} for a class diagram of c++ implementation.
 
 The Bash script is not discussed in further detail as it can be considered to be
 very simple.
@@ -61,6 +61,14 @@ by microwaves and the temperature values naturally contains the temperatures.
 
 \begin{figure}[!h]
   \begin{center}
+    \includegraphics[width=0.5\linewidth]{stencil.png}
+  \end{center}
+  \caption{Stencil}
+  \label{fig:stencil}
+\end{figure}
+
+\begin{figure}[!h]
+  \begin{center}
     \includegraphics[width=0.5\linewidth]{grid.png}
   \end{center}
   \caption{Grid}
@@ -73,7 +81,8 @@ j = z*n_x*n_y + y*n_x + x
 \end{equation}
 
 where $n_x$, $n_y$, $n_z$ is the number of points in the $x$, $y$ and $z$ directions
-respectively. See \cref{grid}
+respectively, and $x$, $y$ and $z$ is the points on the grid, See \cref{fig:grid} and
+\cref{fig:stencil}
 
 The center of the stencil, given by $j$ can be described by the equations:
 \begin{eqnarray}
@@ -86,17 +95,8 @@ where $/$ and $ \% $ is the integer division and modulo operators respectively.
 
 In addition to this, we define two more vectors and one more matrix:
 
-\begin{figure}[!h]
-  \begin{center}
-    \includegraphics[width=0.5\linewidth]{stencil.png}
-  \end{center}
-  \caption{Stencil}
-  \label{stencil}
-\end{figure}
-
-The offset matrix represents the neighbours in the stencil (see \cref{stencil}):
+The offset matrix represents the neighbours in the stencil (see \cref{fig:stencil}):
 \begin{equation}
-\[
 O =
 \left[
 \begin{array}{ccc}
@@ -109,7 +109,6 @@ O =
 0 & 0 & 1 \\
 \end{array}
 \right]
-\]
 \end{equation}
 
 The delta vector representing the difference in time and distance used in the heat
@@ -124,7 +123,8 @@ with:
 R = \{ -n_x*n_y, -n_x, -1, 0, 1, n_x, n_x*ny \}
 \end{equation}
 
-This is all the information we need to perform the necessary operations.
+Note that the indexing of these vectors and matrices correspond, so by looping through them,
+We have all the information we need to perform the necessary operations.
 
 \subsection{Updating alpha and beta values}
 

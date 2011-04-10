@@ -12,4 +12,3 @@ do
 	set zrange [0:400]
 	splot \"${file}\" using 2:1:3 with pm3d " | gnuplot
 done
-
