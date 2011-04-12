@@ -3,7 +3,7 @@
 
 \section{Tools}
 
-The programming language chosen to implemented the system was c++.
+The programming language chosen to implemented the system was C++.
 The arguments leading to this choice was:
 
 \begin{itemize}
@@ -17,7 +17,7 @@ functionality.
 
 Other languages considered were Matlab and C.
 
-The tool chosen to visualize the resulting data was gnuplot and ffmpeg. Writing a
+The tools chosen to visualize the resulting data are gnuplot and mencoder. Writing a
 program using OpenGL was considered, but dismissed on the grounds of being too time consuming.
 
 \section{Program design}
@@ -41,7 +41,7 @@ equations described.
 
 See \cref{fig:classdiagram} for a class diagram of the C++ implementation.
 
-The Bash script is not discussed in further detail as it can be considered to be
+The Bash script is not discussed in further detail as it is considered to be
 very simple.
 
 See \cref{ap:source_code} for source code and scripts.
@@ -50,19 +50,18 @@ See \cref{ap:source_code} for source code and scripts.
 
 The main task of the physical system is to implement a matrix-vector multiplication
 procedure for the heat equation to be used in the conjugate gradient method, 
-a method for calculating the heating properties of the microwave and a method 
+a method for calculating the heating properties of the microwave, and a method 
 for calculating the velocity of mass transfer.
 
 \subsection{Partitioning of the problem}
 
-The problem is to perform the multiplication of a sparse, symmetrix, matrix with a
+The problem is to perform the multiplication of a sparse, symmetric matrix with a
 vector. To describe this procedure we have vectors $a$, $b$ and $t$ containing alpha,
 beta, and temperature values respectively. The alpha values represent the heat 
 conduction properties, the beta values describe the substance's ability to be heated
 by microwaves and the temperature values naturally contains the temperatures. We need
 these vectors because each point in the grid contains a particular substance in
 a particular phase.
-
 \begin{figure}[!h]
   \begin{center}
     \includegraphics[width=0.5\linewidth]{stencil.png}
@@ -70,7 +69,6 @@ a particular phase.
   \caption{Stencil}
   \label{fig:stencil}
 \end{figure}
-
 \begin{figure}[!h]
   \begin{center}
     \includegraphics[width=0.5\linewidth]{grid.png}
@@ -78,25 +76,21 @@ a particular phase.
   \caption{Grid}
   \label{fig:grid}
 \end{figure}
-
 We say that position $j$ of the vectors is given by:
 \begin{equation}
-j = z*n_x*n_y + y*n_x + x
+j = z\cdot n_x\cdot n_y + y\cdot n_x + x
 \end{equation}
-
 where $n_x$, $n_y$, $n_z$ is the number of points in the $x$, $y$ and $z$ directions
 respectively, and $x$, $y$ and $z$ is the points on the grid, See \cref{fig:grid} and
 \cref{fig:stencil}
 
-The center of the stencil, given by $j$ can be described by the equations:
+The center of the stencil, given by $j$, can be described by the equations:
 \begin{eqnarray}
   x & \cong & j\%n_x \\
   y & \cong & (j/n_x)\%n_y \\
   z & \cong & j/n_x/n_y 
 \end{eqnarray}
-
 where $/$ and $ \% $ is the integer division and modulo operators respectively.
-
 In addition to this, we define two more vectors and one more matrix:
 
 The offset matrix represents the neighbours in the stencil (see \cref{fig:stencil}):
@@ -124,7 +118,7 @@ D = \{ \frac{dt}{dz^2}, \frac{dt}{dy^2}, \frac{dt}{dx^2}, 0, \frac{dt}{dx^2}, \f
 The vector containing the offsets relative to the diagonal in the matrix we are multiplying
 with:
 \begin{equation}
-R = \{ -n_x*n_y, -n_x, -1, 0, 1, n_x, n_x*ny \}
+R = \{ -n_x\cdot n_y, -n_x, -1, 0, 1, n_x, n_x\cdot ny \}
 \end{equation}
 
 Note that the indexing of these vectors and matrices correspond, so by looping through them,
@@ -145,9 +139,9 @@ in the grid.
 \subsection{The matrix-vector multiplication procedure}
 
 The matrix-vector multiplication procedure takes advantage of the fact that our 
-matrix is sparse and that our problem is well defined. Thus, the algorithm used
+matrix is sparse and that our problem is well defined. Thus the algorithm used
 will complete in $m$ iterations where $m$ is the number of non-zero entries in 
-the matrix. $m$ is approximately equal to $7*n$.
+the matrix. $m$ is approximately equal to $7\cdot n$.
 
 \section{The conjugate gradient method as an iterative algorithm}
 
@@ -156,10 +150,10 @@ the steepest descent algorithm, however, it results in the exact solution within
 $n$ iterations. This is, however, assuming we have infinite floating point accuracy.
 
 The iterative conjugate gradient method lets us define an acceptable error, and stops
-once our solution has an error below what is acceptable.
+once our solution has an error within what is acceptable.
 
 In our implementation, we recompute the correct residual to avoid accumulation of
-floating point precision errors, however, this is not done at each iteration, and may
+floating point precision errors. But this is not done at each iteration, and may
 result in the need of more than $n$ iterations for the algorithm to complete.
 
 \section{The main procedure}
@@ -171,7 +165,7 @@ result in the need of more than $n$ iterations for the algorithm to complete.
   \item Initialize physical system
   \item Initialize internal temperature
   \item Calculate boundary conditions
-  \item Calculate micro-wave field
+  \item Calculate microwave field
   \item Initialize conjugate gradient solver
   \item loop
   \begin{itemize}
@@ -179,19 +173,19 @@ result in the need of more than $n$ iterations for the algorithm to complete.
     \item Calculate diagonal
     \item Set signs for right side multiplication (t=n)
     \item Multiply right side of heat equation
-    \item Add micro-wave effect to right side of equation
+    \item Add microwave effect to right side of equation
     \item Set signs for left side of equation (t=n+1)
     \item Solve using conjugate gradient method
+    \item Save data to file every N iterations
   \end{itemize}
 \item Deallocate memory
 \end{itemize}
 
 \section{Parallel speedup}
 
-The program was tested with $n_x=n_y=n_z=15$ giving $n=n_x*n_y*n_z=3375$ and $n_t=100000$.
-
-The sequantial version of the program ran in 342 seconds. 
-The parallel version ran in 194 seconds (2 cores) and 181 seconds (4 cores).
+The program was tested with $n_x=n_y=n_z=15$ giving $n=n_x\cdot n_y\cdot n_z=3375$ and $n_t=100000$.
+The sequential version of the program ran in 342 seconds. 
+The parallell version ran in 194 seconds (2 cores) and 181 seconds (4 cores).
 
 This gives us a speedup of:
 \begin{equation}
@@ -206,33 +200,34 @@ S_p(4) = \frac{T_s}{T_{p,4}} = \frac{342}{181} = 1.89
 
 The reason the speedup between 2 and 4 cores was so small may be due to a lack of
 parallelizable work. The code can only be parallelized on the spacial work ($n$) of the
-heat equation, and not across the time domain ($n_t$). Thus, most of the work involved in
+heat equation, and not across the time domain ($n_t$). Thus most of the work involved in
 this program is sequential.
 
-The conjugate gradient method is not parallelizable either (except for the linear algebra functions it
+The conjugate gradient method is not parallellizable either (except for the linear algebra functions it
 uses). Thus, the total of parallelizable work is just $n$, which for this example may be too small.
 
 \section{Unimplemented functionality}
 
-Due to timeconstraints and unforeseen complications, the flow equations was not implemented, 
+Due to time constraints and unforeseen complications, the transport equation was not implemented, 
 however a significant amount of effort was put into the implementation before it was 
-abandoned.
-
-The numerical schemes implemented in an attemt at solving the equations was:
+abandoned. The numerical schemes implemented in an attempt at solving the
+equation were:
 
 \begin{itemize}
-  \item Forward euler
+  \item Forward Euler
   \item Runge-Kutta
 \end{itemize} 
 
-Forward euler was dismissed as the difference in time had to be too small to be practical.
+Forward Euler was dismissed as the time steps had to be too small to be practical.
 
-The runge kutta method also gave us some strange and unforeseen results.
+The Runge Kutta method also gave us some strange and unforeseen results. ??
 
 After looking closely at the differential equations and their discrete equivelents, a number
-of practical issues surfaced. And the continued development of the equations was dismissed
+of practical issues surfaced that would require modifications to existing code
+as well, so the continued development of the transport equation was dismissed
 as the project was close to its end.
 
 Since the mass transfer equations was not properly implemented, the stop criteria was not 
 implemented either, as it turned out to be more practical to just run the simulation for as 
-many seconds as needed, and inspect the resulting plots.
+many seconds as needed, say 120, and inspect the resulting plots to find an
+optimal cooking time of about 40 seconds.

@@ -2,12 +2,11 @@
 
 \section{Numerical schemes}
 
-In this project we have use the Cranch-Nicholson method to discretize the heat
-equation \cref{eq:temp} in 3D over a finite grid. This method was chosen because
+In this project the Cranch-Nicholson method was used to discretize the heat
+equation \cref{eq:heat1} in 3D over a finite grid. This method was chosen because
 it is unconditionally stable, and it converges in second order in time and space, as is shown below.
 
-
-The Crank-Nicholson method is based on the equation \cref{integral}, where the trapezoidal rule \cref{trapezoidalrule} is used to approximate the integral on the right hand side. We insert the right hand side of the heat equation in the resulting expression \cref{res}, and use Taylor-expansion to obtain the discretizaion. We use the notation \cref{notations} in the rest of the document.
+The Crank-Nicholson method is based on equation \cref{integral}, where the trapezoidal rule \cref{trapezoidalrule} is used to approximate the integral on the right hand side. We insert the right hand side of the heat equation in the resulting expression \cref{res}, and use Taylor-expansion to obtain the discretizaion. We use the notation \cref{notations} in the rest of the document.
 \begin{equation}
 \partial_{x}^{k}u=\frac{\partial^{k}u}{\partial^{}x^{k}},\quad \quad \partial_{t}^{k}u=\frac{\partial^{k}u}{\partial^{}t^{k}} \quad \quad u_{m}^{n+\alpha k } = u(x_{m},t_{n}+\alpha k)
 \label{notations}
@@ -28,7 +27,7 @@ We thus obtain
 u_m^ {n+1} &=& u_m^ n + \frac{1}{2} k(\partial_t u_m^n + \partial_t u_m^{n+1}) - \frac{1}{12} k^3 \partial_t ^3 u_m^{n+\frac{1}{2}} \\
 &\stackrel{\text{\tiny heat eq.}}{=}& u_m^ n + \frac{1}{2} k(\partial_x^2 u_m^n + \partial_y^2 u_m^n + \partial_z^2 u_m^n + \partial_x^2 u_m^{n+1} + \partial_y^2 u_m^{n+1} + \partial_z^2 u_m^{n+1}) - \frac{1}{12} k^3 \partial_t ^3    u_m^{n+\frac{1}{2}} \nonumber
 \end{eqnarray}
-Using central differences \cref{centraldiff}, and denoting the step sizes in $x, y, z$ direction by $h, f, g$ respectively, gives
+Using central differences \cref{centraldiff}, and denoting the step sizes in $x, y, z$ direction by $h, f, g$ respectively gives
 \begin{eqnarray*}
 u_m^{n+1} &=& u_m^ n + \frac{1}{2} k(\frac{1}{h^2}\delta_x^2 u_m^n + \frac{1}{f^2}\delta_y^2 u_m^n + \frac{1}{g^2}\delta_z^2 u_m^n + \frac{1}{h^2}\delta_x^2 u_m^{n+1} + \frac{1}{f^2}\delta_y^2 u_m^{n+1} + \frac{1}{g^2}\delta_z^2 u_m^{n+1}) \\
   &&- \frac{1}{2} k (\frac{1}{12}h^2\partial_x^4 u_m^n + \frac{1}{12}g^2\partial_y^4 u_m^n + \frac{1}{12}f^2\partial_z^4 u_m^n + \frac{1}{12}h^2\partial_x^4 u_m^{n+1} + \frac{1}{12}g^2\partial_y^4 u_m^{n+1} + \frac{1}{12}f^2\partial_z^4 u_m^{n+1} + ...) \\
@@ -61,14 +60,15 @@ The von Neumann analysis is based on Fourier analysis. The method consist of sub
 \begin{equation*}
 	U_m^n=\xi^n e^{i \beta x_m} \quad \quad  i=\sqrt{-1}
 \end{equation*}
-in the difference equation and solve for $\xi$.
+in the difference equation and solving for $\xi$.
 For the method to be stable it has to meet the condition
 \begin{equation}
 	\mid{\xi}\mid \leq 1
 	\label{stabcond}
 \end{equation}
 
-Here we only perform the Neumann analysis for the one-dimensional heat equation problem. We thus obtain the expression
+Here we only perform the von Neumann analysis for the one-dimensional heat
+equation, giving the expression
 \begin{equation*}
 \xi^{n+1} e^{i\beta x_{j}} = \xi^{n} e^{i\beta x_j}\left(1-2D\right) + \xi^{n+1}D\left(e^{i\beta x_{j+1}} - 2e^{i\beta  x} + e^{i\beta x_{j-1}}\right) + \xi^{nD}\left(e^{i\beta x_{j+1}} + e^{i\beta x_{j-1}}\right)
 \end{equation*}
@@ -78,10 +78,6 @@ where
 D = \frac{1}{2}\frac{\alpha\Delta t}{(\Delta x)^2}
 \label{eq:crank-D}
 \end{equation*}
-\marginpar{A typical
-\textbf{C}ourant-\textbf{F}riedrichs-\textbf{L}ewy condition is an inequality of the form
-$\frac{\Delta t}{\Delta x} < C$, with C a constant. }
-%Marginpar makes a note in the margin, e.g. for explaining things.
 
 Dividing  by $\xi^ne^{i\beta x_j}$, and using $x_{j+1} = x_j + h$ one obtains    %\href{eq:crank-D}
 \begin{eqnarray*}
@@ -95,11 +91,15 @@ As the maximum value of $\sin^2{x}$ is 1, the methods meets the stability condit
 |\xi | = \left|\frac{1-4D}{1+4D}\right|
 \end{equation}
 
-Since D always are positiv, we get that the Crank-Nicolson
+\marginpar{A typical
+\textbf{C}ourant-\textbf{F}riedrichs-\textbf{L}ewy condition is an inequality of the form
+$\frac{\Delta t}{\Delta x} < C$, with C a constant. }
+%Marginpar makes a note in the margin, e.g. for explaining things.
+Since D is always positive, we get that the Crank-Nicolson
 scheme for the heat equation is \emph{unconditionally stable}. In practice it may happen that the method oscillates if the time steps and space steps do not fulfill a CFL-condition.
 \\
 \\
-From Lax' equivalent theorem, which state that a consistent difference scheme will converges if and only if it is stable, the Crank-Nicholson scheme will converge.
+From Lax' equivalent theorem, which states that a consistent difference scheme will converge if and only if it is stable, the Crank-Nicholson scheme will converge.
 
 
 \section{Truncation error in the Crank-Nicolson scheme}
@@ -131,6 +131,6 @@ where $r = k/h^2$, $p = k/f^2$, $q = k/g^2$, and $\tau_m^n$ is the truncation er
 where we have used $\frac{1}{2}(\partial_x^4 u_m^n + \partial_x^4 u_m^{n+}) = \partial_x^4 u_m^{n+\frac{1}{2}} + O(k^2)$. Hence, the truncation error is 
 \begin{eqnarray*}
 \frac{\tau_m^ n}{k} &=& -\frac{1}{12} k^2 \partial_t^2 u_m^{n+\frac{1}{2}} - \frac{1}{12} h^2 \partial_x^4 u_m^{n+\frac{1}{2}} - \frac{1}{12} g^2 \partial_y^4 u_m^{n+\frac{1}{2}} - \frac{1}{12} f^2 \partial_z^4 u_m^{n+\frac{1}{2}}\\
-					&=& O(k^2 + h^2 + g^2 + f^2)
+&=& O(k^2 + h^2 + g^2 + f^2) \rm{.}
 \end{eqnarray*}
 

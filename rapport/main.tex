@@ -1,4 +1,4 @@
-\documentclass[11pt,a4paper]{book}
+\documentclass[a4paper]{book}
 \usepackage{../futhark} %I denne filen har vi alt av \usepackage osv.
 \usepackage{../rapport}
 
@@ -12,9 +12,22 @@
 	\pagestyle{plain}	%Stil på sammendrag og forord.
 	\pagenumbering{roman} 	%Sidetall på formen i, ii, osv. på sammendrag, forord og innholdsfortegnelse.
 
-	\sammendrag{Text in abstract}
+	\sammendrag{Numerical simulations and experiments with bacon preparation
+	in a microwave oven were performed. The numerical simulations were
+	performed using the Crank-Nicolson numerical scheme on various heat
+	equations for the different media in bacon. The experiments were
+	performed with regular and with thick bacon in an ordinary household
+	microwave oven, for single slices, and preparation times in the range
+	30-70 seconds. The results of the experiments are in good agreement both
+	with expected behaviour and with the results of the numerical work.}
 	%\coffee{4}
-	\forord{Text in foreword}
+	\forord{This work was conducted in connection with the subject TMA4850
+	Experts in Teamwork - Applied Mathematics at NTNU, Trondheim. The work
+	was performed over the course of one semester, with primarily one
+	working day per week. The authors whish to thank Lise Kvalø and the
+	people at the Instrumentation Workshop at the Institute of Physics 
+	for their generosity in lending out relevant lab equipment, and the 
+	people working at ??? for lending out their microwave oven.}
 	%\coffee{1}
 	\clearpage		%Ny side
 
@@ -31,7 +44,7 @@
 	\include{numerics}	%Kap. 3
 	\include{implementation} %Kap. 4
 	\include{experiments} %Kap. 5
-	\include{resultats_numerics} %Kap. 6
+       %\include{resultats_numerics} %Kap. 6
 	\include{conclusion}	%Kap. 7
 
 %Appendix:
