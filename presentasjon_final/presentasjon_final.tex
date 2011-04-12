@@ -5,7 +5,13 @@
 \usepackage{wasysym}
 \usepackage{color}
 \usepackage{allrunes}
+\usepackage{listings}
 \providecommand*{\wb}{{\textarl{\withlines futhark}}}
+\def\Tiny{\fontsize{4pt}{4pt}\selectfont}
+
+\lstset{
+basicstyle=\Tiny
+}
 
 %Diverse matematiske lurerier
 % \DeclareMathOperator{\Sample}{Sample}
@@ -69,7 +75,7 @@
   \begin{center} 
   \begin{itemize} 
   \item[$\bullet$] Hvordan kan steking av bacon i en mikrobølgeovn modelleres matematisk? 
-  \item[$\bullet$] Hvordan vil fett og vanninnhold påvirke stekingen, og hvilken steketid er optimal? 
+  \item[$\bullet$] Hvordan vil dimensjonen på baconskiva påvirke steketida, og hvilken steketid er optimal? 
   \end{itemize} 
   \end{center} 
 \end{frame}
@@ -126,6 +132,12 @@
 \end{frame}
 
 \begin{frame}
+  \frametitle{Mikrobølgefeltet $J^{MW}$}
+  \hspace{20pt}
+      \includegraphics[width=0.8\linewidth]{microwave.pdf}
+\end{frame}
+
+\begin{frame}
   \frametitle{Numerisk løsningsmodell}
   \begin{itemize}
     \item[$\bullet$] Vi bruker Finite Difference Method (FDM) til å løse differensial-
@@ -158,23 +170,49 @@ der
   massetransportligninger gjør det mulig å finne kritisk massetap (målt gjennom forsøk).
 
 \item[$\bullet$] \textbf{Temperatur:} Maillards reaksjoner sier at bruning starter ved
-  154$^o$C. Kritisk temperatur.
+  154$^{\circ}$C. Kritisk temperatur.
   \end{itemize}
   \end{center}
 \end{frame}
 
 \begin{frame}
-  \frametitle{Status eksperimenter}
-    \begin{center}
-      \includegraphics[width=0.7\linewidth]{eksperiment.pdf}
-    \end{center}
+  \frametitle{Implementasjon i C++}
+	\lstinputlisting[language=C++]{meh}
+\end{frame}
+
+\begin{frame}
+  \frametitle{Stencil}
+    \hspace{40pt}
+      \includegraphics[width=0.7\linewidth]{stencil.png}
+\end{frame}
+
+\begin{frame}
+  \frametitle{Eksperimenter}
+   \begin{itemize} 
+  	\item[$\bullet$] Vanlig bacon
+  \end{itemize}
+  \hspace{40pt}
+      \includegraphics[width=0.6\linewidth]{regular_bacon.pdf}
+    
+\end{frame}
+
+\begin{frame}
+  \frametitle{Eksperimenter}
+  \begin{itemize} 
+  	\item[$\bullet$] Tykt bacon
+  \end{itemize}
+     \hspace{40pt}
+      \includegraphics[width=0.6\linewidth]{thick_bacon.pdf}
 \end{frame}
 
 \begin{frame}
   \frametitle{Konklusjon}
-  \begin{itemize}
-    \item 
-  \end{itemize}
+  \begin{itemize} 
+  	\item[$\bullet$] Modellering av bacon med varmelikningen gir eit realistisk resultat.
+  	\item[$\bullet$] Varme- og massetransport er utfordrende å implementere.
+  	\item[$\bullet$] Dimensjonen på baconet har mye å si.	
+  	\item[$\bullet$] Optimal steketid ligg på rundt 40-60 s. med 750 Watt, avhengig av ønsket grad av sprøhet.
+  	\end{itemize}
 \end{frame}
 
 \end{document}

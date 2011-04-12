@@ -2,7 +2,7 @@ set term postscript eps enhanced color
 set output "microwave.eps"
 set xrange [-16:16]
 set yrange [-16:16]
-set zrange [0:10]
+set zrange [-2:10]
 unset surface
 set samples 100
 set isosamples 100
