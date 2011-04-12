@@ -1,4 +1,4 @@
-\chapter{Theory}
+\chapter{The Physics}
 \section{The physical system}
 The physical system to be modeled is a thin, rectangular strip of bacon which is
 subjected to approx. 750 watts of microwave radiation at the frequency of 2.4
@@ -7,7 +7,7 @@ GHz. To be modeled is the heat in the strip, phase transitions and transport.
 \section{Our approach}
 \begin{figure}[!h]
   \begin{center}
-    \includegraphics[width=0.4\linewidth]{physicists.png}
+    \includegraphics[width=0.3\linewidth]{physicists.png}
   \end{center}
   \caption{Our initial approach to the problem. \url{xkcd.com/793}}
   \label{fig:xkcd_physics}
@@ -18,17 +18,19 @@ heat equation for the three media meat, solid fat, and liquid fat, thus giving
 the temperature at step $n$. Then at step $n+1$, the temperature is regarded as
 known, and we solve the transport equation for liquid fat out of the bacon. Then
 we know the distribution of liquid fat at step $n+2$, where we solve the heat
-equations again, and we repeat ad nauseam.
+equations again, et cetera.
 
 \section{The heat equations}
 The differential equations governing the heat transport are all variations of the heat
-equation, with various source terms, \cref{eq:temp}:
+equation, with various source terms, \crefrange{eq:heat1}{eq:heat3}:
 \begin{align}
-  \label{eq:temp}
-  (\rho c_p)_m \pd{T}{t} - \alpha_m \grad{^2 T} &= J^{MW} \quad \rm{m,} \\
-  \eta_s (\rho c_p)_s \pd{T}{t} - \eta_s\alpha_s \grad{^2 T} &= J^{MW} - J^{Melt}  \quad \rm{s,} \\
+  \label{eq:heat1}
+  (\rho c_p)_m \pd{T}{t} - \alpha_m \grad{^2 T} &= J^{MW} \quad \rm{,} \\
+  \label{eq:heat2}
+  \eta_s (\rho c_p)_s \pd{T}{t} - \eta_s\alpha_s \grad{^2 T} &= J^{MW} - J^{Melt}  \quad \rm{,} \\
+  \label{eq:heat3}
   \eta_l (\rho c_p)_l \pd{T}{t} - \eta_s\alpha_l \grad{^2 T} - \eta_l(\rho c_p)_l(\v{v}\cdot
-  \grad{})T &= J^{MW}  \quad \rm{l.}
+  \grad{})T &= J^{MW}  \quad \rm{.}
 \end{align}
 Here the subscript $m$ denotes meat, $s$ denotes solid fat, and $l$ denotes
 liquid fat. $J^{MW}$ is the source term representing the microwave oven.
@@ -46,23 +48,22 @@ latent heat absorbed in the solid-liquid phase transition. This can be written a
 where the fat is melting between the temperatures $T_1$ and $T_2$. For fat these
 are typically around 30-50$^\circ$C. For $T \notin (T1,T2)$ this term is zero,
 and it is readily seen that this is equivalent to a modification of the constant
-$c_{p,l}$ in \cref{eq:temp} when $T \in (T1,T2)$, thus it is not a serious
+$c_{p,l}$ in \cref{eq:heat2} when $T \in (T1,T2)$, thus it is not a serious
 complication.
 
 In the last of the heat equations, there also appears what is called a
 convective derivative, on the form $(\v{v}\cdot \grad{})T$. This is a somewhat
 more complicated term, and is essentially a modification due to transport of
-liquid fat implying an implicit transport of heat. But, we're in luck, boys! 
+liquid fat implying a transport of heat. But we're in luck! 
 
 As the bacon strip is essentially two-dimensional, transport will almost
-exclusively happen in the vertical (small) direction. In our approach, the
-source terms don't vary in the vertical direction, so this term will be a transport
-of heat in the vertical direction. This will not affect the heat transport in
+exclusively happen in the vertical (small) direction, and also the
+source terms don't vary in the vertical direction. As this term will be a transport
+of heat in the vertical direction, it will not affect the heat transport in
 the horisontal directions.  As we're not really
 interested in the vertical temperature distribution, this means that we can
 happily neglect this term, in the spirit of Richard Feynmann: ``it doesn't give
 any new physics''.
-
 
 \section{The transport equations}
 The transport equation used in our approach is the one-dimensional Navier Stokes
@@ -78,11 +79,11 @@ discussed in further detail below. An interesting term here is $\pd{p}{x}$, wher
 $p$ is the pressure in the fluid. Following the work by \cite{brent}, we replace
 this with a term inspired by \cref{carman-kozeny}
 \begin{equation}
-  \pd{p}{x} = -C\frac{ (1-\eta)^2}{\eta^3} v_a
+  \pd{p}{x} = -C\frac{ (1-\epsilon)^2}{\epsilon^3} v_a
   \label{carman-kozeny}
 \end{equation}
-where $\eta$ is the melted fraction in the current volume element, and
-$v_a$ is an apparent velocity. As the volume element melts, $\eta$ goes from
+where $\epsilon = \epsilon(z)$ is the melted fraction in the current volume element, and
+$v_a$ is an apparent velocity. As the volume element melts, $\epsilon$ goes from
 zero to one, and $\pd{p}{x}$ goes from a very large value to zero. This is known 
 as the Carman-Kozeny equation for flow in a pouros medium, and is applicable to 
 materials where melting does not happen at one specific temperature, but instead 
@@ -96,14 +97,14 @@ orthogonal to the dendritic structure, will influence the constant C.
 
 Using the procedure outlined in \cite{poirier}, the constant $C$ was estimated to be
 $8 \times 10^8$, where flow is assumed to be parallell to the dendritic
-structure, and the primary dendritic arm distance in bacon was estimated to be
-2.5 mm. The assumption of parallell flow dictates the value of the Kozeny
+structure, and the primary dendritic arm distance in bacon fat was measured to be
+about 2.5 mm. The assumption of parallell flow dictates the value of the Kozeny
 constant yielding the final value for $C$.
 
 Influenced by these considerations, the term $\pd{p}{x}$ in
 \cref{eq:navier-stokes} was replaced by \cref{eq:pressure}
 \begin{equation}
-  \pd{p}{x} =  -C\frac{ (1-\eta)^2}{(\eta+d)^3} v
+  \pd{p}{x} =  -C\frac{ (1-\epsilon)^2}{(\epsilon+d)^3} v
   \label{eq:pressure}
 \end{equation}
 where $d$ is a tiny constant introduced simply to avoid dividing by zero in the
@@ -113,7 +114,10 @@ Introducing this term has two effects. First of all, for a solid element,
 $\pd{p}{x}$ becomes very large, and forces the velocity to be zero. When the
 element starts melting, the flow will mimic the Carman-Kozeny flow, which is
 realistic for a porous medium, and finally in the molten stage, the ordinary
-Navier Stokes equations are recovered.
+pressureless Navier Stokes equations are recovered.
 
+Alas, the numerical implementation of the transport equation was not completed
+within the timeframe of the project. The theory is still presented here for
+completeness.
 
 
