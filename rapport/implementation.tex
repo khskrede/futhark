@@ -220,7 +220,10 @@ equation were:
 
 Forward Euler was dismissed as the time steps had to be too small to be practical.
 
-The Runge Kutta method also gave us some strange and unforeseen results. ??
+The Runge Kutta method also gave us some strange and unforeseen results, as the term in 
+the equation that was supposed to keep the velocity field equal to $0$ until the substances
+started melting, caused the velocity field to blow up to infinity. Other issues was that
+the nodes close to the boundary, seems to never reach melting point temperatures.
 
 After looking closely at the differential equations and their discrete equivelents, a number
 of practical issues surfaced that would require modifications to existing code
