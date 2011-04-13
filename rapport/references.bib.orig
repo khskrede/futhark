@@ -91,6 +91,7 @@ keywords = "Line heat source"
 	year="1988",
 	author="A. D. Brent and V. R. Voller and K. J. Reid"
 }
+<<<<<<< HEAD
 
 @article{deepfrying,
 title = "Mass, thermal and quality aspects of deep-fat frying of pork meat",
@@ -201,6 +202,7 @@ doi = {10.1111/j.1365-2621.1989.tb08556.x},
 pages = {15--17},
 year = {1989},
 }
+=======
 @inbook{aarseth,
 	author="Jan Bjarte Aarseth",
 	title="Numeriske Beregningsmetoder",
@@ -210,4 +212,5 @@ year = {1989},
 	school="Norwegian University of Science and Technology"
 }
 	
-
+	
+>>>>>>> 300b4d8c5bfe2283c468575d1a6e3bde35e1b0c7

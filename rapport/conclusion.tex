@@ -1,13 +1,45 @@
 \chapter{Conclusion}
 \section{Discussion of the results}
+Observing the animation produced by the code in \cref{avs:implementation}, and
+viewing individual time slices, it is inferred that the optimal cooking time of
+a bacon slice 15 cm x 5 cm is about 50 seconds for crisp bacon. This is in good
+agreement with the experiments, which found that after 50 seconds no more fat
+can be lost, indicating crisp bacon. In order to produce a correspondance
+between a numerical prediction of cooking time and experimental cooking time,
+one would first need to quantify crispness in terms of temperature, requiring
+far more data samples than were available here. The experimental team laments
+not being able to perform more experiments, as the sample size presented here is
+too small to give accurate statistics. \\
+
+The numerical work performed was satisfactory in terms of modelling the heat
+equations, including a realistic microwave source term and phase transitions.
+Integrating transport of liquid fat into this model, enabling an estimate of
+mass lost as a function of cooking time, in turn giving a second stop condition.
+This would give a consistency check on the temperature stop criterion. With
+regards to code integration, once the transport equations are implemented, it is
+a simple matter to introduce feedbacks from transport into the heat equations,
+something which was omitted in this work. \\
+
+The experiments performed suggest that 
+the fat transport is complicated, and that gravity is not dominating the flow -
+a lot of liquid fat accumulated in the upper paper. The studies of the
+Carman-Kozeny equation in connection with this work suggests that this would
+constitute a good model for transport in mushy bacon regions. The transport in
+fully liquid regions was not studied in detail, and is most likely nontrivial.
+Simple visual inspections of the finished bacon from experiments reveals that
+part of the fat in the bacon slices somehow solidifies, a process which is not
+understood in the present framework.
 
 \section{Conclusion}
 The performed numerical simulations and experiments with bacon preparation
-in a microwave oven gave satisfactory results so far as they were implemented. 
+in a microwave oven gave satisfactory results so far as they were implemented.
 The numerical simulations of the heat equations gave reasonable results in agreement
 with experiments. An implementation of the transport equation would have been
 more satisfactory, and is suggested as a possibility for future work in this
-direction. The experiments performed suggest that the fat transport is
-complicated, and that gravity is not dominating the flow. 
-
+direction. As microwave preparation of bacon is shown elsewhere to be the
+healthiest option, expanding on the work here with more simulations and
+experiments, and introducing a more complicated model of bacon fat at high
+temperatures, one should be able to attain a complete understanding of the
+preparation process and thus produce guidelines for the optimal preparation of
+bacon.
 
