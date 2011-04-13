@@ -58,9 +58,10 @@ Furthermore, there is the term $J^{Melt}$ which represents heat loss due to
 latent heat absorbed in the solid-liquid phase transition. This can be written as 
 \[ \frac{L \rho}{T_2-T_1} \pd{T}{t} \rm{,} \quad T \in (T_1,T_2) \rm{,}\]
 with $L$ the latent heat of the fat, and where the fat is melting between the temperatures 
-$T_1$ and $T_2$. For fat these are typically around 30-50$^\circ$C. For $T \notin (T1,T2)$ 
+$T_1$ and $T_2$. For fat these are typically around 30-50$^\circ$C. For $T
+\notin (T_1,T_2)$ 
 this term is zero, and it is readily seen that this is equivalent to a modification of the constant
-$c_{p,l}$ in \cref{eq:heat2} when $T \in (T1,T2)$, thus it is not a serious
+$c_{p,l}$ in \cref{eq:heat2} when $T \in (T_1,T_2)$, thus it is not a serious
 complication.\\
 
 In the last of the heat equations, there also appears what is called a
@@ -136,5 +137,16 @@ Navier Stokes equation, i.e. $\pd{p}{x} = 0 \forall x,t$, and add a source term
 proportional to $\pd{\epsilon}{t}$. To understand this, it helps to think of the
 Navier Stokes equation as a diffusion equation in momentum, with an extra
 convective derivative. With an initial condition of zero flow everywhere, and
-absorbing boundary conditions 
+absorbing boundary conditions, $\pd{\epsilon}{t}$ will differ from zero when
+melting is happening, giving a source of momentum. This momentum is then dissipated due to
+the viscosity. From experiments the fat transport seems to be isotropic, i.e.
+gravity is not dominating, so the appropriate form of the whole term is
+\begin{equation}
+  \xi v_a \sqrt{2\pi \mu L_z} \pd{\epsilon}{t}
+  \label{eq:diffusion}
+\end{equation}
+where $\xi$ is a random variable being either +1 or -1 with equal probability,
+$v_a$ is the apparent velocity measured for liquid fat in bacon, and the scaling
+factor $\sqrt{2\pi\mu L_z}$ gives the correct apparent velocity assuming
+diffusion of momentum.
 
