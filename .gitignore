@@ -11,5 +11,8 @@
 *.bbl
 *.dvi
 *.pdf
+*.nav
+*.snm
 *.sty
 *.swp
+
