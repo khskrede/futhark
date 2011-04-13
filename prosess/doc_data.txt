@@ -1,0 +1,13 @@
+InfoKey: Creator
+InfoValue: TeX
+InfoKey: Producer
+InfoValue: pdfTeX-1.40.11
+InfoKey: PTEX.Fullbanner
+InfoValue: This is pdfTeX, Version 3.1415926-1.40.11-2.2 (TeX Live 2010/Arch Linux) kpathsea version 6.0.0
+InfoKey: ModDate
+InfoValue: D:20110413115110+02'00'
+InfoKey: CreationDate
+InfoValue: D:20110413115110+02'00'
+PdfID0: d933d5daffa83d5f1cdad66205c14ea
+PdfID1: d933d5daffa83d5f1cdad66205c14ea
+NumberOfPages: 2
