@@ -177,7 +177,7 @@ phys_sys::RungeKuttaFlow( int x, int y, int z, float f  ) {
    k /= 3;
 
    return - ( my1 * my1 * flow1 - 2 * my2 * my2 * flow2 + my3 * my3 * flow3 ) * dt / dz / dz
-          - 1 / 2 / dz * (flow3*flow3 - flow1*flow1) + k + g ;
+          - 1 / 2 / dz * (flow3*flow3 - flow1*flow1) + g ;
 }
 
 
@@ -197,7 +197,9 @@ phys_sys::CalculateFlow( ) {
       for ( int y = 0; y<ny; y++ ) {
 	    for ( int z = 0; z < nz; z++ ) {
                int j = z*nx*ny + y*nx + x;
-               temp_flow[j] = flow[j] + RungeKuttaFlow(x,y,z,0); //(f1[j] + f2[j]) / 2 ;
+               f1[j] = RungeKuttaFlow(x,y,z,0);
+               f2[j] = RungeKuttaFlow(x,y,z,0);
+               temp_flow[j] = flow[j] + (f1[j] + f2[j]) / 2 ;
             }
          }
    }
