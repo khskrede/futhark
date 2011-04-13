@@ -1,5 +1,7 @@
 *.dat.png
 *.dat
+*.flo
+*.flo.png
 *.o
 *.aux
 *.log
