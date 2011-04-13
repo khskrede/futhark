@@ -96,9 +96,23 @@ phys_consts::CalculateValues( ) {
 
 }
 
-const float phys_consts::left_signs[7] = { -1, -1, -1, 1, -1, -1, -1 };
-const float phys_consts::right_signs[7] = { 1, 1, 1, -1, 1, 1, 1 };
+const float 
+phys_consts::left_signs[7] = { -1, -1, -1, 1, -1, -1, -1 };
 
-float phys_consts::alpha_values[phys_consts::substances][phys_consts::phases] = {{0,0,0,0,0},{0,0,0,0,0},{0,0,0,0,0}};
-float phys_consts::beta_values[phys_consts::substances][phys_consts::phases] = {{0,0,0,0,0},{0,0,0,0,0},{0,0,0,0,0}};
-float phys_consts::substance_temps[phys_consts::substances][phys_consts::phases] = {{0,0,0,0,0},{0,0,0,0,0},{0,0,0,0,0}};
+const float 
+phys_consts::right_signs[7] = { 1, 1, 1, -1, 1, 1, 1 };
+
+float 
+phys_consts::alpha_values[phys_consts::substances][phys_consts::phases] = {{0,0,0,0,0},
+                                                                           {0,0,0,0,0},
+                                                                           {0,0,0,0,0}};
+
+float 
+phys_consts::beta_values[phys_consts::substances][phys_consts::phases] = {{0,0,0,0,0},
+                                                                          {0,0,0,0,0},
+                                                                          {0,0,0,0,0}};
+
+float 
+phys_consts::substance_temps[phys_consts::substances][phys_consts::phases] = {{0,0,0,0,0},
+                                                                              {0,0,0,0,0},
+                                                                              {0,0,0,0,0}};

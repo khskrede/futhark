@@ -1,6 +1,7 @@
 
 #include <iostream>
 #include <fstream>
+#include <sstream>
 #include <string>
 #include <stdio.h>
 #include <stdlib.h>
@@ -51,13 +52,13 @@ main(int argc, char *argv[]) {
    float Lt = 120.0;
 
    // Snapshots per second (25 = realtime video)
-   float snapshots_ps = 1;
+   float snapshots_ps = 25;
 
    // Set size of mesh
-   int nx = 10;
-   int ny = 10;
-   int nz = 10;
-   int nt = 12000000;
+   int nx = 15;
+   int ny = 15;
+   int nz = 15;
+   int nt = 1200000;
 
    // -------------------------------------------
    // Calculate delta values
@@ -88,13 +89,19 @@ main(int argc, char *argv[]) {
    float s = greatest_alpha * ( dt/dx/dx + dt/dy/dy + dt/dz/dz );
 
    if ( s > cfl ) {
-      std::cout << "Error: Courant-Friedrichs-Lewy (CFL) condition broken\n"
-                << "The calculation was stopped because" 
+      std::cout << "\nError: Courant-Friedrichs-Lewy (CFL) condition broken\n"
+                << "The calculation was stopped because " 
                 << "inaccurate and oscillating solutions may occur. \n\n"
                 << "a * ( dt/dx^2 + dt/dy^2 + dt/dz^2 ) " << s
-                << " should be less than: " << cfl << "\n";
+                << " should be less than: " << cfl << "\n"
+                << "Do you want to continue? [y/n]\n";
+      
+      std::string answer;
+      std::cin >> answer;
 
-      return 1;
+      if ( answer.c_str()[0] != 'y' ) {
+         return 1;
+      }
    }
 
    // -------------------------------------------
@@ -187,10 +194,21 @@ DumpHeat(float *t, int nx, int ny, int nz, float dx, float dy, float dz, int i) 
 
    std::cout << "snapshot at iteration " << i << "\n";
 
-   char str[10];
-   sprintf (str, "%d", i);
+   stringstream ss;
+   ss << i;
+   string str;
+   ss >> str;
+
+   //char str[12];
+
+   int str_length = str.length();
+   for (int j = 0; j < 7 - str_length; j++)
+      str = "0" + str;
+
+   //sprintf (str, "%d", i);
    std::ofstream outfile;
-   outfile.open( (std::string("data/") + std::string(str) + std::string(".dat")).c_str() , std::ios::out);
+   outfile.open( (string("data/") + string(str) + string(".dat")).c_str(), 
+                 std::ios::out);
 
    int z=nz/2;
       for (int y = 0; y<ny; y++ ) {
