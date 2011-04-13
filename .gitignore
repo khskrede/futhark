@@ -1,5 +1,7 @@
 *.dat.png
 *.dat
+*.flo
+*.flo.png
 *.o
 *.aux
 *.log
@@ -11,3 +13,6 @@
 *.pdf
 *.nav
 *.snm
+*.sty
+*.swp
+
