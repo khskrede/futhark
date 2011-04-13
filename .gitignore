@@ -9,4 +9,5 @@
 *.bbl
 *.dvi
 *.pdf
-*.sty
+*.nav
+*.snm
