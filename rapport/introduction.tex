@@ -6,7 +6,7 @@
 The problem considered in this project is the preparation of bacon in a microwave oven. Bacon is
 defined as cured meat from side and back cuts of a pig. A microwave oven in this context is a
 household appliance typically delivering 750 W of microwave effect at a frequency of 2.1 GHz
-to a Faraday cage of volume 40 liters. 
+to a Faraday cage of volume 40 liters.\\ 
 
 Previous work done in the field of pork preparation
 \cite{pork-cooking-diffusion}, \cite{pork-chops} is mainly based on
@@ -21,7 +21,7 @@ performed in \cite{bacon-safety-micro}.
 The practice of numerically simulating food preparation has increased in recent
 years \cite{meat-cooking-numerical}, \cite{chicken-numerics}, and it is now
 possible to take advantage of recent advances in computing power to perform these 
-simulations on commodity hardware.
+simulations on commodity hardware.\\
 
 The personal motivation for the problem formulation was clear. As soon as modeling of food preparation was
 brought on the table, bacon seemed a prime choice. A microwave oven may seem an odd choice for
@@ -33,11 +33,10 @@ suitable for feedback during the cooking process, as the bacon is obscured from 
 traditional bacon chef, used to a touch-and-go approach, this is an obstacle to implementation, as
 overcooking bacon in a microwave oven easily yields inedible results. The
 purpose of this work, then, is to establish reliable numerical simulations that can serve as a basis
-for estimating cooking time for an arbitrary slice of bacon.
+for estimating cooking time for an arbitrary slice of bacon.\\
 
 As the project considers the optimal preparation of bacon in a microwave oven, two natural questions
 were formulated:
-
 \begin{itemize}
   \item How is preparation of bacon in a microwave oven modelled numerically?
   \item How does the size of the bacon affect the preparation, and what preparation time is optimal?
@@ -49,19 +48,19 @@ numerical model of bacon in a microwave oven; a simple glance at the relevant
 equations tells the experienced numerics person that no analytical solution
 exists. With a numerical solution of the heat and mass transport equations, the
 optimal preparation time can be predicted. But this presumes an understanding of
-what makes good bacon. So what does?
+what makes good bacon. So what does? \\
 
 Work done by \cite{maillard} and \cite{intarwebz} suggests that two factors are important in
 determining good bacon. The first is a high enough temperature that the Maillard
 reaction can take place, which happens around 140 \textdegree C. The second is that
 a significant proportion of the fat has melted and has been transported out of
 the bacon. Both of these factors are naturally affected by the composition of
-the bacon; especially water and fat content will play a major role.
+the bacon; especially water and fat content will play a major role. \\
 
 Having identified these two factors as the important criteria for an optimal
 solution, experimental work is needed to determine the correlation between
 temperature and fat loss, and how finished bacon is. This is, of course, also a
-subjective question - different people prefer different grades of crispness.
+subjective question - different people prefer different grades of crispness.\\
 
 Another experimental question is how much of the microwave effect that is
 absorbed by the bacon. The second law of thermodynamics dictates that some of
@@ -73,6 +72,7 @@ with standardized calibration procedures published by the IEC's SC 59K, so a 750
 microwave oven will actually output 750 W of cooking energy into the cooking
 chamber, while typically drawing 1.1 kW of electrical power from the mains
 socket. This means using the rated power will be good enough for our purposes.
+\\
 
 Finally, experiments are needed to verify the accuracy of the numerical results.
 As heat and mass transport is a Complicated Problem, this is not guaranteed a

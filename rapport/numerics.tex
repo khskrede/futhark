@@ -2,7 +2,7 @@
 
 \section{Numerical schemes for the heat equation}
 
-The heat equation are on the form
+The heat equation is on the form
 \begin{equation}
 \frac{\partial u}{\partial t}=\mu \grad{^2 u} + K,
 \label{heatequation}
@@ -11,7 +11,8 @@ Here K is a constant, and we thus neglect it in the discretization of (\ref{heat
 
 In this project the Cranch-Nicholson method was used to discretize the heat
 equation \cref{eq:heat1} in 3D over a finite grid. This method was chosen because
-it is unconditionally stable, and it converges in second order in time and space, as is shown below.
+it is unconditionally stable, and it converges in second order in time and
+space, as is shown below. \\
 
 The Crank-Nicholson method is based on the equation \cref{integral}, where the trapezoidal rule \cref{trapezoidalrule} is used to approximate the integral on the right hand side. We insert the right hand side of the heat equation in the resulting expression \cref{res}, and use Taylor-expansion to obtain the discretizaion. We use the notation \cref{notations} in the rest of this document.
 
@@ -38,8 +39,12 @@ u_m^ {n+1} &=& u_m^ n + \frac{1}{2} k(\partial_t u_m^n + \partial_t u_m^{n+1}) -
 Using central differences \cref{centraldiff}, and denoting the step sizes in $x, y, z$ direction by $h, f, g$ respectively gives
 \begin{eqnarray*}
 u_m^{n+1} &=& u_m^ n + \frac{1}{2} \mu k(\frac{1}{h^2}\delta_x^2 u_m^n + \frac{1}{f^2}\delta_y^2 u_m^n + \frac{1}{g^2}\delta_z^2 u_m^n + \frac{1}{h^2}\delta_x^2 u_m^{n+1} + \frac{1}{f^2}\delta_y^2 u_m^{n+1} + \frac{1}{g^2}\delta_z^2 u_m^{n+1}) \\
-  &&- \frac{1}{2} \mu k (\frac{1}{12}h^2\partial_x^4 u_m^n + \frac{1}{12}g^2\partial_y^4 u_m^n + \frac{1}{12}f^2\partial_z^4 u_m^n + \frac{1}{12}h^2\partial_x^4 u_m^{n+1} + \frac{1}{12}g^2\partial_y^4 u_m^{n+1} + \frac{1}{12}f^2\partial_z^4 u_m^{n+1} + ...) \\
-  &&- \frac{1}{12} k^3 \partial_t ^3 u_m^{n+\frac{1}{2}} \\ 
+  &&- \frac{1}{2} \mu k (\frac{1}{12}h^2\partial_x^4 u_m^n +
+  \frac{1}{12}g^2\partial_y^4 u_m^n + \frac{1}{12}f^2\partial_z^4 u_m^n +
+  \frac{1}{12}h^2\partial_x^4 u_m^{n+1} + \frac{1}{12}g^2\partial_y^4
+  u_m^{n+1}\\
+  &&+ \frac{1}{12}f^2\partial_z^4 u_m^{n+1} + \cdots)
+  - \frac{1}{12} k^3 \partial_t ^3 u_m^{n+\frac{1}{2}} \\ 
   %&=& u_m^n + \frac{r}{2}(\delta_x^2 u_m^n + \delta_x^2 u_m^{n+1}) + \frac{p}{2}(\delta_y^2 u_m^n + \delta_y^2 u_m^{n+1}) + \frac{q}{2}(\delta_z^2 u_m^n + \delta_z^2 u_m^{n+1}) + \tau_m^n
 \end{eqnarray*}
 where
@@ -47,6 +52,16 @@ where
 \delta_{r}^{2}U_m^{n}=\frac{U_{m+1}^{n}-2U_m^{n}+U_{m-1}^{n}}{{\Delta r}^{2}}
 \label{centraldiff}
 \end{equation}
+At this point it may be instructive to use \cref{fig:stencil-numerics} as a guideline.
+
+\begin{figure}[h!]
+  \begin{center}
+    \includegraphics[width=0.7\textwidth]{stencil.png}
+  \end{center}
+  \caption{Stencil for the Crank Nicolson method}
+  \label{fig:stencil-numerics}
+\end{figure}
+
 We thus obtain the implicit method for the heat equation
 \begin{equation}
 u_m^{n+1}-\mu k(\frac{1}{h^2}\delta_x^2 u_m^{n+1}-\frac{1}{f^2}\delta_y^2 u_m^{n+1}-\frac{1}{g^2}\delta_z^2 u_m^{n+1})=u_m^n + \mu k(\frac{1}{h^2}\delta_x^2 u_m^n + \frac{1}{f^2}\delta_y^2 u_m^n +\frac{1}{g^2}\delta_z^2 u_m^n)
@@ -64,7 +79,7 @@ The truncation error $\tau_m^n \Rightarrow 0$ as $h,f,g,k \Rightarrow 0$, and th
 
 \section{Von Neumann analysis of the Crank-Nicholson-scheme}
 
-The von Neumann analysis is based on Fourier analysis. The method consist of substituting 
+The von Neumann analysis is based on Fourier analysis, see \cite{aarseth}. The method consist of substituting 
 \begin{equation*}
 	U_m^n=\xi^n e^{i \beta x_m} \quad \quad  i=\sqrt{-1}
 \end{equation*}
@@ -99,12 +114,10 @@ As the maximum value of $\sin^2{x}$ is 1, the methods meets the stability condit
 |\xi | = \left|\frac{1-4D}{1+4D}\right|
 \end{equation}
 
-\marginpar{A typical
-\textbf{C}ourant-\textbf{F}riedrichs-\textbf{L}ewy condition is an inequality of the form
-$\frac{\Delta t}{\Delta x} < C$, with C a constant. }
-%Marginpar makes a note in the margin, e.g. for explaining things.
 Since D is always positive, we get that the Crank-Nicolson
-scheme for the heat equation is \emph{unconditionally stable}. In practice it may happen that the method oscillates if the time steps and space steps do not fulfill a CFL-condition.
+scheme for the heat equation is \emph{unconditionally stable}. In practice it
+may happen that the method oscillates if the time steps and space steps do not
+fulfill a CFL-condition\footnote{Courant-Friedrichs-Levy condition}.
 \\
 \\
 From Lax' equivalent theorem, which states that a consistent difference scheme will converge if and only if it is stable, the Crank-Nicholson scheme will converge.
