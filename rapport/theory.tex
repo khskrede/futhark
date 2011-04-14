@@ -15,9 +15,9 @@ GHz. To be modeled is the heat in the strip, phase transitions and transport.
 
 Initially, our approach to modelling was to use a staggered approach: first solve the
 heat equation for the three media meat, solid fat, and liquid fat, thus giving
-the temperature at step $n$. Then at step $n+1$, the temperature is regarded as
+the temperature at computation step $i$. Then at step $i+1$, the temperature is regarded as
 known, and we solve the transport equation for liquid fat out of the bacon. Then
-we know the distribution of liquid fat at step $n+2$, where we solve the heat
+we know the distribution of liquid fat at step $i+2$, where we solve the heat
 equations again, et cetera.
 
 \section{The heat equations}
@@ -37,7 +37,8 @@ liquid fat. $J^{MW}$ is the source term representing the microwave oven.
 Here this is modelled as a cylindrically symmetric term,
 with the radial power distribution on the form \cref{eq:effektfordeling},
 \begin{equation}
-  J^{MW}(r) = 0.5 + 2.55008x - 0.588013x^2 + 0.032445x^3 + 0.00124411x^4 - 0.0000973516x^5 \rm{,}
+  J^{MW}(r) = 0.5 + 2.55008r - 0.588013r^2 + 0.032445r^3 + 0.00124411r^4 -
+  9.73516\cdot 10^{-4}r^5 \rm{,}
   \label{eq:effektfordeling}
 \end{equation}
 i.e. a fifth degree polynomial, interpolated from the results in
@@ -57,10 +58,10 @@ the microwave oven. This term may look confusing, so it has been illustrated in
 Furthermore, there is the term $J^{Melt}$ which represents heat loss due to
 latent heat absorbed in the solid-liquid phase transition. This can be written as 
 \[ \frac{L \rho}{T_2-T_1} \pd{T}{t} \rm{,} \quad T \in (T_1,T_2) \rm{,}\]
-with $L$ the latent heat of the fat, and where the fat is melting between the temperatures 
+where $L$ is the latent heat of the fat, and with the fat is melting between the temperatures 
 $T_1$ and $T_2$. For fat these are typically around 30-50$^\circ$C. For $T
 \notin (T_1,T_2)$ 
-this term is zero, and it is readily seen that this is equivalent to a modification of the constant
+this term is zero. It is readily seen that this is equivalent to a modification of the constant
 $c_{p,l}$ in \cref{eq:heat2} when $T \in (T_1,T_2)$, thus it is not a serious
 complication.\\
 
@@ -70,12 +71,12 @@ more complicated term, and is essentially a modification due to transport of
 liquid fat implying a transport of heat. But we're in luck! \\
 
 As the bacon strip is essentially two-dimensional, transport will almost
-exclusively happen in the vertical (small) direction, and also the
-source terms don't vary in the vertical direction. As this term will be a transport
+exclusively happen in the vertical (small) direction, and the
+source terms don't vary in this direction. As this term will be a transport
 of heat in the vertical direction, it will not affect the heat transport in
 the horisontal directions.  As we're not really
 interested in the vertical temperature distribution, this means that we can
-happily neglect this term, in the spirit of Richard Feynmann: ``it doesn't give
+happily neglect this term. In the spirit of Richard Feynmann: ``it doesn't give
 any new physics''.
 
 \section{The transport equations}
@@ -97,7 +98,7 @@ this with a term inspired by \cref{carman-kozeny}
 where $\epsilon = \epsilon(z)$ is the melted fraction in the current volume element, and
 $v_a$ is an apparent velocity. As the volume element melts, $\epsilon$ goes from
 zero to one, and $\pd{p}{x}$ goes from a very large value to zero. This is known 
-as the Carman-Kozeny equation for flow in a pouros medium, and is applicable to 
+as the Carman-Kozeny equation for flow in a porous medium. It is applicable to 
 materials where melting does not happen at one specific temperature, but instead 
 over a range of temperatures (non-isothermal phase change). \cite{poirier} \\
 
@@ -107,6 +108,7 @@ melted, it is assumed to have a dendritic structure, and it is said to be in a
 ``mushy'' phase. The dendritic structure itself, and whether the flow is parallell or
 orthogonal to the dendritic structure, will influence the constant C. \\
 
+%Rewrite
 Using the procedure outlined in \cite{poirier}, the constant $C$ was estimated to be
 $8 \times 10^8$, where flow is assumed to be parallell to the dendritic
 structure, and the primary dendritic arm distance in bacon fat was measured to be
@@ -125,12 +127,12 @@ numerical procedure.\\
 Introducing this term has two effects. First of all, for a solid element,
 $\pd{p}{x}$ becomes very large, and forces the velocity to be zero. When the
 element starts melting, the flow will mimic the Carman-Kozeny flow, which is
-realistic for a porous medium, and finally in the molten stage, the ordinary
+realistic for a porous medium. Finally in the molten stage, the ordinary
 pressureless Navier Stokes equations are recovered.\\
 
 Alas, the numerical implementation of the transport equation was not completed
 within the timeframe of the project. The theory is still presented here for
-completeness.
+completeness.\\ %Paragraph check
 
 An alternative route suggested at the last moment is to take the pressureless
 Navier Stokes equation, i.e. $\pd{p}{x} = 0 \forall x,t$, and add a source term

@@ -9,12 +9,16 @@ The heat equation is on the form
 \end{equation}
 Here K is a constant, and we thus neglect it in the discretization of (\ref{heatequation}).\\
 
-In this project the Crank-Nicholson method was used to discretize the heat
+In this project the Crank-Nicolson method was used to discretize the heat
 equation \cref{eq:heat1} in 3D over a finite grid. This method was chosen because
-it is unconditionally stable, and it converges in second order in time and
+it is unconditionally stable for the heat equation, and it converges in second order in time and
 space, as is shown below. \\
 
-The Crank-Nicholson method is based on the equation \cref{integral}, where the trapezoidal rule \cref{trapezoidalrule} is used to approximate the integral on the right hand side. We insert the right hand side of the heat equation in the resulting expression \cref{res}, and use Taylor-expansion to obtain the discretizaion. We use the notation \cref{notations} in the rest of this document.
+The Crank-Nicolson method is based on \cref{integral}, where the
+trapezoidal rule \ref{trapezoidalrule} is used to approximate the integral on
+the right hand side. We insert the right hand side of the heat equation in the
+resulting expression \ref{res}, and use Taylor-expansion to obtain the
+discretization. We use the notation \ref{notations} in the rest of this document.
 
 \begin{equation}
 \partial_{x}^{k}u=\frac{\partial^{k}u}{\partial^{}x^{k}},\quad \quad \partial_{t}^{k}u=\frac{\partial^{k}u}{\partial^{}t^{k}} \quad \quad u_{m}^{n+\alpha k } = u(x_{m},t_{n}+\alpha k)
@@ -58,7 +62,7 @@ At this point it may be instructive to use \cref{fig:stencil-numerics} as a guid
   \begin{center}
     \includegraphics[width=0.7\textwidth]{stencil.png}
   \end{center}
-  \caption{Stencil for the Crank Nicolson method}
+  \caption{Stencil for the Crank-Nicolson method}
   \label{fig:stencil-numerics}
 \end{figure}
 
@@ -67,7 +71,7 @@ We thus obtain the implicit method for the heat equation
 u_m^{n+1}-\mu k(\frac{1}{h^2}\delta_x^2 u_m^{n+1}-\frac{1}{f^2}\delta_y^2 u_m^{n+1}-\frac{1}{g^2}\delta_z^2 u_m^{n+1})=u_m^n + \mu k(\frac{1}{h^2}\delta_x^2 u_m^n + \frac{1}{f^2}\delta_y^2 u_m^n +\frac{1}{g^2}\delta_z^2 u_m^n)
 \label{crank}
 \end{equation}
-with truncation error error
+with truncation error
 \begin{eqnarray}
 \frac{\tau_m^ n}{k} &=& -\frac{1}{12} \mu k^2 \partial_t^2 u_m^{n+\frac{1}{2}} - \frac{1}{12} \mu h^2 \partial_x^4 u_m^{n+\frac{1}{2}} - \frac{1}{12} \mu g^2 \partial_y^4 u_m^{n+\frac{1}{2}} - \frac{1}{12} \mu f^2 \partial_z^4 u_m^{n+\frac{1}{2}}\\
 &=& \mathcal{O} (k^2 + h^2 + g^2 + f^2)
@@ -75,9 +79,9 @@ with truncation error error
 \end{eqnarray}
 
 Here we have used that $\frac{1}{2}(\partial_x^4 u_m^n + \partial_x^4 u_m^{n+1}) = \partial_x^4 u_m^{n+\frac{1}{2}} + \mathcal{O} (k^2)$. 
-The truncation error $\tau_m^n \Rightarrow 0$ as $h,f,g,k \Rightarrow 0$, and the Crank-Nicholson method is consistent for the heat equation. To see if the method converges we perform a von Neumann analysis of the numerical scheme.
+The truncation error $\frac{\tau_m^n}{k} \Rightarrow 0$ as $h,f,g,k \Rightarrow 0$, and the Crank-Nicolson method is consistent for the heat equation. To see if the method converges we perform a von Neumann analysis of the numerical scheme.
 
-\section{Von Neumann analysis of the Crank-Nicholson-scheme}
+\section{Von Neumann analysis of the Crank-Nicolson-scheme}
 
 The von Neumann analysis is based on Fourier analysis, see \cite{aarseth}. The method consist of substituting 
 \begin{equation*}
@@ -114,18 +118,18 @@ As the maximum value of $\sin^2{x}$ is 1, the methods meets the stability condit
 |\xi | = \left|\frac{1-4D}{1+4D}\right|
 \end{equation}
 
-Since D is always positive, we get that the Crank-Nicolson
+Since $D$ is always positive, we get that the Crank-Nicolson
 scheme for the heat equation is \emph{unconditionally stable}. In practice it
 may happen that the method oscillates if the time steps and space steps do not
 fulfill a CFL-condition\footnote{Courant-Friedrichs-Levy condition}.
 \\
 \\
-From Lax' equivalent theorem, which states that a consistent difference scheme will converge if and only if it is stable, the Crank-Nicholson scheme will converge.
+From Lax' equivalent theorem, which states that a consistent difference scheme will converge if and only if it is stable, the Crank-Nicolson scheme will converge.
 
 
 %\section{Truncation error in the Crank-Nicolson scheme}
 
-%The Crank-Nicholson method is based on the trapezoidal rule. From the trapezoidal rule the truncation error is represented by
+%The Crank-Nicolson method is based on the trapezoidal rule. From the trapezoidal rule the truncation error is represented by
 %\begin{equation*}
 %\int_0^k f(t) dt = \frac{1}{2} k (f(0) - f(k)) -\frac{1}{12} k^3 f''(\frac{k}{2}) + ...
 %\end{equation*}

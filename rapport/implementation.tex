@@ -3,13 +3,13 @@
 
 \section{Tools}
 
-The programming language chosen to implemented the system was C++.
+The programming language chosen to implement the system in was C++.
 The arguments leading to this choice was:
 \begin{itemize}
 \item Most of the group members had some earlier experience with the language.
 \item It allows for a high level of abstraction without losing control of the
 underlying hardware.
-\item The code can be easily parallellized for shared memory machines using OpenMP.
+\item The code can easily be parallellized for shared memory machines using OpenMP.
 \item Many libraries exist for C++ that implement highly optimized linear algebra
 functionality.
 \end{itemize}
@@ -18,12 +18,11 @@ The tools chosen to visualize the resulting data are gnuplot and mencoder. Writi
 program using OpenGL was considered, but dismissed on the grounds of being too time consuming.
 
 \section{Program design}
-
 \begin{figure}[!h]
   \begin{center}
     \includegraphics[width=0.5\linewidth]{classdiagram.png}
   \end{center}
-  \caption{Class diagram of c++ implementation}
+  \caption{Class diagram of C++ implementation}
   \label{fig:classdiagram}
 \end{figure}
 The program mainly consist of three parts:
@@ -31,7 +30,7 @@ The program mainly consist of three parts:
 \item C++ implementation of matrix representations of the discretized equations.
 \item C++ implementation of the conjugate gradient method for solving the
 equations described.
-\item Bash script for generating plots and and movie of the generated data.
+\item Bash script for generating plots and movie of the generated data.
 \end{itemize}
 See \cref{fig:classdiagram} for a class diagram of the C++ implementation.
 The Bash script is not discussed in further detail as it is considered to be
@@ -41,25 +40,26 @@ very simple. See \cref{ap:source_code} for source code and scripts.
 
 The main task of the physical system is to implement a matrix-vector multiplication
 procedure for the heat equation to be used in the conjugate gradient method, 
-a method for calculating the heating properties of the microwave, and a method 
+a method for calculating the heating properties of the microwave and a method 
 for calculating the velocity of mass transfer.
 
 \subsection{Partitioning of the problem}
 
 The problem is to perform the multiplication of a sparse, symmetric matrix with a
 vector. To describe this procedure we have vectors $a$, $b$ and $t$ containing alpha,
-beta, and temperature values respectively. The alpha values represent the heat 
+beta and temperature values respectively. The alpha values represent the heat 
 conduction properties, the beta values describe the substance's ability to be heated
 by microwaves and the temperature values naturally contains the temperatures. We need
 these vectors because each point in the grid contains a particular substance in
 a particular phase.
-\begin{figure}[!h]
-  \begin{center}
-    \includegraphics[width=0.5\linewidth]{stencil.png}
-  \end{center}
-  \caption{Stencil}
-  \label{fig:stencil}
-\end{figure}
+%\begin{figure}[!h]
+%  \begin{center}
+%    \includegraphics[width=0.5\linewidth]{stencil.png}
+%  \end{center}
+%  \caption{Stencil}
+%  \label{fig:stencil}
+%\end{figure}
+
 \begin{figure}[!h]
   \begin{center}
     \includegraphics[width=0.5\linewidth]{grid.png}
@@ -73,7 +73,7 @@ j = z\cdot n_x\cdot n_y + y\cdot n_x + x
 \end{equation}
 where $n_x$, $n_y$, $n_z$ is the number of points in the $x$, $y$ and $z$ directions
 respectively, and $x$, $y$ and $z$ is the points on the grid, See \cref{fig:grid} and
-\cref{fig:stencil} \\
+\cref{fig:stencil-numerics} \\
 
 The center of the stencil, given by $j$, can be described by the equations:
 \begin{eqnarray}
@@ -112,10 +112,10 @@ with:
 R = \{ -n_x\cdot n_y, -n_x, -1, 0, 1, n_x, n_x\cdot ny \}
 \end{equation}
 
-Note that the indexing of these vectors and matrices correspond, so by looping through them,
-We have all the information we need to perform the necessary operations.
+Note that the indexing of these vectors and matrices correspond. So by looping through them
+we have all the information we need to perform the necessary operations.
 
-\subsection{Updating alpha and beta values}
+\subsection{Updating alpha and beta valuesu}
 
 When updating the alpha and beta values, we simply loop through the temperature
 vector, and update the alpha and beta vectors to their correct values using the
@@ -123,21 +123,21 @@ physical constants describing the substance at that point.
 
 \subsection{Calculating the distribution of the microwave effect}
 
-This is done according to \cref{eq:effektfordeling} and by multiplying the
-resulting distribution by the microwave effect and dividing by the volume at each point
-in the grid.
+This is done by multiplying \cref{eq:effektfordeling} with the microwave effect
+(say 750 W), and then dividing by the volume $n_x n_y n_z$. This expression can
+then be used directly in the update procedure.
 
 \subsection{The matrix-vector multiplication procedure}
 
 The matrix-vector multiplication procedure takes advantage of the fact that our 
 matrix is sparse and that our problem is well defined. Thus the algorithm used
 will complete in $m$ iterations where $m$ is the number of non-zero entries in 
-the matrix. $m$ is approximately equal to $7\cdot n$.
+the matrix. $m$ is approximately equal to $7n$.
 
 \section{The conjugate gradient method as an iterative algorithm}
 
-The method (conjugate gradient) used to solve the system of equations is based on 
-the steepest descent algorithm, however, it results in the exact solution within
+The conjugate gradient method used to solve the system of equations is based on
+the steepest descent algorithm. This improved method results in the exact solution within
 $n$ iterations. This is, however, assuming we have infinite floating point
 accuracy. \\
 
@@ -150,8 +150,8 @@ result in the need of more than $n$ iterations for the algorithm to complete.
 \section{The main procedure}
 
 \begin{itemize}
-  \item Initialize problem; define grid-size, dimensions of bacon, partitioning of fat vs meat
-  and internal and external temperature.
+  \item Initialize problem; define grid-size, dimensions of bacon, partitioning
+    of fat vs. meat and internal and external temperature.
   \item Allocate necessary memory
   \item Initialize physical system
   \item Initialize internal temperature
@@ -162,12 +162,12 @@ result in the need of more than $n$ iterations for the algorithm to complete.
   \begin{itemize}
     \item Update alpha and beta values
     \item Calculate diagonal
-    \item Set signs for right side multiplication (t=n)
+    \item Set signs for right side multiplication ($t=n$)
     \item Multiply right side of heat equation
     \item Add microwave effect to right side of equation
-    \item Set signs for left side of equation (t=n+1)
+    \item Set signs for left side of equation ($t=n+1$)
     \item Solve using conjugate gradient method
-    \item Save data to file every N iterations
+    \item Save data to file every $N$ iterations
   \end{itemize}
 \item Deallocate memory
 \end{itemize}
@@ -195,12 +195,14 @@ The conjugate gradient method is not parallellizable either (except for the line
 uses). Thus, the total of parallelizable work is just $n$, which for this example may be too small.
 
 \section{Resulting plots}
-Three resulting plots are displayed here, please also refer to the animation
-movie file attached. These plots were made with a single bacon slice of
-dimensions 15cm x 5cm x 1cm modelled in a 750 W microwave oven. The
+Three resulting plots are displayed here. Please also refer to the animation
+attached. These plots were made with a single bacon slice with
+dimensions $15\times5\times1$ cm modelled in a 750 W microwave oven. The
 simulation was run without a stop criterion for 120 seconds, ensuring that the
 interesting time interval is at least covered by the simulation. \\
 
+
+%Make sure figures are in the right place
 \begin{figure}[!h]
   \begin{center}
     \includegraphics[width=0.75\textwidth]{bacon-4sec.pdf}
@@ -222,11 +224,11 @@ with theoretical expectations.\\
   \label{fig:bacon-16sec}
 \end{figure}
 
-The second plot, \cref{fig:bacon-16sec}, is taken at 16 seconds. Here stuff is
-starting to happen, and it is interesting to note that the temperature in the
-left part of the bacon strip is the highest here, the opposite of the situation
+The second plot, \cref{fig:bacon-16sec}, is taken at 16 seconds. Here
+interesting things are starting to happen. It is noted that the temperature in the
+left part of the bacon is higher here, which is the opposite of the situation
 at 4 seconds. This is because the fat has started melting, and the melting
-process makes the heating process slow down, again in accordance with
+process makes the heating process slow down. Again in accordance with
 theoretical expectations. \\
 
 \begin{figure}[!h]
@@ -245,8 +247,8 @@ tasty at this point.
 
 \section{Unimplemented functionality}
 
-Due to time constraints and unforeseen complications, the transport equation was not implemented, 
-however a significant amount of effort was put into the implementation before it was 
+Due to time constraints and unforeseen complications, the transport equation was
+not implemented. However, a significant amount of effort was put into the implementation before it was 
 abandoned. The numerical schemes implemented in an attempt at solving the
 equation were:
 
@@ -268,7 +270,7 @@ as well, so the continued development of the transport equation was dismissed
 as the project was close to its end.\\
 
 Further work on the mass-transfer equations would involve time-dependant boundary conditions,
-crank-nicholson discretization, and solving them with the conjugate gradient method.
+Crank-Nicolson discretization, and solving them with the conjugate gradient method.
 
 Since the mass transfer equation was not properly implemented, the stop criteria was not 
 implemented either, as it turned out to be more practical to just run the simulation for as 
