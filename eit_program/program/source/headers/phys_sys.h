@@ -18,6 +18,7 @@ class phys_sys {
    static float* flow;
    static float* temp_flow;
    static float* epsilon;
+   static float* prev_eps;
    static float* f1;
    static float* f2;
 
@@ -38,7 +39,7 @@ class phys_sys {
          float dx, float dy, float dz, float dt,
          float* temperatures, float* alphas, float* betas,
          float* boundarys, float* diagonals, float* microfield,
-         float* flow, float* temp_flow, float* epsilon, float* f1, float* f2 );
+         float* flow, float* temp_flow, float* epsilon, float* f1, float* f2 , float* prev_eps);
 
    static void
    CalculateWaveField( float effect );
