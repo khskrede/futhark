@@ -35,12 +35,12 @@ main(int argc, char *argv[]) {
    float initial_temp = 20;
 
    // Microwave effect (W)
-   float microwave_effect = 750;
+   float microwave_effect = 750000;
 
    // dimensions of bacon (m)
-   float Lx = 0.15;
-   float Ly = 0.05;
-   float Lz = 0.01;
+   float Lx = 1;
+   float Ly = 1;
+   float Lz = 0.1;
 
    // Fat / Meat partition, Fat at y > DLy
    float DLy = 0.05;
@@ -52,10 +52,10 @@ main(int argc, char *argv[]) {
    float snapshots_ps = 12;
 
    // Set size of mesh
-   int nx = 15;
-   int ny = 15;
-   int nz = 15;
-   int nt = 500000;
+   int nx = 5;
+   int ny = 5;
+   int nz = 5;
+   int nt = 5000;
 
    // -------------------------------------------
    // Calculate delta values
@@ -112,6 +112,7 @@ main(int argc, char *argv[]) {
    float* flow = new float[n];
    float* temp_flow = new float[n];
    float* epsilon = new float[n];
+   float* prev_eps = new float[n];
    float* f1 = new float[n];
    float* f2 = new float[n];
 
@@ -120,7 +121,7 @@ main(int argc, char *argv[]) {
                   dx, dy, dz, dt,
                   temperatures, alphas, betas,
                   boundarys, diagonals, microfield, 
-                  flow, temp_flow, epsilon, f1, f2 );
+                  flow, temp_flow, epsilon, f1, f2, prev_eps );
 
    // Set initial temperature
    phys_sys::InitializeTemperature( initial_temp );

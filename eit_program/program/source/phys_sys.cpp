@@ -6,6 +6,7 @@
 #include <string>
 
 #include <math.h>
+#include <time.h>
 #include <omp.h>
 
 #include "headers/phys_sys.h"
@@ -16,7 +17,7 @@ phys_sys::Init(int t_nx, int t_ny, int t_nz, int t_nt, int t_dny,
                float t_dx, float t_dy, float t_dz, float t_dt,
                float* t_temperatures, float* t_alphas, float* t_betas,
                float* t_boundarys, float* t_diagonals, float* t_microfield,
-               float* t_flow, float* t_temp_flow, float* t_epsilon, float* t_f1, float* t_f2 ) {
+               float* t_flow, float* t_temp_flow, float* t_epsilon, float* t_f1, float* t_f2, float* t_prev_eps ) {
 
    nx = t_nx;
    ny = t_ny;
@@ -40,6 +41,7 @@ phys_sys::Init(int t_nx, int t_ny, int t_nz, int t_nt, int t_dny,
    flow = t_flow;
    temp_flow = t_temp_flow;
    epsilon = t_epsilon;
+   prev_eps = t_prev_eps;
    f1 = t_f1;
    f2 = t_f2;
 
@@ -60,6 +62,7 @@ phys_sys::Init(int t_nx, int t_ny, int t_nz, int t_nt, int t_dny,
    deltas[6] = dt / 2 / dz / dz;
 
    phys_consts::CalculateValues();
+   srand(time(0));
 }
 
 void
@@ -164,6 +167,16 @@ phys_sys::RungeKuttaFlow( int x, int y, int z, float f  ) {
    if ( z != nz-1 )
       epsilon3 = epsilon[j3];
 
+   // get previous epsilon values (mirror boundary conditions)
+   float prev_eps1=prev_eps[j2];
+   float prev_eps2=prev_eps[j2];
+   float prev_eps3=prev_eps[j2];
+   if ( z != 0 )
+      prev_eps1 = prev_eps[j1];
+   if ( z != nz-1 )
+      prev_eps3 = prev_eps[j3];
+
+
    // calculate k values
    float d = 0.000001;
    float k = 0;
@@ -176,8 +189,18 @@ phys_sys::RungeKuttaFlow( int x, int y, int z, float f  ) {
 
    k /= 3;
 
+   // calculate eps values
+   float eps = 0;
+   eps += epsilon1 - prev_eps1;
+   eps += epsilon2 - prev_eps2;
+   eps += epsilon3 - prev_eps3;
+   eps /= 3;
+   eps /= dt;
+   // 50/50 chance of +/-
+   eps *= (rand()%2) - 1;
+
    return - ( my1 * my1 * flow1 - 2 * my2 * my2 * flow2 + my3 * my3 * flow3 ) * dt / dz / dz
-          - 1 / 2 / dz * (flow3*flow3 - flow1*flow1) + g ;
+          - 1 / 2 / dz * (flow3*flow3 - flow1*flow1) + eps ;
 }
 
 
@@ -194,7 +217,7 @@ phys_sys::CalculateFlow( ) {
    // Calculate initial flow
    #pragma omp parallel for
    for ( int x = 0; x < nz; x++ ) {
-      for ( int y = 0; y<ny; y++ ) {
+      for ( int y = dny; y<ny; y++ ) {
 	    for ( int z = 0; z < nz; z++ ) {
                int j = z*nx*ny + y*nx + x;
                f1[j] = RungeKuttaFlow(x,y,z,0);
@@ -208,7 +231,7 @@ phys_sys::CalculateFlow( ) {
    // Uphold v*e = v*e
    #pragma omp parallel for
    for ( int x = 0; x < nz; x++ ) {
-      for ( int y = 0; y<ny; y++ ) {
+      for ( int y = dny; y<ny; y++ ) {
          for ( int z = 0; z < nz; z++ ) {
 
             int j2 = z*nx*ny + y*nx + x;
@@ -274,6 +297,10 @@ void
 phys_sys::UpdateAlphaBetaValues( ) {
    float t1 = 40;
    float t2 = 50;
+
+   float* temp = prev_eps;
+   prev_eps = epsilon;
+   epsilon = temp;
 
 
    // For all points in mesh
@@ -450,6 +477,7 @@ float* phys_sys::microfield=0;
 float* phys_sys::flow=0;
 float* phys_sys::temp_flow=0;
 float* phys_sys::epsilon=0;
+float* phys_sys::prev_eps=0;
 float* phys_sys::f1=0;
 float* phys_sys::f2=0;
 
