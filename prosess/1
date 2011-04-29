@@ -1,9 +1,6 @@
 %Slik at vi får norske navn på ting:
 \usepackage[norsk]{babel}
 \usepackage[norsk]{cleveref}
-\usepackage[inner=2cm,outer=4cm]{geometry}
-\fancyheadoffset[EL]{0cm}
-\fancyheadoffset[OR]{0cm}
 
 %Forside for prosess, settes inn med \forsideProsess
 \newcommand*{\forside}{\begingroup

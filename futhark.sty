@@ -1,7 +1,6 @@
 %Denne .sty-filen brukes av latex-dokumentene i mappene ``prosess'' og
 %``rapport''. 
 \usepackage[utf8]{inputenc}
-\usepackage{babel}
 \usepackage{graphicx}
 \usepackage[T1]{fontenc}
 \usepackage{allrunes}	%runer for å skrive futhark
@@ -19,17 +18,19 @@
 \usepackage{color}      %farger
 \usepackage{booktabs}   %Bedre linjer i tabeller
 \usepackage{float}      % gir mulighet for \begin{figure}[H] som forcer skikkelig
-\definecolor{midnightblue}{RGB}{25,25,112}
+\usepackage{framed}	%bakgrunnsfarge på sitater
+\definecolor{midnightblue}{RGB}{25,25,112} %Store bokstaver => (R|G|B) \in [0,255]
+\definecolor{old}{RGB}{50,30,30} %Farge på skrift i sitater
+\definecolor{shadecolor}{RGB}{255,255,240} %Bakgrunnsfarge sitater
 %\usepackage[width=16cm, left=2cm]{geometry} %mindre marger
 \usepackage[activate={true,nocompatibility},final]{microtype} %flisespikkeri som Åsmund liker
 \setlength\parindent{0pt} %Fjerner indentering
-\addtolength{\parskip}{\baselineskip} %Gir åpenrom mellom hvert avsnitt
 \setlength{\parfillskip}{30\p@ \@plus 1fil} %Gjør at den siste linjen i et avsnitt aldri går helt ut til høyre
 %Ny font - nice! :
-\usepackage{textcomp}
-\usepackage{courier}
-\renewcommand{\rmdefault}{ugm}
-\usepackage[urw-garamond]{mathdesign} %URW Garamond
+\usepackage{textcomp} %symboler
+\usepackage{courier} %font på kodeeksempler - courier
+\renewcommand{\rmdefault}{ugm} %font på hovedtekst - garamond
+\usepackage[urw-garamond]{mathdesign} %font på matte  - garamond
 %Færre orddelinger ved linje-
 %skift:
 \hyphenpenalty=5000
@@ -50,25 +51,32 @@ citecolor=midnightblue  %siteringer
 {\raggedright\footnotesize #1}}
 
 %Oppsett for fancyhdr-pakken
-\setlength{\headheight}{15.2pt}
-%Vi reformaterer \leftmark og \rightmark slik at de ikke er skrevet med bare store bokstaver:
-\renewcommand{\chaptermark}[1]{\markboth{#1}{}}
-\renewcommand{\sectionmark}[1]{\markright{#1}{}}
+\pagestyle{fancy}
+\fancyhf{}
+\renewcommand{\chaptermark}[1]{\markboth{\MakeUppercase{#1}}{}}
+\renewcommand{\sectionmark}[1]{\markright{\MakeUppercase{#1}}{}}
+\renewcommand{\headrulewidth}{0.3pt}
+\setlength{\headheight}{13.6pt}
+
 
 %Futhark-logoen
 \newlength{\drop}
 \providecommand*{\wb}{{\textarl{ \withlines futhark}}}
 
+%Denne mekker stilen på sammendrag og forord:
+\newcommand{\forordstil}{
+\pagenumbering{roman}
+\fancyhead[LE]{\thepage\hspace{2em}\footnotesize{\rightmark}}
+\fancyhead[RE,LO]{}
+\fancyhead[RO]{{\footnotesize\leftmark}\hspace{2em}\thepage}
+}
+
 %Vi definerer \kapittelstil, som gjør oppsettet for kapitlene.
 \newcommand{\kapittelstil}{
 \pagenumbering{arabic}	%Vanlige sidetall
-\pagestyle{fancy}	%Så vi kan bruke fancyhdr
-%Mer oppsett for fancyhdr-pakken, for kapitlene.
-%head betyr header, foot er footer. (l|c|r) er venstre, midten, høyre
-%den første {} gir for partall-sider, den andre {} gir for oddetall-sider
-\lhead{}{\leftmark}
-\chead{}{}
-\rhead{\rightmark}{}
+\fancyhead[RE,LO]{\thesection}
+\fancyfoot[C]{\thepage}
+\fancyfoot[RE,LO]{\wb}
 }
 
 %Diverse matematiske lurerier
