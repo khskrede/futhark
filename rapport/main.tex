@@ -9,8 +9,7 @@
 	\clearpage		%Ny side
 	
 %Sammendrag og forord:
-	\pagestyle{plain}	%Stil på sammendrag og forord.
-	\pagenumbering{roman} 	%Sidetall på formen i, ii, osv. på sammendrag, forord og innholdsfortegnelse.
+	\forordstil
 
 	\sammendrag{Numerical simulations and experiments with bacon preparation
 	in a microwave oven were performed. The numerical simulations were
@@ -52,6 +51,8 @@
 	\include{conclusion}	%Kap. 7
 
 %Appendix:
+	\appendix		%Gjør at alle etterfølgende kapitler blir appendikser
+	\fancyhead[RE,LO]{}	%Ingen headere i appendiks og bibliografi
 	\include{appendixa}
 	\include{appendixb}
 %Referanser:

@@ -108,12 +108,12 @@ melted, it is assumed to have a dendritic structure, and it is said to be in a
 ``mushy'' phase. The dendritic structure itself, and whether the flow is parallell or
 orthogonal to the dendritic structure, will influence the constant C. \\
 
-%Rewrite
-Using the procedure outlined in \cite{poirier}, the constant $C$ was estimated to be
-$8 \times 10^8$, where flow is assumed to be parallell to the dendritic
-structure, and the primary dendritic arm distance in bacon fat was measured to be
-about 2.5 mm. The assumption of parallell flow dictates the value of the Kozeny
-constant yielding the final value for $C$.\\
+Using the procedure outlined in \cite{poirier}, the constant $C$ was measured to
+be about $8 \times 10^8$. Here it has been assumed that bacon is cut orthogonal
+to the dendritic fiber structure of the meat, so that the flow will be in the
+parallell direction to the dendritic structure. Using this fact, along with a
+measured distance of 2.5 mm between dendritic fibers in partially molten bacon, 
+the procedure gives the value of the Kozeny constant previously stated.\\
 
 Influenced by these considerations, the term $\pd{p}{x}$ in
 \cref{eq:navier-stokes} was replaced by \cref{eq:pressure}
@@ -134,7 +134,7 @@ Alas, the numerical implementation of the transport equation was not completed
 within the timeframe of the project. The theory is still presented here for
 completeness.\\ %Paragraph check
 
-An alternative route suggested at the last moment is to take the pressureless
+An alternative route investigated at the last moment is to take the pressureless
 Navier Stokes equation, i.e. $\pd{p}{x} = 0 \forall x,t$, and add a source term
 proportional to $\pd{\epsilon}{t}$. To understand this, it helps to think of the
 Navier Stokes equation as a diffusion equation in momentum, with an extra
@@ -152,3 +152,13 @@ $v_a$ is the apparent velocity measured for liquid fat in bacon, and the scaling
 factor $\sqrt{2\pi\mu L_z}$ gives the correct apparent velocity assuming
 diffusion of momentum.
 
+What has not been discussed in either of these two models is the mass
+conservation equation. For a medium such as bacon, where the density may vary,
+this is of the form
+\begin{equation}
+  \pd{\rho}{t} + \div{\rho v} = 0
+  \label{massconservation}
+\end{equation}
+where $\rho$ is the density. This will impose a furter restriction on the
+possible solutions, clearing away divergencies etc., but it also gives an
+additional equation to implement

@@ -84,7 +84,8 @@ The center of the stencil, given by $j$, can be described by the equations:
 where $/$ and $ \% $ is the integer division and modulo operators respectively.
 In addition to this, we define two more vectors and one more matrix:
 
-The offset matrix represents the neighbours in the stencil (see \cref{fig:stencil}):
+The offset matrix represents the neighbours in the stencil (see
+\cref{fig:stencil-numerics}):
 \begin{equation}
 O =
 \left[
@@ -115,7 +116,7 @@ R = \{ -n_x\cdot n_y, -n_x, -1, 0, 1, n_x, n_x\cdot ny \}
 Note that the indexing of these vectors and matrices correspond. So by looping through them
 we have all the information we need to perform the necessary operations.
 
-\subsection{Updating alpha and beta valuesu}
+\subsection{Updating alpha and beta values}
 
 When updating the alpha and beta values, we simply loop through the temperature
 vector, and update the alpha and beta vectors to their correct values using the
@@ -244,21 +245,41 @@ bacon, with meat temperatures well above the Maillard critical temperature. The
 fat temperature has almost caught up with the meat, and the bacon should be very
 tasty at this point.
 
+\section{The mass transport equation.}
+The first implementation of the mass transport equation was tried using the
+Carman-Kozeny-like equation \cref{eq:navier-stokes}. A significant amount of
+effort was put into implementing this equation before the attempts were
+abandoned. The numerical schemes implemented in this attempt were:
+\begin{itemize}
+  \item Forward Euler
+  \item Runge-Kutta
+\end{itemize}
+Forward Euler was dismissed as the time steps had to be too small to be practical.
+The Runge Kutta method also gave us some strange and unforeseen results, as the term in 
+the equation that was supposed to keep the velocity field equal to $0$ until the substances
+started melting, caused the velocity field to blow up to infinity. This is
+probably due to the fact that no mass conservation equation had been implemented
+at this point. Another issue was that the nodes close to the boundary seem to never reach melting point
+temperatures. This would set the flow through these cells equal to zero, so it
+would be impossible to get flow out of the bacon.\\
+
+In a last ditch effort, the alternative way suggested by \cref{eq:diffusion} was
+implemented, again without an accompanying mass conservation equation. This
+seems to yield very reasonable results, as can be seen in \cref{fig:transport},
+except for the fact that the flow assumes a final value which is nonzero for
+large times. This is clearly unphysical, as it implies that an unlimited amount
+of fat can flow out of the bacon. This caveat is thought to stem from the lack
+of a mass conservation equation, and implementation of this additional
+constraint would likely solve this problem.\\
 
 \section{Unimplemented functionality}
-
-Due to time constraints and unforeseen complications, the transport equation was
-not fully implemented. However, a significant amount of effort was put into the implementation before it was 
-abandoned. The forward euler method was just to solve the mass-transport equations,
-but, the preservation of mass in the system was not implemented.
+Further work on the mass-transfer equations would involve the discussed mass
+conservation equation, time-dependant boundary conditions,
+Crank-Nicolson discretization, and solving them with the conjugate gradient
+method. The work presented here suggests that good results should be within
+reach if some more time is used. \\
 
 Since the mass transfer equation was not properly implemented, the stop criteria was not 
 implemented either, as it turned out to be more practical to just run the simulation for as 
 many seconds as needed, say 120, and inspect the resulting plots to find an
 optimal cooking time of about 50 seconds.
-
-Further work would be to implement changing boundary conditions across the time domain and
-implementing the preservation of mass by adding a mass-variable to the stencil. One may
-also want to use crank-nicholson discretization for the mass-transport equations and
-the conjugate gradient method for solving them.
-
