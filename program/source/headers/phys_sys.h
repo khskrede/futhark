@@ -15,7 +15,11 @@ class phys_sys {
    static float* boundarys;
    static float* diagonals;
    static float* microfield;
-
+   static float* flow;
+   static float* temp_flow;
+   static float* epsilon;
+   static float* prev_eps;
+   
    static int stencil[7][3];
    static int offsets[7];
    static float deltas[7];
@@ -32,7 +36,8 @@ class phys_sys {
    Init( int nx, int ny, int nz, int nt, int dny,
          float dx, float dy, float dz, float dt,
          float* temperatures, float* alphas, float* betas,
-         float* boundarys, float* diagonals, float* microfield);
+         float* boundarys, float* diagonals, float* microfield,
+         float* flow, float* temp_flow, float* epsilon, float* prev_eps);
 
    static void
    CalculateWaveField( float effect );
@@ -46,6 +51,12 @@ class phys_sys {
    static void
    CalculateDiagonal( );
 
+   inline static float
+   DFlow( int x, int y, int z, float f );
+
+   static void
+   CalculateFlow();
+   
    static void
    UpdateAlphaBetaValues( );
 
