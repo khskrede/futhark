@@ -15,8 +15,9 @@
 
 using namespace std;
 
-/* Functions */
+/* Functions declarations */
 void DumpHeat(float *x, int nx, int ny, int nz, float dx, float dy, float dz, int i);
+void DumpFlow(float *x, int nx, int ny, int nz, float dx, float dy, float dz, int i);
 
 int
 main(int argc, char *argv[]) {
@@ -49,7 +50,7 @@ main(int argc, char *argv[]) {
    float DLy = 0.03;
 
    // Set length of cooking (s)
-   float Lt = 120.0;
+   float Lt = 60.0;
 
    // Snapshots per second (25 = realtime video)
    float snapshots_ps = 25;
@@ -58,7 +59,7 @@ main(int argc, char *argv[]) {
    int nx = 15;
    int ny = 15;
    int nz = 15;
-   int nt = 1200000;
+   int nt = 600000;
 
    // -------------------------------------------
    // Calculate delta values
@@ -118,12 +119,17 @@ main(int argc, char *argv[]) {
    float* diagonals = new float[n];
    float* microfield = new float[n];
    float* b = new float[n];
+   float* flow = new float[n];
+   float* temp_flow = new float[n];
+   float* epsilon = new float[n];
+   float* prev_eps = new float[n];
 
    // Initialize physical system
    phys_sys::Init(nx, ny, nz, nt, dny,
                   dx, dy, dz, dt,
                   temperatures, alphas, betas,
-                  boundarys, diagonals, microfield);
+                  boundarys, diagonals, microfield,
+                  flow, temp_flow, epsilon, prev_eps);
 
    // Set initial temperature
    phys_sys::InitializeTemperature( initial_temp );
@@ -139,6 +145,7 @@ main(int argc, char *argv[]) {
 
    // Print cross-sections of heat and flow state to file
    DumpHeat(temperatures, nx, ny, nz, dx, dy, dz, 0);
+   DumpFlow(flow, nx, ny, nz, dx, dy, dz, 0);
 
    // Main loop
    for ( int i = 1; i < nt; i++ ) {
@@ -166,9 +173,13 @@ main(int argc, char *argv[]) {
       phys_sys::SetLeftSigns();
       solver.Solve();
 
+      // calculate flow with updated heat values
+      phys_sys::CalculateFlow();
+      
       // Print cross-sections of temperature and flow to files
       if( i%snapshots_pi == 0) {
          DumpHeat(temperatures, nx, ny, nz, dx, dy, dz, i/snapshots_pi);
+         DumpFlow(flow, nx, ny, nz, dx, dy, dz, i/snapshots_pi);
       }
    }
 
@@ -185,6 +196,10 @@ main(int argc, char *argv[]) {
    delete[] betas;
    delete[] microfield;
    delete[] b;
+   delete[] flow;
+   delete[] temp_flow;
+   delete[] epsilon;
+   delete[] prev_eps;
    return 0;
 }
 
@@ -199,7 +214,6 @@ DumpHeat(float *t, int nx, int ny, int nz, float dx, float dy, float dz, int i) 
    string str;
    ss >> str;
 
-   //char str[12];
 
    int str_length = str.length();
    for (int j = 0; j < 7 - str_length; j++)
@@ -221,3 +235,30 @@ DumpHeat(float *t, int nx, int ny, int nz, float dx, float dy, float dz, int i) 
    outfile.close();
 }
 
+// Print cross-section of flow field
+void
+DumpFlow(float *t, int nx, int ny, int nz, float dx, float dy, float dz, int i) {
+   
+   stringstream ss;
+   ss << i;
+   string str;
+   ss >> str;
+
+
+   int str_length = str.length();
+   for (int j = 0; j < 7 - str_length; j++)
+      str = "0" + str;
+   
+   std::ofstream outfile;
+   outfile.open( (std::string("data/flow") + std::string(str) + std::string(".flo")).c_str() , std::ios::out);
+
+   int z=nz/2;
+      for (int y = 0; y<ny; y++ ) {
+         for (int x = 0; x<nx; x++ ) {
+            outfile << x*dx << " " << y*dy << " " << t[z*nz*ny + y*nx + x] << "\n";
+         }
+         outfile << "\n";
+   }
+
+   outfile.close();
+}

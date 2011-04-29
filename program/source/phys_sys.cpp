@@ -15,7 +15,8 @@ void
 phys_sys::Init(int t_nx, int t_ny, int t_nz, int t_nt, int t_dny,
                float t_dx, float t_dy, float t_dz, float t_dt,
                float* t_temperatures, float* t_alphas, float* t_betas,
-               float* t_boundarys, float* t_diagonals, float* t_microfield) {
+               float* t_boundarys, float* t_diagonals, float* t_microfield,
+               float* t_flow, float* t_temp_flow, float* t_epsilon, float* t_prev_eps ) {
 
    nx = t_nx;
    ny = t_ny;
@@ -36,6 +37,10 @@ phys_sys::Init(int t_nx, int t_ny, int t_nz, int t_nt, int t_dny,
    boundarys = t_boundarys;
    diagonals = t_diagonals;
    microfield = t_microfield;
+   flow = t_flow;
+   temp_flow = t_temp_flow;
+   epsilon = t_epsilon;
+   prev_eps = t_prev_eps;
 
    offsets[0] = -nx*ny;
    offsets[1] = -nx;
@@ -54,6 +59,8 @@ phys_sys::Init(int t_nx, int t_ny, int t_nz, int t_nt, int t_dny,
    deltas[6] = dt / 2 / dz / dz;
 
    phys_consts::CalculateValues();
+   
+   srand(time(0));
 }
 
 void
@@ -135,6 +142,106 @@ phys_sys::CalculateBoundaryConditions( float outside_temp ) {
    }
 }
 
+
+inline float
+phys_sys::DFlow( int x, int y, int z, float f  ) {
+
+   // get iterators along z axis
+   int j1 = (z-1)*nx*ny + y*nx + x;
+   int j2 = z*nx*ny + y*nx + x;
+   int j3 = (z+1)*nx*ny + y*nx + x;
+
+   // calculate my values (mirror boundary conditions)
+   float a = 0.0002414;
+   float b = 247.8; // C
+   float c = 140;
+   float my1 = a*exp(b/(temperatures[j2]+273.15-c));
+   float my2 = a*exp(b/(temperatures[j2]+273.15-c));
+   float my3 = a*exp(b/(temperatures[j2]+273.15-c));
+   if ( z != 0 )
+      my1 = a*exp(b/(temperatures[j1]+273.15-c));
+   if ( z != nz-1 )
+      my3 = a*exp(b/(temperatures[j3]+273.15-c));
+
+   // get flow (mirror boundary conditions)
+   float flow1 = flow[j2];
+   float flow2 = flow[j2];
+   float flow3 = flow[j2];
+   if ( z != 0 ) 
+      flow1 = flow[j1];
+   if ( z != nz-1 ) 
+      flow3 = flow[j3];
+   
+   // gravity constant
+   float g = 9.81;
+
+   // get epsilon values (mirror boundary conditions)
+   float epsilon1=epsilon[j2];
+   float epsilon2=epsilon[j2];
+   float epsilon3=epsilon[j2];
+   if ( z != 0 )
+      epsilon1 = epsilon[j1];
+   if ( z != nz-1 )
+      epsilon3 = epsilon[j3];
+
+   // get previous epsilon values (mirror boundary conditions)
+   float prev_eps1=prev_eps[j2];
+   float prev_eps2=prev_eps[j2];
+   float prev_eps3=prev_eps[j2];
+   if ( z != 0 )
+      prev_eps1 = prev_eps[j1];
+   if ( z != nz-1 )
+      prev_eps3 = prev_eps[j3];
+
+
+   // calculate k values
+   float d = 0.000001;
+   float k = 0;
+   k += flow1 * 1600*(1-epsilon1)*(1-epsilon1)
+              /( (epsilon1+d) * (epsilon1+d) * (epsilon1+d));
+   k += flow2 * 1600*(1-epsilon2)*(1-epsilon2)
+              /( (epsilon2+d) * (epsilon2+d) * (epsilon2+d));
+   k += flow3 * 1600*(1-epsilon3)*(1-epsilon3)
+              /( (epsilon3+d) * (epsilon3+d) * (epsilon3+d));
+
+   k /= 3;
+
+   // calculate eps values
+   float eps = 0;
+   eps += epsilon1 - prev_eps1;
+   eps += epsilon2 - prev_eps2;
+   eps += epsilon3 - prev_eps3;
+   eps /= 3;
+   // 50/50 chance of +/-
+   eps *= (rand()%2) - 1;
+   eps *= 0.5;
+
+   return - ( my1 * my1 * flow1 - 2 * my2 * my2 * flow2 + my3 * my3 * flow3 ) * dt / dz / dz
+          - 1 / 2 / dz * (flow3*flow3 - flow1*flow1) + eps ;
+}
+
+
+void
+phys_sys::CalculateFlow( ) {
+
+   // Calculate initial flow
+   #pragma omp parallel for
+   for ( int x = 0; x < nz; x++ ) {
+      for ( int y = dny; y<ny; y++ ) {
+	      for ( int z = 0; z < nz; z++ ) {
+            int j = z*nx*ny + y*nx + x;
+            temp_flow[j] = flow[j] + dt*DFlow(x,y,z,0);
+         }
+      }
+   }
+
+   #pragma omp parallel for
+   for ( int i = 0; i < n; i++ ) {
+      flow[i] = temp_flow[i];
+   }
+
+}
+
 void
 phys_sys::UpdateAlphaBetaValues( ) {
 
@@ -168,6 +275,18 @@ phys_sys::UpdateAlphaBetaValues( ) {
             break;
          }
       }
+      
+      // Calculate epsilon values, only for fat.
+
+      float t2 = phys_consts::substance_temps[2][2];
+      float t1 = phys_consts::substance_temps[2][1];
+
+      if ( temperatures[i] >= t2 )
+         epsilon[i] = 1;
+      else if ( temperatures[i] < t1 )
+         epsilon[i] = 0;
+      else if ( temperatures[i] < t2 )
+         epsilon[i] = ( temperatures[i] - t1) / (t2 - t1);
    }
 }
 
@@ -300,7 +419,10 @@ float* phys_sys::betas=0;
 float* phys_sys::boundarys=0;
 float* phys_sys::diagonals=0;
 float* phys_sys::microfield=0;
-
+float* phys_sys::flow=0;
+float* phys_sys::temp_flow=0;
+float* phys_sys::epsilon=0;
+float* phys_sys::prev_eps=0;
 float* phys_sys::signs=0;
 
 int phys_sys::stencil[7][3] = { {0,0,-1}, {0,-1,0}, {-1,0,0}, {0,0,0},
