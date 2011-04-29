@@ -9,14 +9,27 @@
 \usepackage{hyperref}	%linker
 \usepackage{fancyhdr}	%header og footer
 \usepackage{lipsum}	%Lorem Ipsum
-\usepackage{amsmath}
+\usepackage{amsmath}    %matte
 \usepackage{amsthm} 	%Teoremer
-\usepackage{amssymb}	%Matematiske symboler
+%\usepackage{amssymb}	%Matematiske symboler
 \usepackage{multicol}	%Flere kolonner
-%\usepackage{cleveref}
-\usepackage{../coffee2}
-\usepackage{subfig}
-\usepackage{listings}
+%\usepackage{cleveref}  %Flyttet til prosess.sty eller rapport.sty
+\usepackage{../coffee2} %kaffeflekker
+\usepackage{subfig}     %figur-i-figur
+\usepackage{color}      %farger
+\usepackage{booktabs}   %Bedre linjer i tabeller
+\usepackage{float}      % gir mulighet for \begin{figure}[H] som forcer skikkelig
+\definecolor{midnightblue}{RGB}{25,25,112}
+%\usepackage[width=16cm, left=2cm]{geometry} %mindre marger
+\usepackage[activate={true,nocompatibility},final]{microtype} %flisespikkeri som Åsmund liker
+\setlength\parindent{0pt} %Fjerner indentering
+\addtolength{\parskip}{\baselineskip} %Gir åpenrom mellom hvert avsnitt
+\setlength{\parfillskip}{30\p@ \@plus 1fil} %Gjør at den siste linjen i et avsnitt aldri går helt ut til høyre
+%Ny font - nice! :
+\usepackage{textcomp}
+\usepackage{courier}
+\renewcommand{\rmdefault}{ugm}
+\usepackage[urw-garamond]{mathdesign} %URW Garamond
 %Færre orddelinger ved linje-
 %skift:
 \hyphenpenalty=5000
@@ -27,7 +40,7 @@
 colorlinks=true,
 linkcolor=black, %interne lenker i dokumentet
 urlcolor=blue,   %hyperlenker
-citecolor=green  %siteringer
+citecolor=midnightblue  %siteringer
 }
 
 %marginpar lar oss skrive notater i margen, men vi gjør den litt penere:
@@ -56,10 +69,6 @@ citecolor=green  %siteringer
 \lhead{}{\leftmark}
 \chead{}{}
 \rhead{\rightmark}{}
-\lfoot{Kap. \thechapter}
-\cfoot{\thepage}
-\rfoot{\wb} 		%Dette gir et Futhark-tegn med stavruner i høyre hjørne nederst.
-\renewcommand{\headrulewidth}{0.3pt}
 }
 
 %Diverse matematiske lurerier
