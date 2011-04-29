@@ -248,31 +248,17 @@ tasty at this point.
 \section{Unimplemented functionality}
 
 Due to time constraints and unforeseen complications, the transport equation was
-not implemented. However, a significant amount of effort was put into the implementation before it was 
-abandoned. The numerical schemes implemented in an attempt at solving the
-equation were:
-
-\begin{itemize}
-  \item Forward Euler
-  \item Runge-Kutta
-\end{itemize} 
-
-Forward Euler was dismissed as the time steps had to be too small to be practical.
-The Runge Kutta method also gave us some strange and unforeseen results, as the term in 
-the equation that was supposed to keep the velocity field equal to $0$ until the substances
-started melting, caused the velocity field to blow up to infinity. Other issues was that
-the nodes close to the boundary seem to never reach melting point
-temperatures.\\
-
-After looking closely at the differential equations and their discrete equivalents, a number
-of practical issues surfaced that would require modifications to existing code
-as well, so the continued development of the transport equation was dismissed
-as the project was close to its end.\\
-
-Further work on the mass-transfer equations would involve time-dependant boundary conditions,
-Crank-Nicolson discretization, and solving them with the conjugate gradient method.
+not fully implemented. However, a significant amount of effort was put into the implementation before it was 
+abandoned. The forward euler method was just to solve the mass-transport equations,
+but, the preservation of mass in the system was not implemented.
 
 Since the mass transfer equation was not properly implemented, the stop criteria was not 
 implemented either, as it turned out to be more practical to just run the simulation for as 
 many seconds as needed, say 120, and inspect the resulting plots to find an
 optimal cooking time of about 50 seconds.
+
+Further work would be to implement changing boundary conditions across the time domain and
+implementing the preservation of mass by adding a mass-variable to the stencil. One may
+also want to use crank-nicholson discretization for the mass-transport equations and
+the conjugate gradient method for solving them.
+
