@@ -30,7 +30,7 @@
 
 
 \begin{document}
-  \begin{frame}{}
+  \begin{frame}
   \begin{columns}[t]
   \begin{column}{.97\textwidth}
 
@@ -77,50 +77,35 @@ The experiments were
 \vspace{1.0\baselineskip}
 {\Large Result}
 
-
-
-	Lorem ipsum dolor sit amet, consectetur adipisicing
-	elit, sed do eiusmod tempor incididunt ut labore et
-	dolore magna aliqua. Ut enim ad minim veniam, quis
-	nostrud exercitation ullamco laboris nisi ut aliquip
-	ex ea commodo consequat. Duis aute irure dolor in
-	reprehenderit in voluptate velit esse cillum dolore
-	eu fugiat nulla pariatur. Excepteur sint occaecat
-	cupidatat non proident, sunt in culpa qui officia
-	deserunt mollit anim id est laborum.
+A program was written in C++, implementing equations given in the previous
+section. The program produced an animation of heat distribution in the bacon, 
+yielding the following plot at $t = 50$s:
+\begin{figure}[!h] 
+  \begin{center}
+    \includegraphics[width=\linewidth]{bacon-50sec.pdf}
+  \end{center}
+  \caption{A slice of bacon after fifty seconds in a microwave oven}
+  \label{fig:bacon-50sec}
+\end{figure}
+By observing the plot in figure above we notice that the
+temperature in the bacon slice is fairly close to $150^{\circ}$C. This is the required temperature
+for initiation of Maillard reactions, thus the bacon is (according to theory)
+cooked. This means that our numerical model predicts bacon completion at about
+$50$ seconds, give or take.
 
     \vspace{1.0\baselineskip}	
-	Lorem ipsum dolor sit amet, consectetur adipisicing
-	elit, sed do eiusmod tempor incididunt ut labore et
-	dolore magna aliqua. Ut enim ad minim veniam, quis
-	nostrud exercitation ullamco laboris nisi ut aliquip
-	ex ea $c = \lambda f$ commodo consequat:
-	\[ \sin^{2}\theta_{hkl}=(\frac{\lambda^{2}}{4a^{2}})(h^{2}+k^{2}+l^{2}) \]
-	Duis aute irure dolor in
-	reprehenderit in voluptate velit esse cillum dolore
-	eu fugiat nulla pariatur. Excepteur sint occaecat
-	cupidatat non proident, sunt in culpa qui officia
-	deserunt mollit anim id est laborum.
-	Lorem ipsum dolor sit amet, consectetur adipisicing
-	elit, sed do eiusmod tempor incididunt ut labore et
-	dolore magna aliqua. Ut enim ad minim veniam, quis
-	nostrud exercitation ullamco laboris nisi ut aliquip
-	ex ea commodo consequat. Duis aute irure dolor in
-	reprehenderit in voluptate velit esse cillum dolore
-	eu fugiat nulla pariatur. Excepteur sint occaecat
-	cupidatat non proident, sunt in culpa qui officia
-	deserunt mollit anim id est laborum.
-	\[ \sin^{2}\theta_{i+1}-\sin^{2}\theta_{i}=(\frac{\lambda^{2}}{4a^{2}})\Delta n \]
-	Lorem ipsum dolor sit amet, consectetur adipisicing
-	elit, sed do eiusmod tempor incididunt ut labore et
-	dolore magna aliqua. Ut enim ad minim veniam, quis
-	nostrud exercitation ullamco laboris nisi ut aliquip
-	ex ea commodo consequat. Duis aute irure dolor in
-	reprehenderit in voluptate velit esse cillum dolore
-	eu fugiat nulla pariatur. Excepteur sint occaecat
-	cupidatat non proident, sunt in culpa qui officia
-	deserunt mollit anim id est laborum.
-
+The experiments yielded cooked bacon between $40-60$ seconds, depending on
+desired degree of crispness. Bacon completion was predicted to coincide with a
+critical temperature, as well as a limiting fat loss.
+\begin{figure}[!h] 
+  \begin{center}
+    \includegraphics[width=\linewidth]{poster_bacon.pdf}
+  \end{center}
+  \caption{Experimental data regarding fat loss}
+  \label{fig:bacon-50sec}
+\end{figure}
+As we can see in the figure above, there is clearly a limiting fat loss at about
+$50$ seconds. This implies that our numerical model is accurate.
 \vspace{1.0\baselineskip}
 {\Large Conclusion}
 
@@ -137,13 +122,7 @@ preparation process and thus produce guidelines for the optimal preparation of
 bacon.
 
 
-\begin{figure}[!h]
-  \begin{center}
-    \includegraphics[width=\linewidth]{bacon-50sec.pdf}
-  \end{center}
-  \caption{A slice of bacon after fifty seconds in a microwave oven}
-  \label{fig:bacon-50sec}
-\end{figure}
+
 
 
     \end{multicols}
